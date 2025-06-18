@@ -11,7 +11,7 @@ import { UserLogin } from '../interfaces/user-login';
 @Injectable({
   providedIn: 'root'
 })
-export class ApiService {
+export class AuthService {
   private http = inject(HttpClient);
   private baseUrl = 'https://nearish-back.onrender.com/api/';
 

@@ -1,0 +1,60 @@
+import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { BaseResponceInterface } from '../interfaces/base-responce-interface';
+import { Observable } from 'rxjs';
+import { CreatePost } from '../interfaces/create-post';
+import { Post } from '../interfaces/post';
+import { UpdatePost } from '../interfaces/update-post';
+import { RemovePost } from '../interfaces/remove-post';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class PostService {
+  private readonly baseUrl = 'https://nearish-back.onrender.com/api/Post/';
+
+  constructor(private http: HttpClient) {}
+
+  private getAuthHeaders(): HttpHeaders {
+    const token = localStorage.getItem('token');
+    return new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'application/json'
+    });
+  }
+
+
+  createPost(dto: CreatePost): Observable<BaseResponceInterface> {
+    return this.http.post<BaseResponceInterface>(
+      `${this.baseUrl}create post`,
+      dto,
+      { headers: this.getAuthHeaders() }
+    );
+  }
+
+  
+  getPosts(): Observable<Post[]> {
+    return this.http.get<Post[]>(`${this.baseUrl}get all posts`);
+  }
+
+  
+  updatePost(dto: UpdatePost): Observable<BaseResponceInterface> {
+    return this.http.patch<BaseResponceInterface>(
+      `${this.baseUrl}update post`,
+      dto,
+      { headers: this.getAuthHeaders() }
+    );
+  }
+
+ 
+  deletePost(dto: RemovePost): Observable<BaseResponceInterface> {
+    return this.http.request<BaseResponceInterface>(
+      'delete',
+      `${this.baseUrl}delete post`,
+      {
+        body: dto,
+        headers: this.getAuthHeaders()
+      }
+    );
+  }
+}

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ApiService } from '../../Services/api-service';
+import { AuthService } from '../../Services/AuthService';
 import { CookieService } from 'ngx-cookie-service';
 import { Router } from '@angular/router';
 import { UserLogin } from '../../interfaces/user-login';
@@ -14,7 +14,7 @@ import { FormsModule } from '@angular/forms';
 })
 export class LoginComponent {
 constructor(
-    private api: ApiService,
+    private api: AuthService,
     private cookieService: CookieService,
     private router: Router
   ) {}
@@ -25,35 +25,30 @@ constructor(
   };
 
   loginFunc(): void {
-    this.api.login(this.user).subscribe({
-      next: (res) => {
-        if (res.success) {
-          alert('Login successful!');
-
-          const token = res.data;
-          const expires = this.extractExpiryFromMessage(res.message || '');
-
-          if (token) {
-            this.cookieService.set('accessToken', token, {
-              path: '/',
-              expires: expires || 1
-            });
-          }
-
-          this.router.navigate(['/home']);
+  this.api.login(this.user).subscribe({
+    next: (res) => {
+      if (res.success) {
+        alert('Login successful!');
+        
+        const token = typeof res.data === 'string' ? res.data : res.data?.token;
+        
+        if (token) {
+          localStorage.setItem('accessToken', token);
         }
-      },
-      error: (err) => {
-        alert('Error: ' + (err.error?.message || 'Something went wrong.'));
+        
+        this.router.navigate(['/home']);
       }
-    });
-  }
+    },
+    error: (err) => {
+      alert('Error: ' + (err.error?.message || 'Something went wrong.'));
+    }
+  });
+}
+private extractExpiryFromMessage(message: string): Date | null {
+  const match = message.match(/Token Expires At:\s*(.+)/);
+  if (!match || !match[1]) return null;
 
-  private extractExpiryFromMessage(message: string): Date | null {
-    const match = message.match(/Token Expires At:\s*(.+)/);
-    if (!match || !match[1]) return null;
-
-    const date = new Date(match[1].trim());
-    return isNaN(date.getTime()) ? null : date;
-  }
+  const date = new Date(match[1].trim());
+  return isNaN(date.getTime()) ? null : date;
+}
 }

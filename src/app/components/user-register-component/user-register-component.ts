@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { register } from '../../interfaces/register';
-import { ApiService } from '../../Services/api-service';
+import { AuthService } from '../../Services/AuthService';
 import { CookieService } from 'ngx-cookie-service';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
@@ -22,7 +22,7 @@ export class UserRegisterComponent {
   };
 
   constructor(
-    private api: ApiService,
+    private api: AuthService,
     private cookieService: CookieService,
     private router: Router
   ) {}

@@ -1,0 +1,120 @@
+import { Component, OnInit } from '@angular/core';
+import { Post } from '../../interfaces/post';
+import { PostService } from '../../Services/posts-service';
+import { CommonModule } from '@angular/common';
+import { PostCardComponent } from '../post-card-component/post-card-component';
+import { CreatePost } from '../../interfaces/create-post';
+import { CreatePostComponent } from "../create-post-component/create-post-component";
+
+
+@Component({
+ selector: 'app-post-component',
+  imports: [CommonModule, PostCardComponent, CreatePostComponent],
+  templateUrl: './post-component.html',
+  styleUrl: './post-component.css'
+})
+export class PostComponent implements OnInit {
+   posts: Post[] = [];
+  loading = true;
+  error: string = '';
+
+  showCreateModal = false;
+
+  constructor(private postService: PostService) {}
+
+  ngOnInit() {
+    this.loadPosts();
+  }
+
+  loadPosts() {
+    this.postService.getPosts().subscribe({
+      next: (data) => {
+        this.posts = data;
+        this.loading = false;
+      },
+      error: (err) => {
+        this.error = 'Failed to load posts';
+        this.loading = false;
+      },
+    });
+  }
+
+  openCreateModal() {
+    this.showCreateModal = true;
+  }
+
+  onPostCreated(dto: CreatePost) {
+    this.postService.createPost(dto).subscribe({
+      next: (res) => {
+        if (res.data) {
+          this.posts.unshift(res.data);
+          this.showCreateModal = false;
+        } else {
+          alert('Post created but no data returned');
+        }
+      },
+      error: (err) => {
+        console.error('Failed to create post:', err);
+        alert('Failed to create post.');
+      },
+    });
+  }
+
+  onCancelCreate() {
+    this.showCreateModal = false;
+  }
+
+  getLikeCount(post: Post): number {
+    return post.likes?.length || 0;
+  }
+
+  getCommentCount(post: Post): number {
+    return post.comments?.length || 0;
+  }
+
+  deletePost(postId: number): void {
+    const confirmDelete = confirm('Are you sure you want to delete this post?');
+    if (!confirmDelete) return;
+
+    this.postService.deletePost({ postId }).subscribe({
+      next: () => {
+        this.posts = this.posts.filter((p) => p.id !== postId);
+      },
+      error: (err) => {
+        console.error('Failed to delete the post:', err);
+        alert('Failed to delete the post.');
+      },
+    });
+  }
+
+  editPost(post: Post): void {
+    const newDescription = prompt('Edit description:', post.description);
+    if (newDescription === null) return;
+
+    const newImageUrl = prompt('Edit image URL:', post.imageUrl || '');
+    if (newImageUrl === null) return;
+
+    const newVideoUrl = prompt('Edit video URL:', post.videoUrl || '');
+    if (newVideoUrl === null) return;
+
+    const dto = {
+      postId: post.id,
+      description: newDescription,
+      imageUrl: newImageUrl,
+      videoUrl: newVideoUrl,
+    };
+
+    this.postService.updatePost(dto).subscribe({
+      next: (res) => {
+        const index = this.posts.findIndex((p) => p.id === post.id);
+        if (index !== -1 && res.data) {
+          this.posts[index] = { ...this.posts[index], ...res.data };
+        }
+      },
+      error: (err) => {
+        console.error('Failed to update the post:', err);
+        alert('Failed to update the post.');
+      },
+    });
+  }
+}

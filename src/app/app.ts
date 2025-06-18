@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { ApiService } from './Services/api-service';
+import { AuthService } from './Services/AuthService';
 import { register } from './interfaces/register';
 import { UserRegisterComponent } from "./components/user-register-component/user-register-component";
 import { HeaderComponent } from "./components/header-component/header-component";
@@ -13,7 +13,7 @@ import { HeaderComponent } from "./components/header-component/header-component"
   styleUrl: './app.css'
 })
 export class App {
-  service = inject(ApiService)
+  service = inject(AuthService)
   protected title = 'Nearish-Front';
 
    ragaca!:register

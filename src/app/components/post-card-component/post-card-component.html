@@ -1,0 +1,35 @@
+<div class="post-card">
+  <div class="post-header">
+    <img
+      [src]="post.user?.profileImage || 'assets/default-avatar.png'"
+      class="avatar"
+      alt="User"
+    />
+    <div>
+      <h3>{{ post.user?.name }}</h3>
+      <p class="date">{{ post.createdAt | date: 'medium' }}</p>
+    </div>
+  </div>
+
+  <p class="description">{{ post.description }}</p>
+
+  <ng-container *ngIf="post.imageUrl">
+    <img [src]="post.imageUrl" class="media" alt="Post image" />
+  </ng-container>
+
+  <ng-container *ngIf="post.videoUrl">
+    <video controls class="media">
+      <source [src]="post.videoUrl" type="video/mp4" />
+    </video>
+  </ng-container>
+
+  <div class="post-footer">
+    ❤️ {{ getLikeCount() }} Likes |
+    💬 {{ getCommentCount() }} Comments
+
+    <div class="actions">
+      <button (click)="onEdit()">✏️ Edit</button>
+      <button (click)="onDelete()">🗑️ Delete</button>
+    </div>
+  </div>
+</div>
