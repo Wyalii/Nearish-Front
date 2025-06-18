@@ -1,0 +1,45 @@
+<div class="register-container">
+  <h2>Register</h2>
+  <form (ngSubmit)="registerFunc()" #registerForm="ngForm" class="register-form">
+    <label for="name">Name</label>
+    <input
+      id="name"
+      name="name"
+      type="text"
+      [(ngModel)]="user.name"
+      required
+      placeholder="Enter your name"
+    />
+
+    <label for="email">Email</label>
+    <input
+      id="email"
+      name="email"
+      type="email"
+      [(ngModel)]="user.email"
+      required
+      placeholder="Enter your email"
+    />
+
+    <label for="password">Password</label>
+    <input
+      id="password"
+      name="password"
+      type="password"
+      [(ngModel)]="user.password"
+      required
+      placeholder="Enter your password"
+    />
+
+    <label for="profileImage">Profile Image URL (optional)</label>
+    <input
+      id="profileImage"
+      name="profileImage"
+      type="text"
+      [(ngModel)]="user.imageUrl"
+      placeholder="Image URL"
+    />
+
+    <button type="submit" [disabled]="registerForm.invalid">Register</button>
+  </form>
+</div>
