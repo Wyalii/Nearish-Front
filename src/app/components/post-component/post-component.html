@@ -11,6 +11,5 @@
 <!-- Create Post Modal -->
 <app-create-post
   *ngIf="showCreateModal"
-  (postCreated)="onPostCreated($event)"
   (cancelled)="onCancelCreate()"
 ></app-create-post>

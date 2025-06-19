@@ -14,7 +14,7 @@ import { CreatePostComponent } from "../create-post-component/create-post-compon
   styleUrl: './post-component.css'
 })
 export class PostComponent implements OnInit {
-   posts: Post[] = [];
+  posts: Post[] = [];
   loading = true;
   error: string = '';
 

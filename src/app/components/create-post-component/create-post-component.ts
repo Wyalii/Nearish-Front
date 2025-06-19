@@ -13,7 +13,6 @@ import { PostService } from '../../Services/posts-service';
   styleUrls: ['./create-post-component.css'] 
 })
 export class CreatePostComponent {
-  @Output() postCreated = new EventEmitter<CreatePost>();
   @Output() cancelled = new EventEmitter<void>();
   postService = inject(PostService)
   postForm: FormGroup;

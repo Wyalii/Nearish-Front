@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
-import { AuthService } from '../../Services/AuthService';
 import { CookieService } from 'ngx-cookie-service';
 import { Router } from '@angular/router';
-import { UserLogin } from '../../interfaces/user-login';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { UserLogin } from '../../../interfaces/user-login';
+import { AuthService } from '../../../Services/AuthService';
 
 @Component({
   selector: 'app-login-component',
@@ -36,7 +36,7 @@ constructor(
           localStorage.setItem('accessToken', token);
         }
         
-        this.router.navigate(['/home']);
+        this.router.navigate(['/']);
       }
     },
     error: (err) => {

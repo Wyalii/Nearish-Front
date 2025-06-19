@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
-import { register } from '../../interfaces/register';
-import { AuthService } from '../../Services/AuthService';
 import { CookieService } from 'ngx-cookie-service';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { register } from '../../../interfaces/register';
+import { AuthService } from '../../../Services/AuthService';
 
 @Component({
   selector: 'app-user-register-component',
@@ -51,7 +51,7 @@ export class UserRegisterComponent {
             });
           }
 
-          this.router.navigate(['/home']);
+          this.router.navigate(['/']);
         }
       },
       error: (err) => {
