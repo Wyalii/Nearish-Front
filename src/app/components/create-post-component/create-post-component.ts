@@ -4,17 +4,18 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PostService } from '../../Services/posts-service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-create-post',
   standalone: true,
   imports: [CommonModule, FormsModule, ReactiveFormsModule],
   templateUrl: './create-post-component.html',
-  styleUrls: ['./create-post-component.css'] 
+  styleUrls: ['./create-post-component.css'],
 })
 export class CreatePostComponent {
   @Output() cancelled = new EventEmitter<void>();
-  postService = inject(PostService)
+  postService = inject(PostService);
   postForm: FormGroup;
 
   constructor(private fb: FormBuilder) {
@@ -26,21 +27,23 @@ export class CreatePostComponent {
   }
 
   submit() {
-      if (this.postForm.invalid) {
-        this.postForm.markAllAsTouched(); 
-        return;
-      }
-    
-      const postData: CreatePost = { ...this.postForm.value };
-      this.postService.createPost(postData).subscribe({
-        next: (response) => {
-          console.log('Post created:', response);
-          this.postForm.reset();
-        },
-        error: (error) => {
-          console.error('Error creating post:', error);
-        }
-      });
+    if (this.postForm.invalid) {
+      this.postForm.markAllAsTouched();
+      return;
+    }
+
+    const postData: CreatePost = { ...this.postForm.value };
+    this.postService.createPost(postData).subscribe({
+      next: (response) => {
+        console.log('Post created:', response);
+        this.postForm.reset();
+        this.cancelled.emit();
+      },
+      error: (error) => {
+        console.error('Error creating post:', error);
+        this.cancelled.emit();
+      },
+    });
   }
 
   cancel() {
