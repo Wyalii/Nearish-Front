@@ -13,3 +13,6 @@
 .create-post-btn:hover {
   background-color: #0056b3;
 }
+.post-list {
+  width: 100%;
+}
