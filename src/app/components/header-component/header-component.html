@@ -1,7 +1,26 @@
-<nav class="header-nav">
-      <a  routerLink="/"
-        routerLinkActive="active"
-        [routerLinkActiveOptions]="{ exact: true }">Home</a>
-      <a routerLink="/register" routerLinkActive="active">Register</a>
-      <a routerLink="/login" routerLinkActive="active">Login</a>
-    </nav>
+<header class="header-nav">
+  <h1>Nearish</h1>
+  <div class="box">
+    <img
+      *ngIf="isLoggedIn"
+      [src]="isProfilePictureSet ? 'profilePicture': '/guest.png'"
+      class="pfp"
+    />
+    <a
+      routerLink="/"
+      routerLinkActive="active"
+      [routerLinkActiveOptions]="{ exact: true }"
+      *ngIf="!isLoggedIn"
+      >Home</a
+    >
+    <a routerLink="/register" routerLinkActive="active" *ngIf="!isLoggedIn"
+      >Register</a
+    >
+    <a routerLink="/login" routerLinkActive="active" *ngIf="!isLoggedIn"
+      >Login</a
+    >
+    <button class="logout-btn" *ngIf="isLoggedIn" (click)="logout()">
+      Logout
+    </button>
+  </div>
+</header>
