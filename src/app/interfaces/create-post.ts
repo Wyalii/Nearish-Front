@@ -1,5 +1,5 @@
 export interface CreatePost {
-    userId?: number; 
+  userId?: number; 
   videoUrl?: string;
   imageUrl?: string;
   description: string;

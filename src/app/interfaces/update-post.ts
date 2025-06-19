@@ -1,5 +1,5 @@
 export interface UpdatePost {
-     postId: number;
+  postId: number;
   userId?: number; 
   videoUrl?: string;
   imageUrl?: string;

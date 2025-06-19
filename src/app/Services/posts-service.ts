@@ -49,13 +49,11 @@ export class PostService {
 
  
   deletePost(dto: RemovePost): Observable<BaseResponceInterface> {
-    return this.http.request<BaseResponceInterface>(
-      'delete',
-      `${this.baseUrl}delete post`,
-      {
-        body: dto,
-        headers: this.getAuthHeaders()
-      }
-    );
+    const headers = this.getAuthHeaders();
+    return this.http.request<BaseResponceInterface>('DELETE', `${this.baseUrl}delete post`, {
+      headers,
+      body: dto
+    });
   }
+
 }

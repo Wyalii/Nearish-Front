@@ -33,7 +33,6 @@ export class CreatePostComponent {
       }
     
       const postData: CreatePost = { ...this.postForm.value };
-    
       this.postService.createPost(postData).subscribe({
         next: (response) => {
           console.log('Post created:', response);
