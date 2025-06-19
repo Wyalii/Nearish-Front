@@ -16,7 +16,7 @@ export class PostService {
   constructor(private http: HttpClient) {}
 
   private getAuthHeaders(): HttpHeaders {
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem('accessToken');
     return new HttpHeaders({
       Authorization: `Bearer ${token}`,
       'Content-Type': 'application/json'
@@ -25,12 +25,13 @@ export class PostService {
 
 
   createPost(dto: CreatePost): Observable<BaseResponceInterface> {
-    return this.http.post<BaseResponceInterface>(
-      `${this.baseUrl}create post`,
-      dto,
-      { headers: this.getAuthHeaders() }
-    );
-  }
+  const headers = this.getAuthHeaders();
+  return this.http.post<BaseResponceInterface>(
+    `${this.baseUrl}create post`,
+    dto,
+    { headers }
+  );
+}
 
   
   getPosts(): Observable<Post[]> {

@@ -1,8 +1,9 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, inject, Output } from '@angular/core';
 import { CreatePost } from '../../interfaces/create-post';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { PostService } from '../../Services/posts-service';
 
 @Component({
   selector: 'app-create-post',
@@ -14,7 +15,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 export class CreatePostComponent {
   @Output() postCreated = new EventEmitter<CreatePost>();
   @Output() cancelled = new EventEmitter<void>();
-
+  postService = inject(PostService)
   postForm: FormGroup;
 
   constructor(private fb: FormBuilder) {
@@ -30,7 +31,20 @@ export class CreatePostComponent {
       this.postForm.markAllAsTouched(); 
       return;
     }
+    const postData: CreatePost = {
+    ...this.postForm.value,
+  };
     this.postCreated.emit(this.postForm.value);
+    this.postService.createPost(postData).subscribe({
+    next: (response) => {
+      console.log('Post created:', response);
+      this.postForm.reset();
+    },
+    error: (error) => {
+      console.error('Error creating post:', error);
+    }
+  });
+
     this.postForm.reset();
   }
 
