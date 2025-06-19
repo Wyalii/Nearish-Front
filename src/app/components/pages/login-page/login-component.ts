@@ -6,6 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { UserLogin } from '../../../interfaces/user-login';
 import { AuthService } from '../../../Services/AuthService';
 import { TokenService } from '../../../Services/token-service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-login-component',
@@ -16,7 +17,7 @@ import { TokenService } from '../../../Services/token-service';
 export class LoginPage {
   constructor(private api: AuthService, private router: Router) {}
   tokenService = inject(TokenService);
-
+  private snackBar = inject(MatSnackBar);
   user: UserLogin = {
     email: '',
     password: '',
@@ -26,21 +27,22 @@ export class LoginPage {
     this.api.login(this.user).subscribe({
       next: (res) => {
         if (res.success) {
-          alert('Login successful!');
-          1;
-
           const token =
             typeof res.data === 'string' ? res.data : res.data?.token;
 
           if (token) {
             this.tokenService.setToken(token);
           }
-
           this.router.navigate(['/']);
+          this.snackBar.open('Succesfully Logged in!', 'Dismiss', {
+            duration: 5000,
+          });
         }
       },
       error: (err) => {
-        alert('Error: ' + (err.error?.message || 'Something went wrong.'));
+        this.snackBar.open('Something went wrong!', 'Dismiss', {
+          duration: 5000,
+        });
       },
     });
   }

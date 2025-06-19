@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PostService } from '../../Services/posts-service';
 import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-create-post',
@@ -16,6 +17,7 @@ import { Router } from '@angular/router';
 export class CreatePostComponent {
   @Output() cancelled = new EventEmitter<void>();
   postService = inject(PostService);
+  private snackBar = inject(MatSnackBar);
   postForm: FormGroup;
 
   constructor(private fb: FormBuilder) {
@@ -36,11 +38,21 @@ export class CreatePostComponent {
     this.postService.createPost(postData).subscribe({
       next: (response) => {
         console.log('Post created:', response);
+        this.snackBar.open('Succesfully created a post!', 'Dismiss', {
+          duration: 5000,
+        });
         this.postForm.reset();
         this.cancelled.emit();
       },
       error: (error) => {
         console.error('Error creating post:', error);
+        this.snackBar.open(
+          'Failed to create post. Please try again.',
+          'Dismiss',
+          {
+            duration: 5000,
+          }
+        );
         this.cancelled.emit();
       },
     });

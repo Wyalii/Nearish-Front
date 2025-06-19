@@ -1,24 +1,24 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { Post } from '../../interfaces/post';
 import { PostService } from '../../Services/posts-service';
 import { CommonModule } from '@angular/common';
 import { PostCardComponent } from '../post-card-component/post-card-component';
 import { CreatePost } from '../../interfaces/create-post';
-import { CreatePostComponent } from "../create-post-component/create-post-component";
-
+import { CreatePostComponent } from '../create-post-component/create-post-component';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
- selector: 'app-post-component',
+  selector: 'app-post-component',
   imports: [CommonModule, PostCardComponent, CreatePostComponent],
   templateUrl: './post-component.html',
-  styleUrl: './post-component.css'
+  styleUrl: './post-component.css',
 })
 export class PostComponent implements OnInit {
   posts: Post[] = [];
   loading = true;
   error: string = '';
-
   showCreateModal = false;
+  private snackBar = inject(MatSnackBar);
 
   constructor(private postService: PostService) {}
 
@@ -49,13 +49,16 @@ export class PostComponent implements OnInit {
         if (res.data) {
           this.posts.unshift(res.data);
           this.showCreateModal = false;
-        } else {
-          alert('Post created but no data returned');
+          this.snackBar.open('Succesfully Created a post!', 'Dismiss', {
+            duration: 5000,
+          });
         }
       },
       error: (err) => {
         console.error('Failed to create post:', err);
-        alert('Failed to create post.');
+        this.snackBar.open('Something Went Wrong!', 'Dismiss', {
+          duration: 5000,
+        });
       },
     });
   }

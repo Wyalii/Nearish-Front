@@ -11,6 +11,15 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
   const tokenService = inject(TokenService);
   const token = tokenService.getTokenFromLocalStorage();
 
+  const excludedUrls = [
+    'https://nearish-back.onrender.com/api/Post/get all posts',
+  ];
+
+  const shouldSkip = excludedUrls.some((url) => req.url.includes(url));
+
+  if (shouldSkip) {
+    return next(req);
+  }
   const authReq = token
     ? req.clone({
         headers: req.headers.set('Authorization', `Bearer ${token}`),
