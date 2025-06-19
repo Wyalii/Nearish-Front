@@ -6,10 +6,11 @@ import { PostCardComponent } from '../post-card-component/post-card-component';
 import { CreatePost } from '../../interfaces/create-post';
 import { CreatePostComponent } from '../create-post-component/create-post-component';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-post-component',
-  imports: [CommonModule, PostCardComponent, CreatePostComponent],
+  imports: [CommonModule, PostCardComponent, CreatePostComponent, FormsModule],
   templateUrl: './post-component.html',
   styleUrl: './post-component.css',
 })
@@ -28,8 +29,9 @@ export class PostComponent implements OnInit {
 
   loadPosts() {
     this.postService.getPosts().subscribe({
-      next: (data) => {
-        this.posts = data;
+      next: (res) => {
+        console.log(res);
+        this.posts = res;
         this.loading = false;
       },
       error: (err) => {

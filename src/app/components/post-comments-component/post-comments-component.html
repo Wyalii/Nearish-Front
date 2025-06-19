@@ -1,6 +1,6 @@
 <div class="comments-section">
   <!-- Add Comment Form -->
-  <form (ngSubmit)="addComment()" #commentForm="ngForm" class="comment-form">
+  <form #commentForm="ngForm" class="comment-form">
     <textarea
       [(ngModel)]="newCommentText"
       name="commentText"
@@ -12,6 +12,7 @@
   </form>
 
   <!-- List of Comments -->
+
   <div *ngFor="let comment of comments" class="comment">
     <div *ngIf="editCommentId !== comment.id">
       <strong>{{ comment.user?.name }}</strong>:

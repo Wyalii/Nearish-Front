@@ -8,7 +8,7 @@ import { UpdatePost } from '../interfaces/update-post';
 import { RemovePost } from '../interfaces/remove-post';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class PostService {
   private readonly baseUrl = 'https://nearish-back.onrender.com/api/Post/';
@@ -19,26 +19,23 @@ export class PostService {
     const token = localStorage.getItem('accessToken');
     return new HttpHeaders({
       Authorization: `Bearer ${token}`,
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
     });
   }
 
-
   createPost(dto: CreatePost): Observable<BaseResponceInterface> {
-  const headers = this.getAuthHeaders();
-  return this.http.post<BaseResponceInterface>(
-    `${this.baseUrl}create post`,
-    dto,
-    { headers }
-  );
-}
+    const headers = this.getAuthHeaders();
+    return this.http.post<BaseResponceInterface>(
+      `${this.baseUrl}create post`,
+      dto,
+      { headers }
+    );
+  }
 
-  
   getPosts(): Observable<Post[]> {
     return this.http.get<Post[]>(`${this.baseUrl}get all posts`);
   }
 
-  
   updatePost(dto: UpdatePost): Observable<BaseResponceInterface> {
     return this.http.patch<BaseResponceInterface>(
       `${this.baseUrl}update post`,
@@ -47,13 +44,15 @@ export class PostService {
     );
   }
 
- 
   deletePost(dto: RemovePost): Observable<BaseResponceInterface> {
     const headers = this.getAuthHeaders();
-    return this.http.request<BaseResponceInterface>('DELETE', `${this.baseUrl}delete post`, {
-      headers,
-      body: dto
-    });
+    return this.http.request<BaseResponceInterface>(
+      'DELETE',
+      `${this.baseUrl}delete post`,
+      {
+        headers,
+        body: dto,
+      }
+    );
   }
-
 }
