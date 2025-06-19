@@ -105,20 +105,20 @@ export class PostCommentsComponent implements OnInit {
   }
 
 
-deleteComment(comment: PostComment) {
-  this.postCommentService.deletePostcomment(comment).subscribe({
-    next: (res) => {
-      if (res.success) {
-        this.comments = this.comments.filter(c => c.id !== comment.id);
-      } else {
-        alert(res.message);
-      }
-    },
-    error: (err) => {
-      console.error('Failed to delete comment', err);
-      alert('Error deleting comment');
+deleteComment(comment: DeletePostCommnet) {
+ this.postCommentService.deletePostcomment(comment.postId).subscribe({
+  next: res => {
+    if (res.success) {
+      this.comments = this.comments.filter(c => c.postId !== comment.postId);
+    } else {
+      alert(res.message);
     }
-  });
+  },
+  error: err => {
+    console.error('Failed to delete comment', err);
+    alert('Error deleting comment');
+  }
+});
 }
 
 }

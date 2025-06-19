@@ -17,13 +17,14 @@ export class PostCardComponent {
   @Output() edit = new EventEmitter<Post>();
   @Output() delete = new EventEmitter<number>();
   showComments = false;
+
   postService = inject(PostService)
   postCommentService = inject(PostCommentService);
 
   getLikeCount(): number {
     return this.post.likes?.length || 0;
   }
-
+  
   getCommentCount(): number {
     return this.post.comments?.length || 0;
   }

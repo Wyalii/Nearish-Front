@@ -38,16 +38,16 @@ export class PostCommentService {
   return this.http.get<PostComment[]>(`${this.baseUrl}get all post comments`);
 }
 
-deletePostcomment(dto: { postId: number; id: number }): Observable<BaseResponceInterface> {
+deletePostcomment(postId: number): Observable<BaseResponceInterface> {
   const headers = this.getAuthHeaders();
   return this.http.request<BaseResponceInterface>(
     'DELETE',
     `${this.baseUrl}delete post comments`,
     {
       headers,
-      body: dto
+      body: { postId: postId }
     }
-  )
+  );
 }
    
     updatePostcomment(dto: UpdatePostComment): Observable<BaseResponceInterface> {
