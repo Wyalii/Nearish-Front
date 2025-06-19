@@ -6,6 +6,7 @@ import { register } from '../interfaces/register';
 import { CookieService } from 'ngx-cookie-service';
 import { BaseResponceInterface } from '../interfaces/base-responce-interface';
 import { UserLogin } from '../interfaces/user-login';
+import { UserVerify } from '../interfaces/user-verify';
 
 
 @Injectable({
@@ -24,5 +25,10 @@ export class AuthService {
  login(body: UserLogin): Observable<BaseResponceInterface> {
   return this.http.post<BaseResponceInterface>(this.baseUrl + 'Auth/login', body);
 }
+
+  verify(body:UserVerify): Observable<BaseResponceInterface>
+  {
+    return this.http.post<BaseResponceInterface>(this.baseUrl + 'Auth/verify', body);
+  }
 
 }
