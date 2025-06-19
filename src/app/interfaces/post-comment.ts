@@ -2,7 +2,7 @@ import { Post } from "./post";
 import { User } from "./user";
 
 export interface PostComment {
-     id: number;
+   id: number;
   userId: number;
   postId: number;
   text: string;

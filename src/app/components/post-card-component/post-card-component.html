@@ -1,4 +1,5 @@
 <div class="post-card">
+ 
   <div class="post-header">
     <img
       [src]="post.user?.profileImage || 'assets/default-avatar.png'"
@@ -11,17 +12,20 @@
     </div>
   </div>
 
+ 
   <p class="description">{{ post.description }}</p>
 
   <ng-container *ngIf="post.imageUrl">
     <img [src]="post.imageUrl" class="media" alt="Post image" />
   </ng-container>
 
+ 
   <ng-container *ngIf="post.videoUrl">
     <video controls class="media">
       <source [src]="post.videoUrl" type="video/mp4" />
     </video>
   </ng-container>
+
 
   <div class="post-footer">
     ❤️ {{ getLikeCount() }} Likes |
@@ -30,6 +34,16 @@
     <div class="actions">
       <button (click)="onEdit()">✏️ Edit</button>
       <button (click)="onDelete()">🗑️ Delete</button>
+      <button (click)="toggleComments()">
+        {{ showComments ? 'Hide Comments' : 'Show Comments' }}
+      </button>
     </div>
   </div>
+
+ 
+  <app-post-comments-component
+    *ngIf="showComments"
+    [postId]="post.id"
+    (commentAdded)="onCommentAdded()"
+  ></app-post-comments-component>
 </div>
