@@ -27,25 +27,22 @@ export class CreatePostComponent {
   }
 
   submit() {
-    if (this.postForm.invalid) {
-      this.postForm.markAllAsTouched(); 
-      return;
-    }
-    const postData: CreatePost = {
-    ...this.postForm.value,
-  };
-    this.postCreated.emit(this.postForm.value);
-    this.postService.createPost(postData).subscribe({
-    next: (response) => {
-      console.log('Post created:', response);
-      this.postForm.reset();
-    },
-    error: (error) => {
-      console.error('Error creating post:', error);
-    }
-  });
-
-    this.postForm.reset();
+      if (this.postForm.invalid) {
+        this.postForm.markAllAsTouched(); 
+        return;
+      }
+    
+      const postData: CreatePost = { ...this.postForm.value };
+    
+      this.postService.createPost(postData).subscribe({
+        next: (response) => {
+          console.log('Post created:', response);
+          this.postForm.reset();
+        },
+        error: (error) => {
+          console.error('Error creating post:', error);
+        }
+      });
   }
 
   cancel() {
