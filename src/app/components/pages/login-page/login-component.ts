@@ -12,7 +12,7 @@ import { AuthService } from '../../../Services/AuthService';
   templateUrl: './login-component.html',
   styleUrl: './login-component.css'
 })
-export class LoginComponent {
+export class LoginPage {
 constructor(
     private api: AuthService,
     private cookieService: CookieService,

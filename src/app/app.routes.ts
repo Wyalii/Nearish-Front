@@ -1,21 +1,22 @@
 import { Routes } from '@angular/router';
-import { PostComponent } from './components/post-component/post-component';
 import { VerifyPage } from './components/pages/verify-page/verify-page';
-import { UserRegisterComponent } from './components/pages/user-register-component/user-register-component';
-import { LoginComponent } from './components/pages/login-component/login-component';
+import { HomePage } from './components/pages/home-page/home-page';
+import { LoginPage } from './components/pages/login-page/login-component';
+import { RegisterPage } from './components/pages/register-page/user-register-component';
+
 
 export const routes: Routes = [
 
     {
         path:'',
-        component:PostComponent
+        component:HomePage
     },
     {
         path:'register',
-        component:UserRegisterComponent
+        component:RegisterPage
     },{
         path:'login',
-        component:LoginComponent
+        component:LoginPage
     },
     {
         path:'verify',

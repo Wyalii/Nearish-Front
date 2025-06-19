@@ -13,7 +13,7 @@ import { AuthService } from '../../../Services/AuthService';
   templateUrl: './user-register-component.html',
   styleUrls: ['./user-register-component.css']
 })
-export class UserRegisterComponent {
+export class RegisterPage {
   user: register = {
     name: '',
     email: '',
