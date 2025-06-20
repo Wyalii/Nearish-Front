@@ -1,0 +1,39 @@
+<div class="post-container">
+  <img src="arrow.png" class="arrow" (click)="goBack()" />
+  <div class="post-header">
+    <img
+      [src]="post.user?.pofileImage"
+      *ngIf="post.user?.pofileImage"
+      class="pfp"
+    />
+    <img src="guest.png" class="pfp" />
+    <p>{{post.user?.name}}</p>
+  </div>
+  <div class="post-main">
+    <p>{{post.description}}</p>
+    <img [src]="post.imageUrl" *ngIf="post.imageUrl" />
+    <video [src]="post.videoUrl" *ngIf="post.videoUrl"></video>
+  </div>
+  <div class="post-footer">
+    <span>👍 Likes {{post.likes?.length}}</span>
+    <span>💬 Comments {{post.comments?.length}}</span>
+  </div>
+  <div class="post-comments-list">
+    <div class="post-comment-container" *ngFor="let comment of comments">
+      <img
+        [src]="comment.user?.pofileImage"
+        *ngIf="comment.user?.pofileImage"
+        class="comment-pfp"
+      />
+      <img
+        src="guest.png"
+        *ngIf="!comment.user?.pofileImage"
+        class="comment-pfp"
+      />
+      <div class="post-comment-box">
+        <p>{{comment.user?.name}}</p>
+        <p>{{comment.text}}</p>
+      </div>
+    </div>
+  </div>
+</div>

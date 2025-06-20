@@ -6,7 +6,7 @@
         *ngIf="post.user?.pofileImage"
         class="pfp"
       />
-      <img src="guest.png" class="pfp" />
+      <img src="guest.png" class="pfp" *ngIf="!post.user?.pofileImage" />
       <p>{{post.user?.name}}</p>
     </div>
     <img src="more.png" class="more" />
@@ -24,7 +24,7 @@
 
   <div class="post-footer">
     <span>👍 Likes {{getLikeCount()}}</span>
-    <span>💬 Comments {{getCommentCount()}}</span>
+    <span (click)="viewComments()">💬 Comments {{getCommentCount()}}</span>
   </div>
 </div>
 <hr />

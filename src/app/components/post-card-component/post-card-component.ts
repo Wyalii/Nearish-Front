@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { PostService } from '../../Services/posts-service';
 import { RemovePost } from '../../interfaces/remove-post';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-post-card-component',
@@ -17,6 +18,7 @@ export class PostCardComponent {
   @Output() delete = new EventEmitter<number>();
   postService = inject(PostService);
   private snackBar = inject(MatSnackBar);
+ private router = inject(Router); 
 
   getLikeCount(): number {
     return this.post.likes?.length || 0;
@@ -48,5 +50,8 @@ export class PostCardComponent {
         });
       },
     });
+  }
+  viewComments() {
+    this.router.navigate(['/post', this.post.id]);
   }
 }
