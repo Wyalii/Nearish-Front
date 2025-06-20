@@ -25,7 +25,7 @@ export class HeaderComponent implements OnInit {
     });
     this.userService.user$.subscribe((user) => {
       this.user = user;
-      this.user?.pofileImage;
+      this.user?.profileImage;
       console.log(this.user);
     });
   }

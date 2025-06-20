@@ -1,4 +1,11 @@
-import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  inject,
+  Input,
+  OnInit,
+  Output,
+} from '@angular/core';
 import { Post } from '../../interfaces/post';
 import { CommonModule } from '@angular/common';
 import { PostService } from '../../Services/posts-service';
@@ -6,6 +13,7 @@ import { RemovePost } from '../../interfaces/remove-post';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { PostLikeService } from '../../Services/post-like-service';
+import { TokenService } from '../../Services/token-service';
 
 @Component({
   selector: 'app-post-card-component',
@@ -13,18 +21,37 @@ import { PostLikeService } from '../../Services/post-like-service';
   templateUrl: './post-card-component.html',
   styleUrl: './post-card-component.css',
 })
-export class PostCardComponent {
+export class PostCardComponent implements OnInit {
   @Input() post!: Post;
   @Output() edit = new EventEmitter<Post>();
   @Output() delete = new EventEmitter<number>();
-
+  private tokenService = inject(TokenService);
   private postService = inject(PostService);
   private postLikeService = inject(PostLikeService);
   private router = inject(Router);
-
+  isLoggedIn = false;
   isLiking = false;
+  LikedPosts: Post[] = [];
 
   constructor() {}
+  ngOnInit(): void {
+    this.tokenService.isLoggedIn$.subscribe((status) => {
+      this.isLoggedIn = status;
+    });
+
+    if (this.isLoggedIn) {
+      this.postService.getLikedPosts().subscribe({
+        next: (res) => {
+          this.LikedPosts = res;
+          console.log('liked posts:');
+          console.log(res);
+        },
+        error: (err) => {
+          console.log(err);
+        },
+      });
+    }
+  }
 
   getLikeCount(): number {
     return this.post.likes?.length || 0;
@@ -57,6 +84,7 @@ export class PostCardComponent {
     this.postLikeService.likePost(this.post.id).subscribe({
       next: () => {
         this.post.likes = [...(this.post.likes || []), {} as any];
+        this.LikedPosts.push(this.post);
       },
       error: (err) => console.error('Failed to like post', err),
       complete: () => (this.isLiking = false),
@@ -70,6 +98,7 @@ export class PostCardComponent {
     this.postLikeService.unlikePost(this.post.id).subscribe({
       next: () => {
         this.post.likes = (this.post.likes || []).slice(0, -1);
+        this.LikedPosts = this.LikedPosts.filter((p) => p.id !== this.post.id);
       },
       error: (err) => console.error('Failed to unlike post', err),
       complete: () => (this.isLiking = false),
@@ -85,15 +114,6 @@ export class PostCardComponent {
   }
 
   isPostLiked(): boolean {
-    const token = localStorage.getItem('accessToken');
-    if (!token || !this.post.likes) return false;
-
-    try {
-      const payload = JSON.parse(atob(token.split('.')[1]));
-      const userId = payload.id;
-      return this.post.likes.some((like) => like.userId === userId);
-    } catch {
-      return false;
-    }
+    return this.LikedPosts.some((p) => p.id === this.post.id);
   }
 }

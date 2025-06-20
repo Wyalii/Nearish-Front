@@ -2,7 +2,7 @@ export interface User {
   id: number;
   name: string;
   email: string;
-  pofileImage?: string;
+  profileImage?: string;
   isVerified: boolean;
   tokenExpiryDate: string;
 }

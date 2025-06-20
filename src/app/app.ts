@@ -4,6 +4,7 @@ import { RouterOutlet } from '@angular/router';
 import { HeaderComponent } from './components/header-component/header-component';
 import { SignalrService } from './Services/signalr-service';
 import { TokenService } from './Services/token-service';
+import { PostService } from './Services/posts-service';
 
 @Component({
   selector: 'app-root',
@@ -13,9 +14,10 @@ import { TokenService } from './Services/token-service';
 })
 export class App implements OnInit {
   protected title = 'Nearish-Front';
-  signalRSerivce = inject(SignalrService);
-  tokenService = inject(TokenService);
+  private signalRSerivce = inject(SignalrService);
+  private tokenService = inject(TokenService);
   isLoggedIn = false;
+
   ngOnInit(): void {
     this.tokenService.isLoggedIn$.subscribe((status) => {
       this.isLoggedIn = status;

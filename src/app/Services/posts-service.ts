@@ -33,12 +33,17 @@ export class PostService {
     );
   }
 
-   getPostById(dto: GetPostRequest): Observable<{ post: Post }> {
-  return this.http.post<{ post: Post }>(`${this.baseUrl}GetPost`, dto);
-}
+  getPostById(dto: GetPostRequest): Observable<{ post: Post }> {
+    return this.http.post<{ post: Post }>(`${this.baseUrl}GetPost`, dto);
+  }
 
   getPosts(): Observable<Post[]> {
     return this.http.get<Post[]>(`${this.baseUrl}get all posts`);
+  }
+
+  getLikedPosts(): Observable<Post[]> {
+    const headers = this.getAuthHeaders();
+    return this.http.get<Post[]>(`${this.baseUrl}GetLikedPosts`, { headers });
   }
 
   updatePost(dto: UpdatePost): Observable<BaseResponceInterface> {
