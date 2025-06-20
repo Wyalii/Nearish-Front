@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { jwtDecode } from 'jwt-decode';
 import { BehaviorSubject } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
@@ -24,5 +25,22 @@ export class TokenService {
   removeTokenFromLocalStorage(): void {
     localStorage.removeItem(this.tokenKey);
     this._isLoggedIn$.next(false);
+  }
+
+  getUserId(): string | null {
+    const token = this.getTokenFromLocalStorage();
+    if (!token) return null;
+
+    try {
+      const decoded: any = jwtDecode(token);
+      return (
+        decoded[
+          'http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier'
+        ] || null
+      );
+    } catch (error) {
+      console.error('Token decoding failed:', error);
+      return null;
+    }
   }
 }

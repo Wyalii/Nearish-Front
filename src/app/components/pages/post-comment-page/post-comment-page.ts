@@ -9,6 +9,8 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PostComment } from '../../../interfaces/post-comment';
+import { TokenService } from '../../../Services/token-service';
+import { RemovePost } from '../../../interfaces/remove-post';
 
 @Component({
   selector: 'app-post-comment-page',
@@ -22,13 +24,16 @@ export class PostCommentPage implements OnInit {
   newComment = '';
   editingCommentId: number | null = null;
   editedCommentText: string = '';
-
+  showDeleteModal = false;
+  private curretUserId: string | null = null;
   private commentService = inject(PostCommentService);
   private postService = inject(PostService);
   private route = inject(ActivatedRoute);
   private router = inject(Router);
+  private tokenService = inject(TokenService);
 
   ngOnInit() {
+    this.curretUserId = this.tokenService.getUserId();
     const postId = Number(this.route.snapshot.paramMap.get('postId'));
     if (postId) {
       this.loadPost(postId);
@@ -36,6 +41,22 @@ export class PostCommentPage implements OnInit {
     } else {
       console.error('No postId found in route params');
     }
+  }
+  deletePost() {
+    const removePostDto: RemovePost = { postId: this.post.id };
+    this.showDeleteModal = false;
+    this.postService.deletePost(removePostDto).subscribe({
+      next: (res) => {
+        console.log(res);
+        this.goBack();
+      },
+      error: (err) => {
+        console.error('Failed to delete post.', err);
+      },
+    });
+  }
+  isAdminOfPost(): boolean {
+    return this.post.user?.id.toString() === this.curretUserId;
   }
   goBack() {
     this.router.navigate(['/']);

@@ -10,10 +10,10 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
   const router = inject(Router);
   const tokenService = inject(TokenService);
   const token = tokenService.getTokenFromLocalStorage();
-
   const excludedUrls = [
     'https://nearish-back.onrender.com/api/Post/get all posts',
     'https://nearish-back.onrender.com/api/Post/GetLikedPosts',
+    'https://nearish-back.onrender.com/api/Post/GetPost',
   ];
 
   const shouldSkip = excludedUrls.some((url) => req.url.includes(url));

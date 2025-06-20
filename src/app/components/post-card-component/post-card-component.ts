@@ -65,14 +65,6 @@ export class PostCardComponent implements OnInit {
     this.edit.emit(this.post);
   }
 
-  onDelete() {
-    const removePostBody: RemovePost = { postId: this.post.id };
-    this.postService.deletePost(removePostBody).subscribe({
-      next: () => this.delete.emit(this.post.id),
-      error: (err) => console.error('Delete failed:', err),
-    });
-  }
-
   viewComments() {
     this.router.navigate(['/post', this.post.id]);
   }
