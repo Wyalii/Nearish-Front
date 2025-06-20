@@ -1,35 +1,41 @@
 <div class="post-container">
   <img src="arrow.png" class="arrow" (click)="goBack()" />
+  
   <div class="post-header">
     <img
+      *ngIf="post.user?.pofileImage; else guestPostUser"
       [src]="post.user?.pofileImage"
-      *ngIf="post.user?.pofileImage"
       class="pfp"
     />
-    <img src="guest.png" class="pfp" />
+    <ng-template #guestPostUser>
+      <img src="guest.png" class="pfp" />
+    </ng-template>
     <p>{{post.user?.name}}</p>
   </div>
+  
   <div class="post-main">
     <p>{{post.description}}</p>
     <img [src]="post.imageUrl" *ngIf="post.imageUrl" />
     <video [src]="post.videoUrl" *ngIf="post.videoUrl"></video>
   </div>
+  
   <div class="post-footer">
     <span>👍 Likes {{post.likes?.length}}</span>
     <span>💬 Comments {{post.comments?.length}}</span>
   </div>
+  
   <div class="post-comments-list">
     <div class="post-comment-container" *ngFor="let comment of comments">
+      
       <img
+        *ngIf="comment.user?.pofileImage; else guestCommentUser"
         [src]="comment.user?.pofileImage"
-        *ngIf="comment.user?.pofileImage"
         class="comment-pfp"
       />
-      <img
-        src="guest.png"
-        *ngIf="!comment.user?.pofileImage"
-        class="comment-pfp"
-      />
+      <ng-template #guestCommentUser>
+        <img src="guest.png" class="comment-pfp" />
+      </ng-template>
+      
       <div class="post-comment-box">
         <p>{{comment.user?.name}}</p>
         <p>{{comment.text}}</p>

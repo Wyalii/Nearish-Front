@@ -5,6 +5,7 @@ import { PostService } from '../../Services/posts-service';
 import { RemovePost } from '../../interfaces/remove-post';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import { PostLikeService } from '../../Services/post-like-service';
 
 @Component({
   selector: 'app-post-card-component',
@@ -16,9 +17,14 @@ export class PostCardComponent {
   @Input() post!: Post;
   @Output() edit = new EventEmitter<Post>();
   @Output() delete = new EventEmitter<number>();
-  postService = inject(PostService);
-  private snackBar = inject(MatSnackBar);
- private router = inject(Router); 
+
+  private postService = inject(PostService);
+  private postLikeService = inject(PostLikeService);
+  private router = inject(Router);
+
+  isLiking = false;
+
+  constructor() {}
 
   getLikeCount(): number {
     return this.post.likes?.length || 0;
@@ -33,25 +39,66 @@ export class PostCardComponent {
   }
 
   onDelete() {
-    const removePostBody: RemovePost = {
-      postId: this.post.id,
-    };
+    const removePostBody: RemovePost = { postId: this.post.id };
     this.postService.deletePost(removePostBody).subscribe({
-      next: (res) => {
-        console.log('Deleted successfully:', res);
-        this.snackBar.open('Succesfully Deleted a post!', 'Dismiss', {
-          duration: 5000,
-        });
-      },
-      error: (err) => {
-        console.error('Delete failed:', err);
-        this.snackBar.open('Something Went Wrong!', 'Dismiss', {
-          duration: 5000,
-        });
-      },
+      next: () => this.delete.emit(this.post.id),
+      error: (err) => console.error('Delete failed:', err),
     });
   }
+
   viewComments() {
     this.router.navigate(['/post', this.post.id]);
   }
+
+
+  likePost() {
+    if (this.isLiking) return;
+    this.isLiking = true;
+
+    this.postLikeService.likePost(this.post.id).subscribe({
+      next: () => {
+      
+        this.post.likes = [...(this.post.likes || []), {} as any];
+      },
+      error: (err) => console.error('Failed to like post', err),
+      complete: () => (this.isLiking = false),
+    });
+  }
+
+  unlikePost() {
+    if (this.isLiking) return;
+    this.isLiking = true;
+
+    this.postLikeService.unlikePost(this.post.id).subscribe({
+      next: () => {
+     
+        this.post.likes = (this.post.likes || []).slice(0, -1);
+      },
+      error: (err) => console.error('Failed to unlike post', err),
+      complete: () => (this.isLiking = false),
+    });
+  }
+
+  toggleLike() {
+  
+    if ((this.post.likes?.length || 0) > 0) {
+      this.unlikePost();
+    } else {
+      this.likePost();
+    }
+  }
+  
+  isPostLiked(): boolean {
+  const token = localStorage.getItem('accessToken');
+  if (!token || !this.post.likes) return false;
+
+  try {
+    const payload = JSON.parse(atob(token.split('.')[1]));
+    const userId = payload.id;
+    return this.post.likes.some(like => like.userId === userId);
+  } catch {
+    return false;
+  }
 }
+}
+

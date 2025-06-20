@@ -9,6 +9,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PostComment } from '../../../interfaces/post-comment';
+import { PostLikeService } from '../../../Services/post-like-service';
 
 @Component({
   selector: 'app-post-comment-page',
@@ -22,11 +23,13 @@ export class PostCommentPage implements OnInit {
   newComment = '';
   editingCommentId: number | null = null;
   editedCommentText: string = '';
-
+ 
   private commentService = inject(PostCommentService);
   private postService = inject(PostService);
   private route = inject(ActivatedRoute);
   private router = inject(Router);
+ 
+  
   ngOnInit() {
     const postId = Number(this.route.snapshot.paramMap.get('postId'));
     if (postId) {
@@ -124,4 +127,5 @@ export class PostCommentPage implements OnInit {
       },
     });
   }
+
 }
