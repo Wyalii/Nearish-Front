@@ -16,8 +16,8 @@
   <div class="post-comments-list">
     <div class="post-comment-container" *ngFor="let comment of comments">
       <img
-        [src]="comment.user?.pofileImage"
         *ngIf="comment.user?.pofileImage"
+        [src]="comment.user?.pofileImage"
         class="comment-pfp"
       />
       <img

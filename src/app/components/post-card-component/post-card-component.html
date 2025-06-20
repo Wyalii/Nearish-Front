@@ -7,12 +7,13 @@
         class="pfp"
       />
       <img src="guest.png" class="pfp" *ngIf="!post.user?.pofileImage" />
-      <p>{{post.user?.name}}</p>
+      <p>{{ post.user?.name }}</p>
     </div>
     <img src="more.png" class="more" />
   </div>
+
   <div class="post-main">
-    <p>{{post.description}}</p>
+    <p>{{ post.description }}</p>
     <img [src]="post.imageUrl" *ngIf="post.imageUrl" class="post-image" />
     <video
       *ngIf="post.videoUrl"
@@ -23,8 +24,18 @@
   </div>
 
   <div class="post-footer">
-    <span>👍 Likes {{getLikeCount()}}</span>
-    <span (click)="viewComments()">💬 Comments {{getCommentCount()}}</span>
+    <span
+      (click)="toggleLike()"
+      class="like-button"
+      [class.liked]="isPostLiked()"
+      style="cursor: pointer;"
+    >
+      {{ isPostLiked() ? '❤️' : '🤍' }} Likes {{ getLikeCount() }}
+    </span>
+
+    <span (click)="viewComments()" style="cursor: pointer;">
+      💬 Comments {{ getCommentCount() }}
+    </span>
   </div>
 </div>
 <hr />

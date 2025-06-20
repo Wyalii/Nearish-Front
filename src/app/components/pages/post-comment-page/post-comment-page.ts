@@ -27,6 +27,7 @@ export class PostCommentPage implements OnInit {
   private postService = inject(PostService);
   private route = inject(ActivatedRoute);
   private router = inject(Router);
+
   ngOnInit() {
     const postId = Number(this.route.snapshot.paramMap.get('postId'));
     if (postId) {
