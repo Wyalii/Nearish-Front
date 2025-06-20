@@ -4,6 +4,8 @@ import { TokenService } from '../../Services/token-service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { UserService } from '../../Services/user-service';
+import { User } from '../../interfaces/user';
 @Component({
   selector: 'app-header-component',
   imports: [RouterModule, CommonModule, FormsModule],
@@ -12,13 +14,18 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class HeaderComponent implements OnInit {
   isLoggedIn: boolean = false;
-  isProfilePictureSet = false;
-  public profilePicture: string = '';
   tokenService = inject(TokenService);
   private snackBar = inject(MatSnackBar);
+  private userService = inject(UserService);
+  user: User | null = null;
+  profileImage: string = '';
   ngOnInit(): void {
     this.tokenService.isLoggedIn$.subscribe((status) => {
       this.isLoggedIn = status;
+    });
+    this.userService.user$.subscribe((user) => {
+      this.user = user;
+      this.user?.profileImage;
     });
   }
 

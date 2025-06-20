@@ -43,11 +43,13 @@
     <input
       id="profileImage"
       name="profileImage"
-      type="text"
-      [(ngModel)]="user.imageUrl"
-      placeholder="Image URL"
+      type="file"
+      (change)="handleFileUpload($event, 'image')"
+      accept="image/*"
     />
 
-    <button type="submit" [disabled]="registerForm.invalid">Register</button>
+    <button type="submit" [disabled]="registerForm.invalid || imageUploading">
+      Register
+    </button>
   </form>
 </div>

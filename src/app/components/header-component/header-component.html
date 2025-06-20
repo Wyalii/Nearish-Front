@@ -3,7 +3,7 @@
   <div class="box">
     <img
       *ngIf="isLoggedIn"
-      [src]="isProfilePictureSet ? 'profilePicture': '/guest.png'"
+      [src]="user?.profileImage ? 'profileImage': 'guest.png'"
       class="pfp"
     />
     <a

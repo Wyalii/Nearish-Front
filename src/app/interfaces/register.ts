@@ -1,6 +1,6 @@
 export interface register {
-    name:string;
-    email:string;
-    password:string;
-    imageUrl?:string;
+  name: string;
+  email: string;
+  password: string;
+  profileImage?: string;
 }

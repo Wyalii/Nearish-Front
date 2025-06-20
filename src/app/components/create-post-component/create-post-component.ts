@@ -33,6 +33,14 @@ export class CreatePostComponent {
     if (fileUrl) {
       if (type === 'image') {
         this.postForm.patchValue({ imageUrl: fileUrl });
+      } else {
+        this.snackBar.open(
+          'Video upload failed. Please try again.',
+          'Dismiss',
+          {
+            duration: 4000,
+          }
+        );
       }
     }
   }
