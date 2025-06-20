@@ -61,12 +61,7 @@ app-create-post {
   top: 0;
   left: 0;
 }
-
-html,
-body {
+app-post-comment-page {
+  display: flex;
   height: 100%;
-}
-body {
-  margin: 0;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
 }

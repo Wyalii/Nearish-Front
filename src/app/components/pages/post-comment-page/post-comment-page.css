@@ -1,4 +1,6 @@
 .post-container {
+  height: 100%;
+  position: relative;
   background-color: #fff;
   border-radius: 8px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
@@ -96,4 +98,40 @@
 .post-comment-box p:first-child {
   font-weight: 600;
   margin-bottom: 4px;
+}
+
+.post-add-comment {
+  position: sticky;
+  bottom: 0;
+  background-color: white;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  padding: 10px 15px;
+  border-top: 1px solid #ddd;
+  z-index: 10;
+}
+
+.post-add-comment input {
+  flex: 1;
+  padding: 10px;
+  border-radius: 20px;
+  border: 1px solid #ccc;
+  outline: none;
+  font-size: 14px;
+}
+
+.post-add-comment button {
+  padding: 8px 14px;
+  background-color: #1877f2;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.2s;
+}
+
+.post-add-comment button:hover {
+  background-color: #145dcb;
 }
