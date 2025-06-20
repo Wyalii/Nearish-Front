@@ -1,17 +1,27 @@
 <div class="post-card">
   <div class="post-header">
-    <img
-      [src]="post.user?.profileImage"
-      *ngIf="post.user?.profileImage"
-      class="pfp"
-    />
-    <img src="guest.png" class="pfp" />
-    <p>{{post.user?.name}}</p>
+    <div class="user-section">
+      <img
+        [src]="post.user?.profileImage"
+        *ngIf="post.user?.profileImage"
+        class="pfp"
+      />
+      <img src="guest.png" class="pfp" />
+      <p>{{post.user?.name}}</p>
+    </div>
+    <img src="more.png" class="more" />
   </div>
   <div class="post-main">
     <p>{{post.description}}</p>
-    <img [src]="post.imageUrl" *ngIf="post.imageUrl" />
+    <img [src]="post.imageUrl" *ngIf="post.imageUrl" class="post-image" />
+    <video
+      *ngIf="post.videoUrl"
+      [src]="post.videoUrl"
+      controls
+      class="post-video"
+    ></video>
   </div>
+
   <div class="post-footer">
     <span>👍 Likes {{getLikeCount()}}</span>
     <span>💬 Comments {{getCommentCount()}}</span>

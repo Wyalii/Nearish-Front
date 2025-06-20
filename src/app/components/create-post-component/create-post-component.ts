@@ -6,6 +6,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PostService } from '../../Services/posts-service';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { FileService } from '../../Services/file-service';
 
 @Component({
   selector: 'app-create-post',
@@ -18,14 +19,33 @@ export class CreatePostComponent {
   @Output() cancelled = new EventEmitter<void>();
   postService = inject(PostService);
   private snackBar = inject(MatSnackBar);
+  fileService = inject(FileService);
   postForm: FormGroup;
-
   constructor(private fb: FormBuilder) {
     this.postForm = this.fb.group({
       description: ['', [Validators.required, Validators.minLength(5)]],
       imageUrl: [''],
       videoUrl: [''],
     });
+  }
+  async handleFileUpload(event: Event, type: 'image') {
+    const fileUrl = await this.fileService.uploadFile(event, type);
+    if (fileUrl) {
+      if (type === 'image') {
+        this.postForm.patchValue({ imageUrl: fileUrl });
+      }
+    }
+  }
+
+  async handleVideoUpload(event: Event) {
+    const videoUrl = await this.fileService.uploadFile(event, 'video');
+    if (videoUrl) {
+      this.postForm.patchValue({ videoUrl });
+    } else {
+      this.snackBar.open('Video upload failed. Please try again.', 'Dismiss', {
+        duration: 4000,
+      });
+    }
   }
 
   submit() {
