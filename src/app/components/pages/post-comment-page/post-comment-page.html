@@ -1,12 +1,7 @@
 <div class="post-container">
   <img src="arrow.png" class="arrow" (click)="goBack()" />
   <div class="post-header">
-    <img
-      [src]="post.user?.pofileImage"
-      *ngIf="post.user?.pofileImage"
-      class="pfp"
-    />
-    <img src="guest.png" class="pfp" />
+    <img [src]="post.user?.pofileImage || 'guest.png'" class="pfp" />
     <p>{{post.user?.name}}</p>
   </div>
   <div class="post-main">

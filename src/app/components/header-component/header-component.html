@@ -1,26 +1,21 @@
 <header class="header-nav">
-  <h1>Nearish</h1>
-  <div class="box">
-    <img
-      *ngIf="isLoggedIn"
-      [src]="user?.pofileImage ? user?.pofileImage : 'guest.png'"
-      class="pfp"
-    />
+  <div class="header-left">
+    <h1 class="logo">Nearish</h1>
+  </div>
+
+  <div class="header-center" *ngIf="!isLoggedIn">
     <a
       routerLink="/"
       routerLinkActive="active"
       [routerLinkActiveOptions]="{ exact: true }"
-      *ngIf="!isLoggedIn"
       >Home</a
     >
-    <a routerLink="/register" routerLinkActive="active" *ngIf="!isLoggedIn"
-      >Register</a
-    >
-    <a routerLink="/login" routerLinkActive="active" *ngIf="!isLoggedIn"
-      >Login</a
-    >
-    <button class="logout-btn" *ngIf="isLoggedIn" (click)="logout()">
-      Logout
-    </button>
+    <a routerLink="/register" routerLinkActive="active">Register</a>
+    <a routerLink="/login" routerLinkActive="active">Login</a>
+  </div>
+
+  <div class="header-right" *ngIf="isLoggedIn">
+    <img [src]="user?.pofileImage || 'guest.png'" class="pfp" alt="Profile" />
+    <button class="logout-btn" (click)="logout()">Logout</button>
   </div>
 </header>
