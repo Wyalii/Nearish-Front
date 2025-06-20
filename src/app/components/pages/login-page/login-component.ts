@@ -22,8 +22,10 @@ export class LoginPage {
     email: '',
     password: '',
   };
+  loading: boolean = false;
 
   loginFunc(): void {
+    this.loading = true;
     this.api.login(this.user).subscribe({
       next: (res) => {
         if (res.success) {
@@ -33,6 +35,7 @@ export class LoginPage {
           if (token) {
             this.tokenService.setToken(token);
           }
+          this.loading = false;
           this.router.navigate(['/']);
           this.snackBar.open('Succesfully Logged in!', 'Dismiss', {
             duration: 5000,
@@ -40,6 +43,7 @@ export class LoginPage {
         }
       },
       error: (err) => {
+        this.loading = false;
         this.snackBar.open('Something went wrong!', 'Dismiss', {
           duration: 5000,
         });

@@ -1,6 +1,14 @@
-<div class="register-container">
+<div class="loading-container" *ngIf="loading">
+  <img src="/loading.gif" class="loading" />
+  <p>loading...</p>
+</div>
+<div class="register-container" *ngIf="!loading">
   <h2>Register</h2>
-  <form (ngSubmit)="registerFunc()" #registerForm="ngForm" class="register-form">
+  <form
+    (ngSubmit)="registerFunc()"
+    #registerForm="ngForm"
+    class="register-form"
+  >
     <label for="name">Name</label>
     <input
       id="name"

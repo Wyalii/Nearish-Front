@@ -1,69 +1,55 @@
-.post-card {
-  border: 1px solid #ccc;
-  padding: 1rem;
-  border-radius: 12px;
-  background-color: #fff;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
-  margin-bottom: 1rem;
+hr {
+  width: 98%;
+  height: 5px;
+  background-color: gainsboro;
 }
-
+.pfp {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+.post-card {
+  width: 100%;
+  border-radius: 10px;
+  background-color: #fff;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  gap: 10px;
+  margin-bottom: 16px;
+  min-height: 300px;
+}
 .post-header {
+  width: 100%;
+  padding-left: 5px;
   display: flex;
   align-items: center;
-  gap: 10px;
-  margin-bottom: 0.5rem;
+  gap: 20px;
+  margin-bottom: 10px;
+}
+.post-main {
+  margin-bottom: 10px;
+  padding-left: 5px;
 }
 
-.avatar {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  object-fit: cover;
-}
-
-.date {
-  font-size: 0.8rem;
-  color: #888;
-}
-
-.description {
-  margin: 0.5rem 0;
-  font-size: 1rem;
-  white-space: pre-wrap;
-}
-
-.media {
+.post-main img {
   width: 100%;
   max-height: 400px;
   object-fit: cover;
-  margin: 0.5rem 0;
   border-radius: 8px;
 }
-
-.post-footer {
-  color: #444;
-  font-size: 0.9rem;
-  margin-top: 0.5rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+.post-main p {
+  white-space: pre-line;
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.5;
 }
-
-.actions {
+.post-footer {
+  padding-left: 5px;
   display: flex;
   gap: 10px;
 }
-
-.actions button {
-  padding: 4px 8px;
-  font-size: 0.8rem;
-  border: none;
-  border-radius: 6px;
+.post-footer span {
   cursor: pointer;
-  background-color: #eee;
-  transition: background-color 0.2s ease;
-}
-
-.actions button:hover {
-  background-color: #ddd;
 }

@@ -32,7 +32,9 @@ export class PostComponent implements OnInit {
       next: (res) => {
         console.log(res);
         this.posts = res;
-        this.loading = false;
+        setTimeout(() => {
+          this.loading = false;
+        }, 1000);
       },
       error: (err) => {
         this.error = 'Failed to load posts';

@@ -1,4 +1,8 @@
-<div class="login-container">
+<div class="loading-container" *ngIf="loading">
+  <img src="/loading.gif" class="loading" />
+  <p>loading...</p>
+</div>
+<div class="login-container" *ngIf="!loading">
   <h2>Login</h2>
   <form (ngSubmit)="loginFunc()" #loginForm="ngForm">
     <input

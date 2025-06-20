@@ -28,6 +28,7 @@ export class RegisterPage {
     private router: Router
   ) {}
   private snackBar = inject(MatSnackBar);
+  loading: boolean = false;
 
   private extractExpiryFromMessage(message: string): Date | null {
     const match = message.match(/Token Expires At:\s*(.+)/);
@@ -38,6 +39,7 @@ export class RegisterPage {
   }
 
   registerFunc(): void {
+    this.loading = true;
     this.api.register(this.user).subscribe({
       next: (res) => {
         if (res.success) {
@@ -50,7 +52,7 @@ export class RegisterPage {
               expires: expires || 1,
             });
           }
-
+          this.loading = false;
           this.router.navigate(['/']);
           this.snackBar.open('Succesfully Registered Check Email!', 'Dismiss', {
             duration: 5000,
@@ -58,6 +60,7 @@ export class RegisterPage {
         }
       },
       error: (err) => {
+        this.loading = false;
         if (err.status === 409) {
           this.snackBar.open('User Already Exists!', 'Dismiss', {
             duration: 5000,

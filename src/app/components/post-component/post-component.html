@@ -1,15 +1,21 @@
-<button class="create-post-btn" (click)="openCreateModal()">
-  Create New Post
-</button>
-
-<div class="post-list">
-  <app-post-card-component
-    *ngFor="let post of posts"
-    [post]="post"
-  ></app-post-card-component>
+<div class="loading-container" *ngIf="loading">
+  <img src="/loading.gif" class="loading" />
+  <p>loading...</p>
 </div>
-<!-- Create Post Modal -->
-<app-create-post
-  *ngIf="showCreateModal"
-  (cancelled)="onCancelCreate()"
-></app-create-post>
+<ng-container *ngIf="!loading">
+  <button class="create-post-btn" (click)="openCreateModal()">
+    Create New Post
+  </button>
+
+  <div class="post-list">
+    <app-post-card-component
+      *ngFor="let post of posts"
+      [post]="post"
+    ></app-post-card-component>
+  </div>
+  <!-- Create Post Modal -->
+  <app-create-post
+    *ngIf="showCreateModal"
+    (cancelled)="onCancelCreate()"
+  ></app-create-post>
+</ng-container>
