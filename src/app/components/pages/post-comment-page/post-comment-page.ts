@@ -12,32 +12,37 @@ import { PostComment } from '../../../interfaces/post-comment';
 
 @Component({
   selector: 'app-post-comment-page',
-  imports: [CommonModule,FormsModule],
+  imports: [CommonModule, FormsModule],
   templateUrl: './post-comment-page.html',
-  styleUrls: ['./post-comment-page.css']
+  styleUrls: ['./post-comment-page.css'],
 })
-export class PostCommentPage  implements OnInit {
+export class PostCommentPage implements OnInit {
   post!: Post;
   comments: any[] = [];
   newComment = '';
-   editingCommentId: number | null = null;
-editedCommentText: string = '';
+  editingCommentId: number | null = null;
+  editedCommentText: string = '';
 
- private commentService = inject(PostCommentService);
-private postService = inject(PostService);
- private route = inject(ActivatedRoute);
-   ngOnInit() {
- const postId = Number(this.route.snapshot.paramMap.get('postId'));
-  if (postId) {
-    this.loadPost(postId);
-    this.fetchComments();
-  } else {
-    console.error('No postId found in route params');
+  private commentService = inject(PostCommentService);
+  private postService = inject(PostService);
+  private route = inject(ActivatedRoute);
+  private router = inject(Router);
+  ngOnInit() {
+    const postId = Number(this.route.snapshot.paramMap.get('postId'));
+    if (postId) {
+      this.loadPost(postId);
+      this.fetchComments();
+    } else {
+      console.error('No postId found in route params');
+    }
   }
-}
-  fetchComments(){
+  goBack() {
+    this.router.navigate(['/']);
+  }
+  fetchComments() {
     this.commentService.getComments(this.post.id).subscribe({
       next: (res) => {
+        console.log(this.comments);
         if (res.success) this.comments = res.data;
       },
       error: (err) => {
@@ -45,24 +50,24 @@ private postService = inject(PostService);
       },
     });
   }
-   loadPost(postId: number) {
+  loadPost(postId: number) {
     const dto: GetPostRequest = { postId };
 
     this.postService.getPostById(dto).subscribe({
       next: (res) => {
-        this.post = res.post; 
+        this.post = res.post;
         this.comments = this.post.comments || [];
+        console.log(this.comments);
       },
       error: (err) => {
         console.error('Failed to load post:', err);
       },
     });
-
   }
- addComment() {
+  addComment() {
     const dto: CreatePostComment = {
       postId: this.post.id,
-      text: this.newComment
+      text: this.newComment,
     };
 
     this.commentService.createPostComment(dto).subscribe({
@@ -77,7 +82,7 @@ private postService = inject(PostService);
       },
     });
   }
-   deleteComment(commentId: number) {
+  deleteComment(commentId: number) {
     this.commentService.deleteComment(commentId).subscribe({
       next: (res) => {
         if (res.success) {
@@ -89,34 +94,34 @@ private postService = inject(PostService);
       },
     });
   }
-   startEdit(comment: PostComment) {
-      this.editingCommentId = comment.id;
-      this.editedCommentText = comment.text;
-    }
-  
-    cancelEdit() {
-      this.editingCommentId = null;
-      this.editedCommentText = '';
-    }
-   updateComment(commentID: number) {
-  const dto: UpdatePostComment = {
-    commentId: commentID,
-    text: this.editedCommentText,
-  };
+  startEdit(comment: PostComment) {
+    this.editingCommentId = comment.id;
+    this.editedCommentText = comment.text;
+  }
 
-  this.commentService.updatePostcomment(dto).subscribe({
-    next: (res) => {
-      if (res.success) {
-        const comment = this.comments.find((c) => c.id === commentID);
-        if (comment) comment.text = this.editedCommentText;
+  cancelEdit() {
+    this.editingCommentId = null;
+    this.editedCommentText = '';
+  }
+  updateComment(commentID: number) {
+    const dto: UpdatePostComment = {
+      commentId: commentID,
+      text: this.editedCommentText,
+    };
 
-        this.editingCommentId = null;
-        this.editedCommentText = '';
-      }
-    },
-    error: (err) => {
-      console.error('Failed to update comment:', err);
-    },
-  });
-}
+    this.commentService.updatePostcomment(dto).subscribe({
+      next: (res) => {
+        if (res.success) {
+          const comment = this.comments.find((c) => c.id === commentID);
+          if (comment) comment.text = this.editedCommentText;
+
+          this.editingCommentId = null;
+          this.editedCommentText = '';
+        }
+      },
+      error: (err) => {
+        console.error('Failed to update comment:', err);
+      },
+    });
+  }
 }

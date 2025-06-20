@@ -1,77 +1,39 @@
-<div class="post-card" *ngIf="post">
+<div class="post-container">
+  <img src="arrow.png" class="arrow" (click)="goBack()" />
   <div class="post-header">
-    <div class="user-section">
-      <img
-        *ngIf="post.user?.profileImage; else showGuestImage"
-        [src]="post.user?.profileImage"
-        class="pfp"
-      />
-      <ng-template #showGuestImage>
-        <img src="guest.png" class="pfp" />
-      </ng-template>
-      <p>{{ post.user?.name }}</p>
-    </div>
-    <img src="more.png" class="more" />
-  </div>
-
-  <div class="post-main">
-    <p>{{ post.description }}</p>
     <img
-      *ngIf="post.imageUrl"
-      [src]="post.imageUrl"
-      class="post-image"
-      alt="Post Image"
+      [src]="post.user?.pofileImage"
+      *ngIf="post.user?.pofileImage"
+      class="pfp"
     />
-    <video
-      *ngIf="post.videoUrl"
-      [src]="post.videoUrl"
-      controls
-      class="post-video"
-    ></video>
+    <img src="guest.png" class="pfp" />
+    <p>{{post.user?.name}}</p>
   </div>
-
+  <div class="post-main">
+    <p>{{post.description}}</p>
+    <img [src]="post.imageUrl" *ngIf="post.imageUrl" />
+    <video [src]="post.videoUrl" *ngIf="post.videoUrl"></video>
+  </div>
   <div class="post-footer">
-    <span>👍 Likes {{ post.likes?.length || 0 }}</span>
-    <span>💬 Comments {{ comments.length }}</span>
+    <span>👍 Likes {{post.likes?.length}}</span>
+    <span>💬 Comments {{post.comments?.length}}</span>
   </div>
-</div>
-
-<hr />
-
-<div class="comment-form">
-  <textarea
-    [(ngModel)]="newComment"
-    placeholder="Write a comment..."
-    rows="2"
-  ></textarea>
-  <button (click)="addComment()" [disabled]="!newComment.trim()">Post</button>
-</div>
-
-<!-- Comments List -->
-<div class="comment-list" *ngIf="comments.length > 0">
-  <div class="comment" *ngFor="let comment of comments">
-    <div class="comment-header">
-      <strong>{{ comment.user?.name }}</strong>
-      <span>{{ comment.createdAt | date: 'short' }}</span>
-
-      <div class="menu-wrapper" tabindex="0">
-  <button class="menu-button" aria-label="Open comment menu">⋮</button>
-  <div class="menu-dropdown">
-    <button (click)="startEdit(comment)">Edit</button>
-    <button (click)="deleteComment(comment.id)">Delete</button>
-  </div>
-</div>
-
-    <!-- Edit Mode -->
-    <div *ngIf="editingCommentId === comment.id">
-      <textarea [(ngModel)]="editedCommentText" rows="2"></textarea>
-      <button (click)="updateComment(comment.id)">Save</button>
-      <button (click)="cancelEdit()">Cancel</button>
-    </div>
-
-    <!-- Normal Mode -->
-    <div *ngIf="editingCommentId !== comment.id">
-      <div class="comment-body">{{ comment.text }}</div>
+  <div class="post-comments-list">
+    <div class="post-comment-container" *ngFor="let comment of comments">
+      <img
+        [src]="comment.user?.pofileImage"
+        *ngIf="comment.user?.pofileImage"
+        class="comment-pfp"
+      />
+      <img
+        src="guest.png"
+        *ngIf="!comment.user?.pofileImage"
+        class="comment-pfp"
+      />
+      <div class="post-comment-box">
+        <p>{{comment.user?.name}}</p>
+        <p>{{comment.text}}</p>
+      </div>
     </div>
   </div>
 </div>
