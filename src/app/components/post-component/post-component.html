@@ -17,5 +17,6 @@
   <app-create-post
     *ngIf="showCreateModal"
     (cancelled)="onCancelCreate()"
+    (postCreated)="onPostCreated()"
   ></app-create-post>
 </ng-container>

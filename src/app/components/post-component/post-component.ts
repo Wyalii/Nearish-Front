@@ -47,24 +47,8 @@ export class PostComponent implements OnInit {
     this.showCreateModal = true;
   }
 
-  onPostCreated(dto: CreatePost) {
-    this.postService.createPost(dto).subscribe({
-      next: (res) => {
-        if (res.data) {
-          this.posts.unshift(res.data);
-          this.showCreateModal = false;
-          this.snackBar.open('Succesfully Created a post!', 'Dismiss', {
-            duration: 5000,
-          });
-        }
-      },
-      error: (err) => {
-        console.error('Failed to create post:', err);
-        this.snackBar.open('Something Went Wrong!', 'Dismiss', {
-          duration: 5000,
-        });
-      },
-    });
+  onPostCreated() {
+    this.loadPosts();
   }
 
   onCancelCreate() {

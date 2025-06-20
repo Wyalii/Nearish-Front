@@ -16,6 +16,7 @@ import { FileService } from '../../Services/file-service';
   styleUrls: ['./create-post-component.css'],
 })
 export class CreatePostComponent {
+  @Output() postCreated = new EventEmitter<CreatePost>();
   @Output() cancelled = new EventEmitter<void>();
   postService = inject(PostService);
   private snackBar = inject(MatSnackBar);
@@ -70,6 +71,7 @@ export class CreatePostComponent {
           duration: 5000,
         });
         this.postForm.reset();
+        this.postCreated.emit(response.data);
         this.cancelled.emit();
       },
       error: (error) => {
