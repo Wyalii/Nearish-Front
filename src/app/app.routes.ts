@@ -3,6 +3,7 @@ import { VerifyPage } from './components/pages/verify-page/verify-page';
 import { HomePage } from './components/pages/home-page/home-page';
 import { LoginPage } from './components/pages/login-page/login-component';
 import { RegisterPage } from './components/pages/register-page/user-register-component';
+import { PostCommentPage } from './components/pages/post-comment-page/post-comment-page';
 
 
 export const routes: Routes = [
@@ -21,5 +22,9 @@ export const routes: Routes = [
     {
         path:'verify',
         component:VerifyPage
+    },
+    { 
+        path: 'post/:postId',
+         component: PostCommentPage 
     }
 ];

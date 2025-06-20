@@ -1,3 +1,3 @@
 export interface DeletePostCommnet {
-    postId: number;
+    postCommentId: number;
 }

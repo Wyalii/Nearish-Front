@@ -33,20 +33,16 @@ export class PostCommentService {
 
   getComments(postId: number): Observable<BaseResponceInterface> {
     return this.http.get<BaseResponceInterface>(
-      `${this.baseUrl}get all post comments`
+      `https://nearish-back.onrender.com/api/Post/GetPost`
     );
   }
 
-  deletePostcomment(postId: number): Observable<BaseResponceInterface> {
-    const headers = this.getAuthHeaders();
-    return this.http.request<BaseResponceInterface>(
-      'DELETE',
-      `${this.baseUrl}delete post comments`,
-      {
-        headers,
-        body: { postId: postId },
-      }
-    );
+
+  deleteComment(commentId: number): Observable<any> {
+    return this.http.delete(`${this.baseUrl}/delete post comments`, {
+      
+      body: { postCommentId: commentId }, 
+    });
   }
 
   updatePostcomment(dto: UpdatePostComment): Observable<BaseResponceInterface> {

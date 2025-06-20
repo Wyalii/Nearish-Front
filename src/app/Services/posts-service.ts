@@ -6,6 +6,7 @@ import { CreatePost } from '../interfaces/create-post';
 import { Post } from '../interfaces/post';
 import { UpdatePost } from '../interfaces/update-post';
 import { RemovePost } from '../interfaces/remove-post';
+import { GetPostRequest } from '../interfaces/get-post-request';
 
 @Injectable({
   providedIn: 'root',
@@ -31,6 +32,10 @@ export class PostService {
       { headers }
     );
   }
+
+   getPostById(dto: GetPostRequest): Observable<{ post: Post }> {
+  return this.http.post<{ post: Post }>(`${this.baseUrl}GetPost`, dto);
+}
 
   getPosts(): Observable<Post[]> {
     return this.http.get<Post[]>(`${this.baseUrl}get all posts`);

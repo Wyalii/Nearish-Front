@@ -24,7 +24,7 @@
 
   <div class="post-footer">
     <span>👍 Likes {{getLikeCount()}}</span>
-    <span>💬 Comments {{getCommentCount()}}</span>
+    <span (click)="viewComments()">💬 Comments {{getCommentCount()}}</span>
   </div>
 </div>
 <hr />
