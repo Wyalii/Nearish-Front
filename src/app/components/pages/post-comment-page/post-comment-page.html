@@ -1,0 +1,67 @@
+<div class="post-container">
+  <div class="modal-overlay" *ngIf="showDeleteModal">
+    <div class="modal">
+      <p>Are you sure you want to delete this post?</p>
+      <div class="modal-buttons">
+        <button class="cancel-btn" (click)="showDeleteModal = false">
+          Cancel
+        </button>
+        <button class="confirm-btn" (click)="deletePost()">Delete</button>
+      </div>
+    </div>
+  </div>
+  <img src="arrow.png" class="arrow" (click)="goBack()" />
+
+  <div class="post-header">
+    <img
+      *ngIf="post.user?.profileImage; else guestPostUser"
+      [src]="post.user?.profileImage"
+      class="pfp"
+    />
+    <ng-template #guestPostUser>
+      <img src="guest.png" class="pfp" />
+    </ng-template>
+    <p>{{post.user?.name}}</p>
+    <button *ngIf="isAdminOfPost()" (click)="showDeleteModal = true">
+      Delete
+    </button>
+  </div>
+
+  <div class="post-main">
+    <p>{{post.description}}</p>
+    <img [src]="post.imageUrl" *ngIf="post.imageUrl" />
+    <video [src]="post.videoUrl" *ngIf="post.videoUrl"></video>
+  </div>
+
+  <div class="post-footer">
+    <span>👍 Likes {{post.likes?.length}}</span>
+    <span>💬 Comments {{post.comments?.length}}</span>
+  </div>
+
+  <div class="post-comments-list">
+    <div class="post-comment-container" *ngFor="let comment of comments">
+      <img
+        *ngIf="comment.user?.profileImage; else guestCommentUser"
+        [src]="comment.user?.profileImage"
+        class="comment-pfp"
+      />
+      <ng-template #guestCommentUser>
+        <img src="guest.png" class="comment-pfp" />
+      </ng-template>
+
+      <div class="post-comment-box">
+        <p>{{comment.user?.name}}</p>
+        <p>{{comment.text}}</p>
+      </div>
+    </div>
+  </div>
+  <div class="post-add-comment">
+    <input
+      type="text"
+      placeholder="Write a comment..."
+      [(ngModel)]="newComment"
+      (keydown.enter)="addComment()"
+    />
+    <button (click)="addComment()">Post</button>
+  </div>
+</div>

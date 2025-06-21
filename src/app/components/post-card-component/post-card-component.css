@@ -1,0 +1,80 @@
+hr {
+  width: 98%;
+  height: 5px;
+  background-color: gainsboro;
+}
+.pfp {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+.more {
+  width: 30px;
+  cursor: pointer;
+}
+.post-video {
+  width: 100%;
+  height: auto;
+}
+.post-image {
+  width: 100%;
+  max-height: 400px;
+  object-fit: cover;
+  border-radius: 8px;
+  display: block;
+  margin: 0 auto;
+}
+.post-card {
+  width: 100%;
+  border-radius: 10px;
+  background-color: #fff;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 16px;
+  min-height: 300px;
+  padding-bottom: 10px;
+}
+.post-header {
+  width: 95%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-left: 5px;
+  margin-bottom: 10px;
+}
+.user-section {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+.post-main {
+  width: 95%;
+  margin-bottom: 10px;
+  padding-left: 5px;
+}
+
+.post-main img {
+  width: 100%;
+  max-height: 400px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+.post-main p {
+  white-space: pre-line;
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.5;
+}
+.post-footer {
+  width: 95%;
+  padding-left: 5px;
+  display: flex;
+  gap: 10px;
+}
+.post-footer span {
+  cursor: pointer;
+}
