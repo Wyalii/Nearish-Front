@@ -14,10 +14,11 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { PostLikeService } from '../../Services/post-like-service';
 import { TokenService } from '../../Services/token-service';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-post-card-component',
-  imports: [CommonModule],
+  imports: [CommonModule, FormsModule],
   templateUrl: './post-card-component.html',
   styleUrl: './post-card-component.css',
 })

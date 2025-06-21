@@ -2,19 +2,27 @@
   <div class="post-header">
     <div class="user-section">
       <img
+        *ngIf="post.user?.profileImage; else guestPostUser"
         [src]="post.user?.profileImage"
-        *ngIf="post.user?.profileImage"
         class="pfp"
+        loading="lazy"
       />
-      <img src="guest.png" class="pfp" *ngIf="!post.user?.profileImage" />
+      <ng-template #guestPostUser>
+        <img src="guest.png" class="pfp" loading="lazy" />
+      </ng-template>
       <p>{{ post.user?.name }}</p>
     </div>
-    <img src="more.png" class="more" />
+    <img src="more.png" class="more" loading="lazy" />
   </div>
 
   <div class="post-main">
     <p>{{ post.description }}</p>
-    <img [src]="post.imageUrl" *ngIf="post.imageUrl" class="post-image" />
+    <img
+      [src]="post.imageUrl"
+      *ngIf="post.imageUrl"
+      class="post-image"
+      loading="lazy"
+    />
     <video
       *ngIf="post.videoUrl"
       [src]="post.videoUrl"

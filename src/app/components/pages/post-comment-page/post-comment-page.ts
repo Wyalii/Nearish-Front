@@ -80,6 +80,7 @@ export class PostCommentPage implements OnInit {
         this.post = res.post;
         this.comments = this.post.comments || [];
         console.log(this.comments);
+        console.log(this.post);
       },
       error: (err) => {
         console.error('Failed to load post:', err);

@@ -31,7 +31,12 @@ export class FileService {
       }
 
       const data = await res.json();
-      return data.secure_url;
+      const optimizedUrl = data.secure_url.replace(
+        '/upload/',
+        '/upload/w_800,h_800,c_limit,f_auto,q_auto/'
+      );
+
+      return optimizedUrl;
     } catch (err) {
       console.error('Cloudinary upload error:', err);
       return null;
