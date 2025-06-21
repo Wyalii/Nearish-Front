@@ -1,0 +1,201 @@
+.post-container {
+  height: 100%;
+  position: relative;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  margin: 20px auto;
+  padding: 16px;
+  max-width: 600px;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+}
+
+.arrow {
+  width: 20px;
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+
+.post-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.pfp {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1px solid #ccc;
+}
+
+.post-header p {
+  font-weight: 600;
+  margin: 0;
+  font-size: 14px;
+}
+
+.post-main p {
+  white-space: pre-line;
+  margin-bottom: 10px;
+  font-size: 15px;
+  color: #333;
+}
+
+.post-main img,
+.post-main video {
+  max-width: 100%;
+  border-radius: 8px;
+  margin-top: 10px;
+}
+
+.post-footer {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  color: #666;
+  margin-top: 12px;
+  padding-top: 8px;
+  border-top: 1px solid #eee;
+}
+
+.post-comments-list {
+  margin-top: 16px;
+  border-top: 1px solid #eee;
+  padding-top: 10px;
+}
+
+.post-comment-container {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 12px;
+  gap: 10px;
+}
+
+.comment-pfp {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1px solid #ccc;
+}
+
+.post-comment-box {
+  background-color: #f0f2f5;
+  padding: 8px 12px;
+  border-radius: 18px;
+  max-width: 80%;
+}
+
+.post-comment-box p {
+  margin: 0;
+  font-size: 14px;
+  color: #333;
+}
+
+.post-comment-box p:first-child {
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.post-add-comment {
+  position: sticky;
+  bottom: 0;
+  background-color: white;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  padding: 10px 15px;
+  border-top: 1px solid #ddd;
+  z-index: 10;
+}
+
+.post-add-comment input {
+  flex: 1;
+  padding: 10px;
+  border-radius: 20px;
+  border: 1px solid #ccc;
+  outline: none;
+  font-size: 14px;
+}
+
+.post-add-comment button {
+  padding: 8px 14px;
+  background-color: #1877f2;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.2s;
+}
+
+.post-add-comment button:hover {
+  background-color: #145dcb;
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+.modal {
+  background-color: #fff;
+  padding: 20px 24px;
+  border-radius: 10px;
+  width: 90%;
+  max-width: 400px;
+  text-align: center;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.modal p {
+  font-size: 16px;
+  margin-bottom: 20px;
+  color: #111;
+}
+
+.modal-buttons {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.cancel-btn,
+.confirm-btn {
+  flex: 1;
+  padding: 10px;
+  border-radius: 20px;
+  font-size: 14px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.cancel-btn {
+  background-color: #e4e6eb;
+  color: #050505;
+}
+
+.cancel-btn:hover {
+  background-color: #d8dadf;
+}
+
+.confirm-btn {
+  background-color: #d93025;
+  color: white;
+}
+
+.confirm-btn:hover {
+  background-color: #c5221f;
+}

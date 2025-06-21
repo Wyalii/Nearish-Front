@@ -1,0 +1,21 @@
+<header class="header-nav">
+  <div class="header-left">
+    <h1 class="logo">Nearish</h1>
+  </div>
+
+  <div class="header-center" *ngIf="!isLoggedIn">
+    <a
+      routerLink="/"
+      routerLinkActive="active"
+      [routerLinkActiveOptions]="{ exact: true }"
+      >Home</a
+    >
+    <a routerLink="/register" routerLinkActive="active">Register</a>
+    <a routerLink="/login" routerLinkActive="active">Login</a>
+  </div>
+
+  <div class="header-right" *ngIf="isLoggedIn">
+    <img [src]="user?.profileImage || 'guest.png'" class="pfp" alt="Profile" />
+    <button class="logout-btn" (click)="logout()">Logout</button>
+  </div>
+</header>

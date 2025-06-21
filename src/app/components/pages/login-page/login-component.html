@@ -1,0 +1,26 @@
+<div class="loading-container" *ngIf="loading">
+  <img src="/loading.gif" class="loading" />
+  <p>loading...</p>
+</div>
+<div class="login-container" *ngIf="!loading">
+  <h2>Login</h2>
+  <form (ngSubmit)="loginFunc()" #loginForm="ngForm">
+    <input
+      type="email"
+      placeholder="Email"
+      [(ngModel)]="user.email"
+      name="email"
+      required
+    />
+
+    <input
+      type="password"
+      placeholder="Password"
+      [(ngModel)]="user.password"
+      name="password"
+      required
+    />
+
+    <button type="submit" [disabled]="loginForm.invalid">Login</button>
+  </form>
+</div>

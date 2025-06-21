@@ -1,0 +1,49 @@
+<div class="post-card">
+  <div class="post-header">
+    <div class="user-section">
+      <img
+        *ngIf="post.user?.profileImage; else guestPostUser"
+        [src]="post.user?.profileImage"
+        class="pfp"
+        loading="lazy"
+      />
+      <ng-template #guestPostUser>
+        <img src="guest.png" class="pfp" loading="lazy" />
+      </ng-template>
+      <p>{{ post.user?.name }}</p>
+    </div>
+    <img src="more.png" class="more" loading="lazy" />
+  </div>
+
+  <div class="post-main">
+    <p>{{ post.description }}</p>
+    <img
+      [src]="post.imageUrl"
+      *ngIf="post.imageUrl"
+      class="post-image"
+      loading="lazy"
+    />
+    <video
+      *ngIf="post.videoUrl"
+      [src]="post.videoUrl"
+      controls
+      class="post-video"
+    ></video>
+  </div>
+
+  <div class="post-footer">
+    <span
+      (click)="toggleLike()"
+      class="like-button"
+      [class.liked]="isPostLiked()"
+      style="cursor: pointer"
+    >
+      {{ isPostLiked() ? '❤️' : '🤍' }} Likes {{ getLikeCount() }}
+    </span>
+
+    <span (click)="viewComments()" style="cursor: pointer">
+      💬 Comments {{ getCommentCount() }}
+    </span>
+  </div>
+</div>
+<hr />
