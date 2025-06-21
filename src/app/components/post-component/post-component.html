@@ -4,7 +4,7 @@
 </div>
 <ng-container *ngIf="!loading">
   <div class="header">
-    <button class="create-post-btn" (click)="openCreateModal()">
+    <button class="create-post-btn" (click)="goToPostCreate()">
       Create New Post
     </button>
     <div class="box">
@@ -18,10 +18,4 @@
       [post]="post"
     ></app-post-card-component>
   </div>
-  <!-- Create Post Modal -->
-  <app-create-post
-    *ngIf="showCreateModal"
-    (cancelled)="onCancelCreate()"
-    (postCreated)="onPostCreated()"
-  ></app-create-post>
 </ng-container>

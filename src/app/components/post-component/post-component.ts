@@ -4,13 +4,14 @@ import { PostService } from '../../Services/posts-service';
 import { CommonModule } from '@angular/common';
 import { PostCardComponent } from '../post-card-component/post-card-component';
 import { CreatePost } from '../../interfaces/create-post';
-import { CreatePostComponent } from '../create-post-component/create-post-component';
+import { CreatePostComponent } from '../pages/create-post-component/create-post-component';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-post-component',
-  imports: [CommonModule, PostCardComponent, CreatePostComponent, FormsModule],
+  imports: [CommonModule, PostCardComponent, FormsModule],
   templateUrl: './post-component.html',
   styleUrl: './post-component.css',
 })
@@ -18,8 +19,8 @@ export class PostComponent implements OnInit {
   posts: Post[] = [];
   loading = true;
   error: string = '';
-  showCreateModal = false;
   private snackBar = inject(MatSnackBar);
+  private router = inject(Router);
 
   constructor(private postService: PostService) {}
 
@@ -43,16 +44,12 @@ export class PostComponent implements OnInit {
     });
   }
 
-  openCreateModal() {
-    this.showCreateModal = true;
+  goToPostCreate() {
+    this.router.navigate(['/create-post']);
   }
 
   onPostCreated() {
     this.loadPosts();
-  }
-
-  onCancelCreate() {
-    this.showCreateModal = false;
   }
 
   getLikeCount(post: Post): number {

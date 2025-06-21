@@ -30,7 +30,7 @@
   <div class="post-main">
     <p>{{post.description}}</p>
     <img [src]="post.imageUrl" *ngIf="post.imageUrl" />
-    <video [src]="post.videoUrl" *ngIf="post.videoUrl"></video>
+    <video [src]="post.videoUrl" *ngIf="post.videoUrl" controls></video>
   </div>
 
   <div class="post-footer">

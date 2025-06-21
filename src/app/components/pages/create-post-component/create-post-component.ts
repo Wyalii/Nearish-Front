@@ -1,12 +1,12 @@
 import { Component, EventEmitter, inject, Output } from '@angular/core';
-import { CreatePost } from '../../interfaces/create-post';
+import { CreatePost } from '../../../interfaces/create-post';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { PostService } from '../../Services/posts-service';
+import { PostService } from '../../../Services/posts-service';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { FileService } from '../../Services/file-service';
+import { FileService } from '../../../Services/file-service';
 
 @Component({
   selector: 'app-create-post',
@@ -16,12 +16,13 @@ import { FileService } from '../../Services/file-service';
   styleUrls: ['./create-post-component.css'],
 })
 export class CreatePostComponent {
-  @Output() postCreated = new EventEmitter<CreatePost>();
   @Output() cancelled = new EventEmitter<void>();
   postService = inject(PostService);
   private snackBar = inject(MatSnackBar);
   fileService = inject(FileService);
   postForm: FormGroup;
+  uploading: boolean = false;
+  private router = inject(Router);
   constructor(private fb: FormBuilder) {
     this.postForm = this.fb.group({
       description: ['', [Validators.required, Validators.minLength(5)]],
@@ -30,10 +31,12 @@ export class CreatePostComponent {
     });
   }
   async handleFileUpload(event: Event, type: 'image') {
+    this.uploading = true;
     const fileUrl = await this.fileService.uploadFile(event, type);
     if (fileUrl) {
       if (type === 'image') {
         this.postForm.patchValue({ imageUrl: fileUrl });
+        this.uploading = false;
       } else {
         this.snackBar.open(
           'Video upload failed. Please try again.',
@@ -42,18 +45,22 @@ export class CreatePostComponent {
             duration: 4000,
           }
         );
+        this.uploading = false;
       }
     }
   }
 
   async handleVideoUpload(event: Event) {
+    this.uploading = true;
     const videoUrl = await this.fileService.uploadFile(event, 'video');
     if (videoUrl) {
       this.postForm.patchValue({ videoUrl });
+      this.uploading = false;
     } else {
       this.snackBar.open('Video upload failed. Please try again.', 'Dismiss', {
         duration: 4000,
       });
+      this.uploading = false;
     }
   }
 
@@ -71,8 +78,7 @@ export class CreatePostComponent {
           duration: 5000,
         });
         this.postForm.reset();
-        this.postCreated.emit(response.data);
-        this.cancelled.emit();
+        this.cancel();
       },
       error: (error) => {
         console.error('Error creating post:', error);
@@ -83,12 +89,14 @@ export class CreatePostComponent {
             duration: 5000,
           }
         );
-        this.cancelled.emit();
+
+        this.cancel();
       },
     });
   }
 
   cancel() {
     this.cancelled.emit();
+    this.router.navigate(['/']);
   }
 }
