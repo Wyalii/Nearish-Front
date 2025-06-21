@@ -99,7 +99,7 @@ export class PostCardComponent implements OnInit {
   }
 
   toggleLike() {
-    if ((this.post.likes?.length || 0) > 0) {
+    if (this.isPostLiked()) {
       this.unlikePost();
     } else {
       this.likePost();
