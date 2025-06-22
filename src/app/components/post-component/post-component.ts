@@ -7,11 +7,11 @@ import { CreatePost } from '../../interfaces/create-post';
 import { CreatePostComponent } from '../pages/create-post-component/create-post-component';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { FormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-post-component',
-  imports: [CommonModule, PostCardComponent, FormsModule],
+  imports: [CommonModule, PostCardComponent, FormsModule,RouterModule],
   templateUrl: './post-component.html',
   styleUrl: './post-component.css',
 })
@@ -47,7 +47,10 @@ export class PostComponent implements OnInit {
   goToPostCreate() {
     this.router.navigate(['/create-post']);
   }
-
+  goToFriendRequest(){
+   
+    this.router.navigate(['/get'])
+  }
   onPostCreated() {
     this.loadPosts();
   }

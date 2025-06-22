@@ -5,6 +5,7 @@ import { LoginPage } from './components/pages/login-page/login-component';
 import { RegisterPage } from './components/pages/register-page/user-register-component';
 import { PostCommentPage } from './components/pages/post-comment-page/post-comment-page';
 import { CreatePostComponent } from './components/pages/create-post-component/create-post-component';
+import { FriendRequestPage } from './components/pages/friend-request-page/friend-request-page';
 
 export const routes: Routes = [
   {
@@ -31,4 +32,8 @@ export const routes: Routes = [
     path: 'create-post',
     component: CreatePostComponent,
   },
+  {
+    path:'get',
+    component:FriendRequestPage
+  }
 ];
