@@ -5,6 +5,8 @@ import { LoginPage } from './components/pages/login-page/login-component';
 import { RegisterPage } from './components/pages/register-page/user-register-component';
 import { PostCommentPage } from './components/pages/post-comment-page/post-comment-page';
 import { CreatePostComponent } from './components/pages/create-post-component/create-post-component';
+import { ProfilePage } from './components/pages/profile-page/profile-page';
+import { PasswordReset } from './components/pages/password-reset/password-reset';
 
 export const routes: Routes = [
   {
@@ -30,5 +32,13 @@ export const routes: Routes = [
   {
     path: 'create-post',
     component: CreatePostComponent,
+  },
+  {
+    path: 'profile/:username',
+    component: ProfilePage,
+  },
+  {
+    path: 'passwordReset/:token',
+    component: PasswordReset,
   },
 ];

@@ -1,0 +1,45 @@
+<div *ngIf="user; else loading" class="profile-wrapper">
+  <section class="profile-card">
+    <img
+      [src]="user.profileImage || 'https://via.placeholder.com/150'"
+      alt="Profile"
+      class="profile-img"
+    />
+
+    <h2 class="profile-name">{{ user.name }}</h2>
+    <p class="profile-email">{{ user.email }}</p>
+
+    <p class="profile-status">
+      <strong>Status:</strong>
+      <span
+        [class.verified]="user.isVerified"
+        [class.not-verified]="!user.isVerified"
+      >
+        {{ user.isVerified ? 'Verified ✅' : 'Not Verified ❌' }}
+      </span>
+    </p>
+
+    <div class="profile-actions">
+      <button (click)="changePassword()">Change Password</button>
+      <button class="secondary" (click)="forgotPassword()">
+        Forgot Password
+      </button>
+    </div>
+  </section>
+
+  <section *ngIf="userPosts.length > 0; else noPosts" class="posts-list">
+    <h3>Your Posts</h3>
+    <app-post-card-component
+      *ngFor="let post of userPosts"
+      [post]="post"
+    ></app-post-card-component>
+  </section>
+
+  <ng-template #noPosts>
+    <p class="no-posts-msg">You haven't written any posts yet.</p>
+  </ng-template>
+</div>
+
+<ng-template #loading>
+  <div class="loading-state">Loading profile...</div>
+</ng-template>

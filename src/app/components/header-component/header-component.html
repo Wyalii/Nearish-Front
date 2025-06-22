@@ -15,7 +15,12 @@
   </div>
 
   <div class="header-right" *ngIf="isLoggedIn">
-    <img [src]="user?.profileImage || 'guest.png'" class="pfp" alt="Profile" />
+    <img
+      [src]="user?.profileImage || 'guest.png'"
+      class="pfp"
+      alt="Profile"
+      (click)="goToProfilePage()"
+    />
     <button class="logout-btn" (click)="logout()">Logout</button>
   </div>
 </header>
