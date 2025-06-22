@@ -19,8 +19,8 @@ export class FriendRequestService {
     return this.http.post(`${this.apiUrl}/send`, dto);
   }
 
-  getReceivedRequests(): Observable<{ friendRequests: FriendRequest[] }> {
-    return this.http.get<{ friendRequests: FriendRequest[] }>(`${this.apiUrl}/get`);
+  getReceivedRequests() {
+    return this.http.get(`${this.apiUrl}/get`);
   }
 
   acceptRequest(dto: AcceptFriendRequest): Observable<any> {
