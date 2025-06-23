@@ -2,7 +2,7 @@
 <div *ngIf="friendRequests.length > 0; else noRequests">
   <h2>Friend Requests</h2>
   <div *ngFor="let req of friendRequests" class="request-card">
-    <p><strong>Sender ID:</strong> {{ req.sender_Id }}</p>
+    <p><strong>Sender ID:</strong> {{ req.sender.name }}</p>
     <p>Status: {{ req.status }}</p>
     <p>Date: {{ req.createdAt | date }}</p>
 

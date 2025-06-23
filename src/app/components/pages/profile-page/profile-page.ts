@@ -9,6 +9,7 @@ import { TokenService } from '../../../Services/token-service';
 import { Post } from '../../../interfaces/post';
 import { PostCardComponent } from '../../post-card-component/post-card-component';
 import { PasswordService } from '../../../Services/password-service';
+import { PostService } from '../../../Services/posts-service';
 
 @Component({
   selector: 'app-profile-page',
@@ -21,7 +22,10 @@ export class ProfilePage implements OnInit {
   private userService = inject(UserService);
   private router = inject(Router);
   private passwordService = inject(PasswordService);
+  private postService= inject(PostService)
   tokenService = inject(TokenService);
+   loading = true;
+  error: string = '';
   isLoggedIn = false;
   user: User | null = null;
   userPosts: Post[] = [];
@@ -33,10 +37,23 @@ export class ProfilePage implements OnInit {
     this.userService.user$.subscribe((user) => {
       this.user = user;
     });
+   this.viewPost()
   }
 
-  viewPost(arg0: any) {
-    throw new Error('Method not implemented.');
+  viewPost(){
+    this.postService.getPostsCreatedByUser().subscribe({
+      next: (res) => {
+        console.log(res);
+        this.userPosts = res;
+        setTimeout(() => {
+          this.loading = false;
+        }, 1000);
+      },
+      error: (err) => {
+        this.error = 'Failed to load posts created by this user';
+        this.loading = false;
+      },
+    }); 
   }
   goToForgotPassword() {
     this.router.navigate(['/forgotPassword']);

@@ -65,4 +65,8 @@ export class PostService {
       }
     );
   }
+  getPostsCreatedByUser():Observable<Post[]>{
+ const headers = this.getAuthHeaders();
+return this.http.get<Post[]>(`${this.baseUrl}GetCreatedPostsByUser`,{headers} )
+  }
 }
