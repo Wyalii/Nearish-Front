@@ -51,6 +51,9 @@ export class ProfilePage implements OnInit {
       },
       error: (err) => {
         this.error = 'Failed to load posts created by this user';
+         this.snackBar.open(`${err.error.details}`, 'Dismiss', {
+          duration: 5000,
+        });
         this.loading = false;
       },
     });

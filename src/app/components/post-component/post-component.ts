@@ -8,6 +8,7 @@ import { CreatePostComponent } from '../pages/create-post-component/create-post-
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
+import { AuthService } from '../../Services/AuthService';
 
 @Component({
   selector: 'app-post-component',
@@ -21,7 +22,6 @@ export class PostComponent implements OnInit {
   error: string = '';
   private snackBar = inject(MatSnackBar);
   private router = inject(Router);
-
   constructor(private postService: PostService) {}
 
   ngOnInit() {
@@ -39,17 +39,14 @@ export class PostComponent implements OnInit {
       },
       error: (err) => {
         this.error = 'Failed to load posts';
+         this.snackBar.open(`${err.error.details}`, 'Dismiss', {
+          duration: 5000,
+        });
         this.loading = false;
       },
     });
   }
 
-  goToPostCreate() {
-    this.router.navigate(['/create-post']);
-  }
-  goToFriendRequest() {
-    this.router.navigate(['/friendRequests']);
-  }
   onPostCreated() {
     this.loadPosts();
   }
@@ -72,7 +69,9 @@ export class PostComponent implements OnInit {
       },
       error: (err) => {
         console.error('Failed to delete the post:', err);
-        alert('Failed to delete the post.');
+         this.snackBar.open(`Failed to delete the post : ${err.error.details}`, 'Dismiss', {
+          duration: 5000,
+        });
       },
     });
   }
@@ -103,7 +102,9 @@ export class PostComponent implements OnInit {
       },
       error: (err) => {
         console.error('Failed to update the post:', err);
-        alert('Failed to update the post.');
+        this.snackBar.open(`Failed to update the post : ${err.error.details}`, 'Dismiss', {
+          duration: 5000,
+        });
       },
     });
   }

@@ -11,6 +11,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { PostComment } from '../../../interfaces/post-comment';
 import { TokenService } from '../../../Services/token-service';
 import { RemovePost } from '../../../interfaces/remove-post';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-post-comment-page',
@@ -32,6 +33,7 @@ export class PostCommentPage implements OnInit {
   private route = inject(ActivatedRoute);
   private router = inject(Router);
   private tokenService = inject(TokenService);
+    private snackBar = inject(MatSnackBar);
   ngOnInit() {
     const token = this.tokenService.getTokenFromLocalStorage();
     const postId = Number(this.route.snapshot.paramMap.get('postId'));
@@ -48,7 +50,9 @@ export class PostCommentPage implements OnInit {
           this.loadPost(postId);
         },
         error: (err) => {
-          console.error('Failed to load created posts:', err);
+          this.snackBar.open(`${err.error.details}`, 'Dismiss', {
+          duration: 5000,
+        });
           this.loadPost(postId);
         },
       });
@@ -64,7 +68,9 @@ export class PostCommentPage implements OnInit {
   copyPostUrl() {
     const postUrl = window.location.href;
     navigator.clipboard.writeText(postUrl);
-    alert('Post URL copied to clipboard');
+    this.snackBar.open('Post URL copied to clipboard', 'Dismiss', {
+          duration: 5000,
+        });
   }
 
   deletePost() {
@@ -74,9 +80,14 @@ export class PostCommentPage implements OnInit {
       next: (res) => {
         console.log(res);
         this.goBack();
+         this.snackBar.open(`Succesfully deleted post`, 'Dismiss', {
+          duration: 5000,
+        });
       },
       error: (err) => {
-        console.error('Failed to delete post.', err);
+       this.snackBar.open(`${err.error.details}`, 'Dismiss', {
+          duration: 5000,
+        });
       },
     });
   }
@@ -94,7 +105,9 @@ export class PostCommentPage implements OnInit {
         if (res.success) this.comments = res.data;
       },
       error: (err) => {
-        console.error('Failed to fetch comments:', err);
+       this.snackBar.open(`${err.error.details}`, 'Dismiss', {
+          duration: 5000,
+        });
       },
     });
   }
@@ -110,7 +123,9 @@ export class PostCommentPage implements OnInit {
         this.fetchComments();
       },
       error: (err) => {
-        console.error('Failed to load post:', err);
+       this.snackBar.open(`${err.error.details}`, 'Dismiss', {
+          duration: 5000,
+        });
       },
     });
   }
@@ -126,9 +141,14 @@ export class PostCommentPage implements OnInit {
           this.comments.push(res.data);
           this.newComment = '';
         }
+         this.snackBar.open(`Succesfully commented`, 'Dismiss', {
+          duration: 5000,
+        });
       },
       error: (err) => {
-        console.error('Failed to create comment:', err);
+       this.snackBar.open(`failed to comment not loggined in`, 'Dismiss', {
+          duration: 5000,
+        });
       },
     });
   }
@@ -138,9 +158,14 @@ export class PostCommentPage implements OnInit {
         if (res.success) {
           this.comments = this.comments.filter((c) => c.id !== commentId);
         }
+         this.snackBar.open(`Succesfully deleted comment`, 'Dismiss', {
+          duration: 5000,
+        });
       },
       error: (err) => {
-        console.error('Failed to delete comment:', err);
+        this.snackBar.open(`failed to delete comment`, 'Dismiss', {
+          duration: 5000,
+        });
       },
     });
   }
@@ -168,9 +193,14 @@ export class PostCommentPage implements OnInit {
           this.editingCommentId = null;
           this.editedCommentText = '';
         }
+        this.snackBar.open(`Succesfully updated post comment`, 'Dismiss', {
+          duration: 5000,
+        });
       },
       error: (err) => {
-        console.error('Failed to update comment:', err);
+       this.snackBar.open(`failed to update comment`, 'Dismiss', {
+          duration: 5000,
+        });
       },
     });
   }

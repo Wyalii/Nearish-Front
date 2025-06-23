@@ -44,7 +44,7 @@ export class LoginPage {
       },
       error: (err) => {
         this.loading = false;
-        this.snackBar.open('Something went wrong!', 'Dismiss', {
+        this.snackBar.open(`${err.error.details}`, 'Dismiss', {
           duration: 5000,
         });
       },
@@ -57,4 +57,8 @@ export class LoginPage {
     const date = new Date(match[1].trim());
     return isNaN(date.getTime()) ? null : date;
   }
+  goToResetPass(){
+  this.router.navigate(['/forgotPassword'])
+  }
+
 }

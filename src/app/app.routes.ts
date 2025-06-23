@@ -61,4 +61,8 @@ export const routes: Routes = [
     path: 'user/:id', // public view of another user's profile
     component: OthersPage,
   },
+  {
+    path: '**',
+    component: HomePage,
+  },
 ];

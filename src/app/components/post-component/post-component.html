@@ -4,16 +4,6 @@
 </div>
 <ng-container *ngIf="!loading">
   <div class="header">
-    <button class="create-post-btn" (click)="goToPostCreate()">
-      Create New Post
-    </button>
-    <div class="box">
-      <img src="friend-request.png"
-       class="friend-request"
-      (click)="goToFriendRequest()"
-       />
-      <img src="message.png" class="message" />
-    </div>
   </div>
   <div class="post-list">
     <app-post-card-component
