@@ -1,4 +1,16 @@
 <div class="post-card">
+  <div class="modal-overlay" *ngIf="showDeleteModal">
+    <div class="modal">
+      <p>Are you sure you want to delete this post?</p>
+      <div class="modal-buttons">
+        <button class="cancel-btn" (click)="showDeleteModal = false">
+          Cancel
+        </button>
+        <button class="confirm-btn" (click)="deletePost()">Delete</button>
+      </div>
+    </div>
+  </div>
+
   <div class="post-header">
     <div class="user-section">
       <img
@@ -12,7 +24,22 @@
       </ng-template>
       <p>{{ post.user?.name }}</p>
     </div>
-    <img src="more.png" class="more" loading="lazy" />
+
+    <div class="post-actions" style="position: relative">
+      <img
+        src="more.png"
+        class="more"
+        loading="lazy"
+        (click)="toggleDropdown()"
+        style="cursor: pointer"
+      />
+      <ul class="dropdown-menu" *ngIf="showDropdown">
+        <li (click)="copyPostUrl()">Copy URL</li>
+        <li *ngIf="isAdminOfPost()" (click)="showDeleteModal = true">
+          Delete Post
+        </li>
+      </ul>
+    </div>
   </div>
 
   <div class="post-main">
@@ -46,4 +73,5 @@
     </span>
   </div>
 </div>
+
 <hr />

@@ -13,7 +13,7 @@ import { GetPostRequest } from '../interfaces/get-post-request';
 })
 export class PostService {
   private readonly baseUrl = 'https://nearish-back.onrender.com/api/Post/';
-
+  public createdPosts: Post[] = [];
   constructor(private http: HttpClient) {}
 
   private getAuthHeaders(): HttpHeaders {
@@ -64,5 +64,20 @@ export class PostService {
         body: dto,
       }
     );
+  }
+  getCreatedPostsByUser() {
+    const headers = this.getAuthHeaders();
+    return this.http.get(`${this.baseUrl}GetCreatedPostsByUser`, { headers });
+  }
+  loadCreatedPosts(): void {
+    this.getCreatedPostsByUser().subscribe({
+      next: (res: any) => {
+        this.createdPosts = res || [];
+        console.log(this.createdPosts);
+      },
+      error: (err) => {
+        console.error('Failed to load created posts:', err);
+      },
+    });
   }
 }
