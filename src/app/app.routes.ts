@@ -8,6 +8,7 @@ import { CreatePostComponent } from './components/pages/create-post-component/cr
 import { ProfilePage } from './components/pages/profile-page/profile-page';
 import { PasswordReset } from './components/pages/password-reset/password-reset';
 import { ForgotPassword } from './components/pages/forgot-password/forgot-password';
+import { FriendRequestPage } from './components/pages/friend-request-page/friend-request-page';
 
 export const routes: Routes = [
   {
@@ -45,5 +46,9 @@ export const routes: Routes = [
   {
     path: 'forgotPassword',
     component: ForgotPassword,
+  },
+  {
+    path: 'friendRequests',
+    component: FriendRequestPage,
   },
 ];

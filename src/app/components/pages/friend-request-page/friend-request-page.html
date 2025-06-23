@@ -1,0 +1,16 @@
+
+<div *ngIf="friendRequests.length > 0; else noRequests">
+  <h2>Friend Requests</h2>
+  <div *ngFor="let req of friendRequests" class="request-card">
+    <p><strong>Sender ID:</strong> {{ req.sender_Id }}</p>
+    <p>Status: {{ req.status }}</p>
+    <p>Date: {{ req.createdAt | date }}</p>
+
+    <button (click)="accept(req.sender_Id)">Accept</button>
+    <button (click)="reject(req.sender_Id)">Reject</button>
+  </div>
+</div>
+
+<ng-template #noRequests>
+  <p>No friend requests at the moment.</p>
+</ng-template>

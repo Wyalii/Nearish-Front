@@ -14,6 +14,7 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
     'https://nearish-back.onrender.com/api/Post/get all posts',
     'https://nearish-back.onrender.com/api/Post/GetLikedPosts',
     'https://nearish-back.onrender.com/api/Post/GetPost',
+    'https://nearish-back.onrender.com/api/FriendRequest/get',
   ];
 
   const shouldSkip = excludedUrls.some((url) => req.url.includes(url));
@@ -30,7 +31,6 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
   return next(authReq).pipe(
     catchError((error: HttpErrorResponse) => {
       if (error.status === 401 || 403) {
-        // token is expired so token go bye bye.
         tokenService.removeTokenFromLocalStorage();
         router.navigate(['/login']);
       }
