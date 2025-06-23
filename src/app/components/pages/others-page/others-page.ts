@@ -9,6 +9,7 @@ import { Post } from '../../../interfaces/post';
 import { PostCardComponent } from '../../post-card-component/post-card-component';
 import { SendFriendRequest } from '../../../interfaces/send-friend-request';
 import { FriendRequestService } from '../../../Services/friend-request-service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-others-page',
@@ -21,6 +22,7 @@ export class OthersPage implements OnInit {
   private userService = inject(UserService);
   private postService = inject(PostService);
   private firendRequestService = inject(FriendRequestService);
+  private snackBar = inject(MatSnackBar);
   loggedInUserId: number | undefined = undefined;
   showFriendRequestButton = false;
   user: User | undefined = undefined;
@@ -75,9 +77,14 @@ export class OthersPage implements OnInit {
     const dto: SendFriendRequest = { reciver_Id: receiverId };
     this.firendRequestService.sendRequest(dto).subscribe({
       next: () => {
-        console.log('Friend request sent successfully!');
+        this.snackBar.open('Succesfully sent friend request!', 'Dismiss', {
+          duration: 5000,
+        });
       },
       error: (err) => {
+        this.snackBar.open(`${err.error.message}`, 'Dismiss', {
+          duration: 5000,
+        });
         console.error('Failed to send friend request:', err);
       },
     });
