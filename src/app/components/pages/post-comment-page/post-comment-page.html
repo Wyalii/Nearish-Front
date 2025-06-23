@@ -10,32 +10,47 @@
       </div>
     </div>
   </div>
+
   <img src="arrow.png" class="arrow" (click)="goBack()" />
 
   <div class="post-header">
-    <img
-      *ngIf="post.user?.profileImage; else guestPostUser"
-      [src]="post.user?.profileImage"
-      class="pfp"
-    />
-    <ng-template #guestPostUser>
-      <img src="guest.png" class="pfp" />
-    </ng-template>
-    <p>{{post.user?.name}}</p>
-    <button *ngIf="isAdminOfPost()" (click)="showDeleteModal = true">
-      Delete
-    </button>
+    <div class="user-info">
+      <img
+        *ngIf="post.user?.profileImage; else guestPostUser"
+        [src]="post.user?.profileImage"
+        class="pfp"
+      />
+      <ng-template #guestPostUser>
+        <img src="guest.png" class="pfp" />
+      </ng-template>
+      <p>{{ post.user?.name }}</p>
+    </div>
+
+    <div class="post-actions" style="position: relative">
+      <img
+        src="more.png"
+        class="more"
+        (click)="toggleDropdown()"
+        style="cursor: pointer"
+      />
+      <ul class="dropdown-menu" *ngIf="showDropdown">
+        <li (click)="copyPostUrl()">Copy URL</li>
+        <li *ngIf="isAdminOfPost()" (click)="showDeleteModal = true">
+          Delete Post
+        </li>
+      </ul>
+    </div>
   </div>
 
   <div class="post-main">
-    <p>{{post.description}}</p>
+    <p>{{ post.description }}</p>
     <img [src]="post.imageUrl" *ngIf="post.imageUrl" />
     <video [src]="post.videoUrl" *ngIf="post.videoUrl" controls></video>
   </div>
 
   <div class="post-footer">
-    <span>👍 Likes {{post.likes?.length}}</span>
-    <span>💬 Comments {{post.comments?.length}}</span>
+    <span>👍 Likes {{ post.likes?.length }}</span>
+    <span>💬 Comments {{ post.comments?.length }}</span>
   </div>
 
   <div class="post-comments-list">
@@ -50,11 +65,12 @@
       </ng-template>
 
       <div class="post-comment-box">
-        <p>{{comment.user?.name}}</p>
-        <p>{{comment.text}}</p>
+        <p>{{ comment.user?.name }}</p>
+        <p>{{ comment.text }}</p>
       </div>
     </div>
   </div>
+
   <div class="post-add-comment">
     <input
       type="text"

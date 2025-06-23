@@ -1,13 +1,31 @@
-
 <div *ngIf="friendRequests.length > 0; else noRequests">
   <h2>Friend Requests</h2>
   <div *ngFor="let req of friendRequests" class="request-card">
+<<<<<<< HEAD
     <p><strong>Sender ID:</strong> {{ req.sender.name }}</p>
     <p>Status: {{ req.status }}</p>
     <p>Date: {{ req.createdAt | date }}</p>
 
     <button (click)="accept(req.sender_Id)">Accept</button>
     <button (click)="reject(req.sender_Id)">Reject</button>
+=======
+    <div class="request-header">
+      <img
+        [src]="req.sender.profileImage || 'guest.png'"
+        alt="Profile Image"
+        class="profile-img"
+      />
+      <div class="sender-info">
+        <p><strong>{{ req.sender.name }}</strong></p>
+        <p>Status: {{ req.status }}</p>
+        <p>Date: {{ req.createdAt | date }}</p>
+      </div>
+    </div>
+    <div class="button-group">
+      <button (click)="accept(req.sender_Id)">Accept</button>
+      <button (click)="reject(req.sender_Id)">Reject</button>
+    </div>
+>>>>>>> 45d7695bad88aaad640349edbb5af7a835e7b9a9
   </div>
 </div>
 

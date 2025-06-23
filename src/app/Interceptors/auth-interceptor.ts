@@ -15,6 +15,7 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
     'https://nearish-back.onrender.com/api/Post/GetLikedPosts',
     'https://nearish-back.onrender.com/api/Post/GetPost',
     'https://nearish-back.onrender.com/api/FriendRequest/get',
+    'https://nearish-back.onrender.com/api/Post/GetCreatedPostsByUser',
   ];
 
   const shouldSkip = excludedUrls.some((url) => req.url.includes(url));

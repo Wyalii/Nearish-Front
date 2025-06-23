@@ -25,23 +25,48 @@ export class PostCommentPage implements OnInit {
   editingCommentId: number | null = null;
   editedCommentText: string = '';
   showDeleteModal = false;
-  private curretUserId: string | null = null;
+  showDropdown = false;
+
   private commentService = inject(PostCommentService);
   private postService = inject(PostService);
   private route = inject(ActivatedRoute);
   private router = inject(Router);
   private tokenService = inject(TokenService);
-
   ngOnInit() {
-    this.curretUserId = this.tokenService.getUserId();
+    const token = this.tokenService.getTokenFromLocalStorage();
     const postId = Number(this.route.snapshot.paramMap.get('postId'));
-    if (postId) {
-      this.loadPost(postId);
-      this.fetchComments();
-    } else {
+    if (!postId) {
       console.error('No postId found in route params');
+      return;
+    }
+
+    if (token) {
+      this.postService.getCreatedPostsByUser().subscribe({
+        next: (res: any) => {
+          this.postService.createdPosts = res || [];
+          console.log('Created posts loaded:', this.postService.createdPosts);
+          this.loadPost(postId);
+        },
+        error: (err) => {
+          console.error('Failed to load created posts:', err);
+          this.loadPost(postId);
+        },
+      });
+    } else {
+      this.loadPost(postId);
     }
   }
+
+  toggleDropdown() {
+    this.showDropdown = !this.showDropdown;
+  }
+
+  copyPostUrl() {
+    const postUrl = window.location.href;
+    navigator.clipboard.writeText(postUrl);
+    alert('Post URL copied to clipboard');
+  }
+
   deletePost() {
     const removePostDto: RemovePost = { postId: this.post.id };
     this.showDeleteModal = false;
@@ -56,8 +81,9 @@ export class PostCommentPage implements OnInit {
     });
   }
   isAdminOfPost(): boolean {
-    return this.post.user?.id.toString() === this.curretUserId;
+    return this.postService.createdPosts.some((p) => p.id === this.post.id);
   }
+
   goBack() {
     this.router.navigate(['/']);
   }
@@ -81,6 +107,7 @@ export class PostCommentPage implements OnInit {
         this.comments = this.post.comments || [];
         console.log(this.comments);
         console.log(this.post);
+        this.fetchComments();
       },
       error: (err) => {
         console.error('Failed to load post:', err);

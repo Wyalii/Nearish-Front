@@ -41,10 +41,10 @@ export class ProfilePage implements OnInit {
   }
 
   viewPost(){
-    this.postService.getPostsCreatedByUser().subscribe({
+    this.postService.getCreatedPostsByUser().subscribe({
       next: (res) => {
         console.log(res);
-        this.userPosts = res;
+        this.userPosts  = res;
         setTimeout(() => {
           this.loading = false;
         }, 1000);

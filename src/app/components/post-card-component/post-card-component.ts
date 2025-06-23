@@ -1,6 +1,8 @@
 import {
+  ChangeDetectorRef,
   Component,
   EventEmitter,
+  Inject,
   inject,
   Input,
   OnInit,
@@ -23,6 +25,8 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './post-card-component.css',
 })
 export class PostCardComponent implements OnInit {
+  showDeleteModal = false;
+  showDropdown = false;
   @Input() post!: Post;
   @Output() edit = new EventEmitter<Post>();
   @Output() delete = new EventEmitter<number>();
@@ -33,12 +37,22 @@ export class PostCardComponent implements OnInit {
   isLoggedIn = false;
   isLiking = false;
   LikedPosts: Post[] = [];
-
   constructor() {}
   ngOnInit(): void {
     this.tokenService.isLoggedIn$.subscribe((status) => {
       this.isLoggedIn = status;
     });
+    if (this.tokenService.isLoggedIn$) {
+      this.postService.getCreatedPostsByUser().subscribe({
+        next: (res: any) => {
+          this.postService.createdPosts = res || [];
+          console.log('Created posts loaded:', this.postService.createdPosts);
+        },
+        error: (err) => {
+          console.error('Failed to load created posts:', err);
+        },
+      });
+    }
 
     if (this.isLoggedIn) {
       this.postService.getLikedPosts().subscribe({
@@ -52,6 +66,37 @@ export class PostCardComponent implements OnInit {
         },
       });
     }
+  }
+
+  toggleDropdown() {
+    this.showDropdown = !this.showDropdown;
+  }
+
+  copyPostUrl() {
+    const url = window.location.origin + '/posts/' + this.post.id;
+    navigator.clipboard.writeText(url).then(() => {
+      alert('Post URL copied to clipboard');
+      this.showDropdown = false;
+    });
+  }
+
+  deletePost() {
+    const removePostDto: RemovePost = { postId: this.post.id };
+    this.showDeleteModal = false;
+    this.postService.deletePost(removePostDto).subscribe({
+      next: (res) => {
+        console.log(res);
+        window.location.reload();
+      },
+      error: (err) => {
+        console.error('Failed to delete post.', err);
+      },
+    });
+    this.showDeleteModal = false;
+    this.showDropdown = false;
+  }
+  isAdminOfPost(): boolean {
+    return this.postService.createdPosts.some((p) => p.id === this.post.id);
   }
 
   getLikeCount(): number {
