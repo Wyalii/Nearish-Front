@@ -1,0 +1,43 @@
+<ng-template #loadingTemplate>
+  <div class="loading-state">Loading user profile...</div>
+</ng-template>
+<div *ngIf="!loading; else loadingTemplate" class="user-profile-wrapper">
+  <section class="user-profile-card">
+    <img
+      [src]="user?.profileImage || 'guest.png'"
+      alt="Profile Image"
+      class="user-profile-img"
+    />
+
+    <h2 class="user-profile-name">{{ user?.name }}</h2>
+    <p class="user-profile-status">
+      <strong>Status:</strong>
+      <span
+        [class.verified]="user?.isVerified"
+        [class.not-verified]="!user?.isVerified"
+      >
+        {{ user?.isVerified ? 'Verified ✅' : 'Not Verified ❌' }}
+      </span>
+    </p>
+    <button
+      class="friend-request-btn"
+      (click)="sendFriendRequest(user?.id)"
+      *ngIf="showFriendRequestButton"
+    >
+      Send Friend Request
+    </button>
+    <p *ngIf="!showFriendRequestButton">friends</p>
+  </section>
+
+  <section *ngIf="userPosts.length > 0; else noPosts" class="user-posts-list">
+    <h3>{{ user?.name }}'s Posts</h3>
+    <app-post-card-component
+      *ngFor="let post of userPosts"
+      [post]="post"
+    ></app-post-card-component>
+  </section>
+
+  <ng-template #noPosts>
+    <p class="no-posts-msg">This user hasn't written any posts yet.</p>
+  </ng-template>
+</div>

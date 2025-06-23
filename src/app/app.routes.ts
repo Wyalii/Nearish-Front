@@ -9,6 +9,8 @@ import { ProfilePage } from './components/pages/profile-page/profile-page';
 import { PasswordReset } from './components/pages/password-reset/password-reset';
 import { ForgotPassword } from './components/pages/forgot-password/forgot-password';
 import { FriendRequestPage } from './components/pages/friend-request-page/friend-request-page';
+import { SearchPage } from './components/pages/search-page/search-page';
+import { OthersPage } from './components/pages/others-page/others-page';
 
 export const routes: Routes = [
   {
@@ -50,5 +52,13 @@ export const routes: Routes = [
   {
     path: 'friendRequests',
     component: FriendRequestPage,
+  },
+  {
+    path: 'searchPage',
+    component: SearchPage,
+  },
+  {
+    path: 'user/:id', // public view of another user's profile
+    component: OthersPage,
   },
 ];

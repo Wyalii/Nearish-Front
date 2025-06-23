@@ -22,7 +22,8 @@ export class FriendRequestService {
     });
   }
   sendRequest(dto: SendFriendRequest): Observable<any> {
-    return this.http.post(`${this.apiUrl}/send`, dto);
+    const headers = this.getAuthHeaders();
+    return this.http.post(`${this.apiUrl}/send`, dto, { headers });
   }
 
   getReceivedRequests() {
@@ -36,5 +37,21 @@ export class FriendRequestService {
 
   rejectRequest(dto: RejectFriendRequest): Observable<any> {
     return this.http.patch(`${this.apiUrl}/reject`, dto);
+  }
+  getFriends() {
+    const headers = this.getAuthHeaders();
+    return this.http.get('http://localhost:5150/api/FriendRequest/GetFriends', {
+      headers,
+    });
+  }
+
+  isFriend(userId: number) {
+    const headers = this.getAuthHeaders();
+    const body = { userId: userId };
+    return this.http.post<boolean>(
+      'http://localhost:5150/api/FriendRequest/isFriend',
+      body,
+      { headers }
+    );
   }
 }

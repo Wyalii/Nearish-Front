@@ -22,9 +22,9 @@ export class ProfilePage implements OnInit {
   private userService = inject(UserService);
   private router = inject(Router);
   private passwordService = inject(PasswordService);
-  private postService= inject(PostService)
+  private postService = inject(PostService);
   tokenService = inject(TokenService);
-   loading = true;
+  loading = true;
   error: string = '';
   isLoggedIn = false;
   user: User | null = null;
@@ -37,14 +37,14 @@ export class ProfilePage implements OnInit {
     this.userService.user$.subscribe((user) => {
       this.user = user;
     });
-   this.viewPost()
+    this.viewPost();
   }
 
-  viewPost(){
+  viewPost() {
     this.postService.getCreatedPostsByUser().subscribe({
       next: (res) => {
         console.log(res);
-        this.userPosts  = res;
+        this.userPosts = res;
         setTimeout(() => {
           this.loading = false;
         }, 1000);
@@ -53,7 +53,7 @@ export class ProfilePage implements OnInit {
         this.error = 'Failed to load posts created by this user';
         this.loading = false;
       },
-    }); 
+    });
   }
   goToForgotPassword() {
     this.router.navigate(['/forgotPassword']);

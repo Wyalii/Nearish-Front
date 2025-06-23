@@ -1,3 +1,3 @@
 export interface SendFriendRequest {
-     reciver_Id: number;
+  reciver_Id: number | undefined;
 }

@@ -39,6 +39,13 @@ export class HeaderComponent implements OnInit {
   }
 
   goToProfilePage() {
-    this.router.navigate(['/profile', this.user?.name]);
+    if (this.user?.name) {
+      this.router.navigate(['/profile', this.user.name]);
+    } else {
+      console.warn('User is not loaded or has no name');
+      this.snackBar.open('User profile is not available yet.', 'Dismiss', {
+        duration: 4000,
+      });
+    }
   }
 }

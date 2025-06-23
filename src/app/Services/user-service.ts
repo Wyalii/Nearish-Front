@@ -43,6 +43,10 @@ export class UserService {
       });
   }
 
+  getUserById(userId: string): Observable<any> {
+    return this.http.get<User>(`${this.baseUrl}Auth/Users/${userId}`);
+  }
+
   clearUser(): void {
     this.userSubject.next(null);
   }

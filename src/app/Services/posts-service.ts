@@ -65,9 +65,15 @@ export class PostService {
       }
     );
   }
-  getCreatedPostsByUser():Observable<Post[]> {
+  getCreatedPostsByUser(): Observable<Post[]> {
     const headers = this.getAuthHeaders();
-    return this.http.get<Post[]>(`${this.baseUrl}GetCreatedPostsByUser`, { headers });
+    return this.http.get<Post[]>(`${this.baseUrl}GetCreatedPostsByUser`, {
+      headers,
+    });
+  }
+
+  getCreatedPostsById(id: string | null): Observable<Post[]> {
+    return this.http.get<Post[]>(`${this.baseUrl}GetCreatedPostsByUser/${id}`);
   }
   loadCreatedPosts(): void {
     this.getCreatedPostsByUser().subscribe({

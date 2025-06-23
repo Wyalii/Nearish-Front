@@ -12,7 +12,6 @@ import { Post } from '../../interfaces/post';
 import { CommonModule } from '@angular/common';
 import { PostService } from '../../Services/posts-service';
 import { RemovePost } from '../../interfaces/remove-post';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { PostLikeService } from '../../Services/post-like-service';
 import { TokenService } from '../../Services/token-service';

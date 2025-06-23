@@ -1,0 +1,86 @@
+.user-profile-wrapper {
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+.user-profile-card {
+  background-color: #f9f9f9;
+  padding: 24px;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.user-profile-img {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 16px;
+}
+
+.user-profile-name {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 4px;
+}
+
+.user-profile-username {
+  color: #666;
+  font-size: 16px;
+  margin-bottom: 12px;
+}
+
+.user-profile-status {
+  font-size: 16px;
+}
+
+.verified {
+  color: green;
+  font-weight: bold;
+}
+
+.not-verified {
+  color: red;
+  font-weight: bold;
+}
+
+.user-posts-list {
+  margin-top: 40px;
+}
+
+.user-posts-list h3 {
+  font-size: 20px;
+  margin-bottom: 16px;
+}
+
+.no-posts-msg {
+  text-align: center;
+  color: #777;
+  font-size: 16px;
+  margin-top: 24px;
+}
+
+.loading-state {
+  text-align: center;
+  font-size: 18px;
+  color: #555;
+  margin-top: 50px;
+}
+
+.friend-request-btn {
+  padding: 0.4rem 1rem;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background-color 0.2s ease;
+}
+
+.friend-request-btn:hover {
+  background-color: #0056b3;
+}

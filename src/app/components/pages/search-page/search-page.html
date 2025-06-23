@@ -1,0 +1,25 @@
+<div class="search-container">
+  <div class="search-bar">
+    <input
+      type="text"
+      placeholder="Search users..."
+      [(ngModel)]="searchQuery"
+      (input)="onSearch()"
+    />
+  </div>
+
+  <div class="search-results">
+    <div class="result-card" *ngFor="let result of results">
+      <img
+        class="profile-image"
+        [src]="result.profileImage || 'guest.png'"
+        alt="{{ result.name }}"
+        (click)="viewProfile(result.id)"
+      />
+      <div class="user-info">
+        <h3>{{ result.name }}</h3>
+        <p>{{ result.email }}</p>
+      </div>
+    </div>
+  </div>
+</div>
