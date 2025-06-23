@@ -7,6 +7,7 @@ import { PostCommentPage } from './components/pages/post-comment-page/post-comme
 import { CreatePostComponent } from './components/pages/create-post-component/create-post-component';
 import { ProfilePage } from './components/pages/profile-page/profile-page';
 import { PasswordReset } from './components/pages/password-reset/password-reset';
+import { ForgotPassword } from './components/pages/forgot-password/forgot-password';
 
 export const routes: Routes = [
   {
@@ -40,5 +41,9 @@ export const routes: Routes = [
   {
     path: 'passwordReset/:token',
     component: PasswordReset,
+  },
+  {
+    path: 'forgotPassword',
+    component: ForgotPassword,
   },
 ];

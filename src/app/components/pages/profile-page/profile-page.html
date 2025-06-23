@@ -1,7 +1,7 @@
 <div *ngIf="user; else loading" class="profile-wrapper">
   <section class="profile-card">
     <img
-      [src]="user.profileImage || 'https://via.placeholder.com/150'"
+      [src]="user.profileImage || 'guest.png'"
       alt="Profile"
       class="profile-img"
     />
@@ -20,8 +20,7 @@
     </p>
 
     <div class="profile-actions">
-      <button (click)="changePassword()">Change Password</button>
-      <button class="secondary" (click)="forgotPassword()">
+      <button class="secondary" (click)="goToForgotPassword()">
         Forgot Password
       </button>
     </div>

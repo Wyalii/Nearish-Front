@@ -8,6 +8,7 @@ import { FormsModule } from '@angular/forms';
 import { TokenService } from '../../../Services/token-service';
 import { Post } from '../../../interfaces/post';
 import { PostCardComponent } from '../../post-card-component/post-card-component';
+import { PasswordService } from '../../../Services/password-service';
 
 @Component({
   selector: 'app-profile-page',
@@ -19,6 +20,7 @@ export class ProfilePage implements OnInit {
   private snackBar = inject(MatSnackBar);
   private userService = inject(UserService);
   private router = inject(Router);
+  private passwordService = inject(PasswordService);
   tokenService = inject(TokenService);
   isLoggedIn = false;
   user: User | null = null;
@@ -36,10 +38,7 @@ export class ProfilePage implements OnInit {
   viewPost(arg0: any) {
     throw new Error('Method not implemented.');
   }
-  forgotPassword() {
-    throw new Error('Method not implemented.');
-  }
-  changePassword() {
-    throw new Error('Method not implemented.');
+  goToForgotPassword() {
+    this.router.navigate(['/forgotPassword']);
   }
 }
