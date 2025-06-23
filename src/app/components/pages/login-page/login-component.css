@@ -34,3 +34,16 @@ button[disabled] {
   background-color: #aaa;
   cursor: not-allowed;
 }
+.ForgotPass {
+  margin-top: 0.5rem;
+  text-align: right;
+  color: #007bff;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: color 0.2s ease-in-out;
+}
+
+.ForgotPass:hover {
+  color: #0056b3;
+  text-decoration: underline;
+}

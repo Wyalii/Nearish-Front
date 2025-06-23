@@ -51,4 +51,8 @@ export const routes: Routes = [
     path: 'friendRequests',
     component: FriendRequestPage,
   },
+  {
+    path:'**',
+    component:HomePage
+  }
 ];

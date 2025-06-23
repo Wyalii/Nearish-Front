@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, HostListener } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { TokenService } from '../../Services/token-service';
 import { CommonModule } from '@angular/common';
@@ -6,11 +6,12 @@ import { FormsModule } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { UserService } from '../../Services/user-service';
 import { User } from '../../interfaces/user';
+
 @Component({
   selector: 'app-header-component',
   imports: [RouterModule, CommonModule, FormsModule],
   templateUrl: './header-component.html',
-  styleUrl: './header-component.css',
+  styleUrl: './header-component.css', 
 })
 export class HeaderComponent implements OnInit {
   isLoggedIn: boolean = false;
@@ -20,6 +21,8 @@ export class HeaderComponent implements OnInit {
   private router = inject(Router);
   user: User | null = null;
   profileImage: string = '';
+  menuOpen = false;
+
   ngOnInit(): void {
     this.tokenService.isLoggedIn$.subscribe((status) => {
       this.isLoggedIn = status;
@@ -31,14 +34,53 @@ export class HeaderComponent implements OnInit {
     });
   }
 
+  toggleMenu() {
+    this.menuOpen = !this.menuOpen;
+  }
+
   logout() {
     this.tokenService.removeTokenFromLocalStorage();
     this.snackBar.open('Logged Out!', 'Dismiss', {
       duration: 5000,
     });
+    this.menuOpen = false;
   }
 
   goToProfilePage() {
     this.router.navigate(['/profile', this.user?.name]);
+    this.menuOpen = false; 
+  }
+
+  goToFriendRequest() {
+    this.router.navigate(['/friendRequests']);
+    this.menuOpen = false; 
+  }
+
+  goToPostCreate() {
+  
+    this.router.navigate(['/create-post']);
+  
+}
+goToMainPage(){
+  this.router.navigate(['/'])
+}
+  @HostListener('document:click', ['$event'])
+  onClickOutside(event: MouseEvent) {
+    if (!this.menuOpen) return; 
+
+    const target = event.target as HTMLElement;
+
+   
+    const burgerMenu = document.querySelector('.burger-menu');
+    const burgerIcon = document.querySelector('.burger');
+
+    if (
+      burgerMenu &&
+      burgerIcon &&
+      !burgerMenu.contains(target) &&
+      !burgerIcon.contains(target)
+    ) {
+      this.menuOpen = false;
+    }
   }
 }

@@ -47,6 +47,7 @@ export class PostCardComponent implements OnInit {
         next: (res: any) => {
           this.postService.createdPosts = res || [];
           console.log('Created posts loaded:', this.postService.createdPosts);
+          
         },
         error: (err) => {
           console.error('Failed to load created posts:', err);
@@ -63,6 +64,7 @@ export class PostCardComponent implements OnInit {
         },
         error: (err) => {
           console.log(err);
+          
         },
       });
     }

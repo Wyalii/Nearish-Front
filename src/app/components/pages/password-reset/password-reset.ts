@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { PasswordService } from '../../../Services/password-service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-password-reset',
@@ -14,6 +15,7 @@ export class PasswordReset {
   token: string | null = null;
   private route = inject(ActivatedRoute);
   private passwordService = inject(PasswordService);
+ private snackBar = inject(MatSnackBar);
   newPassword = '';
   confirmPassword = '';
   resetMessage = '';
@@ -29,7 +31,9 @@ export class PasswordReset {
         console.log(res);
       },
       error: (err) => {
-        console.log(err);
+         this.snackBar.open(`passwords dont match`, 'Dismiss', {
+          duration: 5000,
+        });
       },
     });
   }

@@ -39,7 +39,7 @@ export class CreatePostComponent {
         this.uploading = false;
       } else {
         this.snackBar.open(
-          'Video upload failed. Please try again.',
+          'image upload failed. please try again',
           'Dismiss',
           {
             duration: 4000,

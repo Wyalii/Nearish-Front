@@ -1,26 +1,30 @@
-.header-nav {
+ .header-nav {
   display: flex;
   align-items: center;
   justify-content: space-between;
   background-color: #ffffff;
   border-bottom: 1px solid #ddd;
   padding: 10px 20px;
+  position: relative;
 }
 
 .logo {
   font-size: 24px;
   font-weight: bold;
   color: #1877f2;
+   cursor: pointer;
 }
-.header-center {
-  display: flex;
-  align-items: center;
-}
+
 .header-left,
 .header-right {
   display: flex;
   align-items: center;
   gap: 15px;
+}
+
+.header-center {
+  display: flex;
+  align-items: center;
 }
 
 .header-center a {
@@ -36,11 +40,33 @@
   background-color: #f0f2f5;
 }
 
+.create-post-btn {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 6px 10px;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  box-shadow: 0 2px 6px rgba(0, 123, 255, 0.4);
+}
+
+.create-post-btn:hover {
+  background-color: #0056b3;
+}
+
 .pfp {
   width: 36px;
   height: 36px;
   border-radius: 50%;
   object-fit: cover;
+  cursor: pointer;
+  transition: box-shadow 0.2s ease-in-out;
+}
+
+.pfp:hover {
+  box-shadow: 0 0 8px rgba(24, 119, 242, 0.6);
 }
 
 .logout-btn {
@@ -51,8 +77,131 @@
   border-radius: 6px;
   cursor: pointer;
   transition: background 0.2s;
+  font-weight: 500;
 }
 
 .logout-btn:hover {
   background-color: #d6203a;
+}
+
+.box {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.message {
+  width: 40px;
+  height: 90px;
+  cursor: pointer;
+}
+
+.friend-request {
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+}
+
+.icon {
+  width: 40px;
+  height: 90px;
+  cursor: pointer;
+}
+
+.create-post {
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+}
+
+.burger {
+  display: none;
+  font-size: 30px;
+  cursor: pointer;
+  padding: 5px 10px;
+  border-radius: 6px;
+  transition: background 0.2s;
+}
+
+.burger:hover {
+  background-color: #f0f2f5;
+}
+
+.burger-menu {
+  display: none;
+  flex-direction: column;
+  position: absolute;
+  top: 70px;
+  right: 9px;
+  background-color: #ffffff;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  border-radius: 12px;
+  padding: 15px 20px;
+  z-index: 1000;
+  width: 190px;
+  animation: slideDown 0.2s ease-out;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.burger-menu a {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  color: #333;
+  font-weight: 500;
+  text-decoration: none;
+  border-radius: 8px;
+  transition: background-color 0.2s;
+  line-height: 1.2;
+}
+
+.burger-menu a:hover {
+  background-color: #f0f2f5;
+}
+
+.burger-menu .pfp {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 12px;
+  cursor: pointer;
+  align-self: center;
+  transition: box-shadow 0.2s ease-in-out;
+}
+
+.burger-menu .pfp:hover {
+  box-shadow: 0 0 10px rgba(24, 119, 242, 0.7);
+}
+
+.burger-menu .logout-btn {
+  margin-top: 15px;
+  width: 100%;
+  display: inline-block;
+  text-align: center;
+}
+
+@media (max-width: 1024px) {
+  .desktop-only {
+    display: none;
+  }
+
+  .burger {
+    display: block;
+  }
+
+  .burger-menu {
+    display: flex;
+  }
 }
