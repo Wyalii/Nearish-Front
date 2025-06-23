@@ -17,6 +17,7 @@ export class HeaderComponent implements OnInit {
   tokenService = inject(TokenService);
   private snackBar = inject(MatSnackBar);
   private userService = inject(UserService);
+  private router = inject(Router);
   user: User | null = null;
   profileImage: string = '';
   ngOnInit(): void {
@@ -35,5 +36,9 @@ export class HeaderComponent implements OnInit {
     this.snackBar.open('Logged Out!', 'Dismiss', {
       duration: 5000,
     });
+  }
+
+  goToProfilePage() {
+    this.router.navigate(['/profile', this.user?.name]);
   }
 }

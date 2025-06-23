@@ -65,3 +65,9 @@ app-post-comment-page {
   display: flex;
   height: 100%;
 }
+app-profile-page {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+}
