@@ -9,7 +9,7 @@ export class PasswordService {
   private readonly baseUrl = 'https://nearish-back.onrender.com/api/Auth/';
   constructor(private http: HttpClient) {}
   sendPasswordResetEmail(email: string): Observable<any> {
-    return this.http.post(`${this.baseUrl}ForgotPassowrd`, { email });
+    return this.http.post(`${this.baseUrl}ForgotPassword`, { email });
   }
 
   resetPassword(newPassword: string, token: string | null): Observable<any> {
