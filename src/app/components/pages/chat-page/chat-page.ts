@@ -41,10 +41,23 @@ export class ChatPage implements OnInit {
     }
     this.signalrService.onChatMessageReceived((senderId, message) => {
       this.messages.push({ senderId, message });
+      const receiverIdInt = Number(this.receiverId);
+      this.signalrService.getMessages(receiverIdInt).subscribe({
+        next: (res) => {
+          console.log('messages:');
+          console.log(res);
+          this.messages = res.data;
+        },
+        error: (err) => {
+          console.log(err);
+        },
+      });
+      console.log(this.messages);
     });
 
     this.signalrService.onMessageSent((message) => {
       console.log('Message sent:', message);
+      console.log(this.messages);
     });
 
     this.signalrService.onMessageFailed((error) => {
@@ -65,6 +78,17 @@ export class ChatPage implements OnInit {
       this.receiverId,
       this.newMessage.trim()
     );
+    const receiverIdInt = Number(this.receiverId);
+    this.signalrService.getMessages(receiverIdInt).subscribe({
+      next: (res) => {
+        console.log('messages:');
+        console.log(res);
+        this.messages = res.data;
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
 
     this.messages.push({ senderId: 'me', text: this.newMessage.trim() });
     this.newMessage = '';
