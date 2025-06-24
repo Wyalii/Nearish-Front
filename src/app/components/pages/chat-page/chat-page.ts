@@ -26,7 +26,18 @@ export class ChatPage implements OnInit {
   ngOnInit() {
     this.receiverId = this.route.snapshot.paramMap.get('id');
     if (this.receiverId) {
+      const receiverIdInt = Number(this.receiverId);
       this.loadReceiverUser(this.receiverId);
+      this.signalrService.getMessages(receiverIdInt).subscribe({
+        next: (res) => {
+          console.log('messages:');
+          console.log(res);
+          this.messages = res.data;
+        },
+        error: (err) => {
+          console.log(err);
+        },
+      });
     }
     this.signalrService.onChatMessageReceived((senderId, message) => {
       this.messages.push({ senderId, message });

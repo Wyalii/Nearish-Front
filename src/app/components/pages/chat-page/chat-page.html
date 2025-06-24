@@ -1,22 +1,25 @@
 <div class="chat-container">
   <h2>Chat with {{ SenderUser.name }}</h2>
 
-  <div class="messages">
-    <div
-      *ngFor="let msg of messages"
-      [class.me]="msg.senderId === 'me'"
-      class="message"
-    >
-      <img
-        *ngIf="msg.senderId !== 'me'"
-        [src]="SenderUser.profileImage || 'guest.png'"
-        class="avatar"
-      />
+  <div
+    *ngFor="let msg of messages"
+    class="message"
+    [ngClass]="{
+    'them': msg.senderId === SenderUser.id,
+    'me': msg.senderId !== SenderUser.id
+  }"
+  >
+    <img
+      *ngIf="msg.senderId === SenderUser.id"
+      [src]="SenderUser.profileImage || 'guest.png'"
+      class="avatar"
+    />
 
-      <strong>
-        {{ msg.senderId === 'me' ? 'You' : SenderUser.name || msg.senderId }}:
+    <div class="message-content">
+      <strong class="name">
+        {{ msg.senderId === SenderUser.id ? SenderUser.name : 'You' }}:
       </strong>
-      <span>{{ msg.message }}</span>
+      <span class="text">{{ msg.text }}</span>
     </div>
   </div>
 

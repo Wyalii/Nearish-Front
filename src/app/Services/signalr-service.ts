@@ -1,5 +1,7 @@
-import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { inject, Injectable } from '@angular/core';
 import * as signalR from '@microsoft/signalr';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -7,6 +9,7 @@ import * as signalR from '@microsoft/signalr';
 export class SignalrService {
   private chatConnection!: signalR.HubConnection;
   private notificationsConnection!: signalR.HubConnection;
+  private http = inject(HttpClient);
 
   // --- CHAT CONNECTION ---
   startChatConnection(token: string) {
@@ -43,6 +46,27 @@ export class SignalrService {
 
   onMessageFailed(handler: (error: string) => void) {
     this.chatConnection.on('MessageFailed', handler);
+  }
+
+  private getAuthHeaders(): HttpHeaders {
+    const token = localStorage.getItem('accessToken');
+    return new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'application/json',
+    });
+  }
+  getMessages(userId: number): Observable<any> {
+    const headers = this.getAuthHeaders();
+    const body = {
+      userId: userId,
+    };
+    return this.http.post<Observable<any>>(
+      'http://localhost:5150/api/Message/getMessages',
+      body,
+      {
+        headers,
+      }
+    );
   }
 
   stopChatConnection() {
