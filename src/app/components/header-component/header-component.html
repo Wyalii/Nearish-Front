@@ -29,7 +29,7 @@
         class="friend-request"
         (click)="goToFriendRequest()"
       />
-      <img src="message.png" class="message" />
+      <img src="message.png" class="message" (click)="goToFrientsList()" />
     </div>
     <img src="friends.png" class="friends" (click)="goToFrientsList()" />
     <img
@@ -65,7 +65,8 @@
         <img src="friend-request.png" class="friend-request" /> Friend Requests
       </a>
       <a (click)="toggleMenu()">
-        <img src="message.png" class="message" /> Messages
+        <img src="message.png" class="message" (click)="goToFrientsList()" />
+        Messages
       </a>
       <a>
         <img src="friends.png" class="friends" (click)="goToFrientsList()" />

@@ -79,7 +79,7 @@ export class OthersPage implements OnInit {
         });
       },
       error: (err) => {
-        this.snackBar.open(`${err.error.details}`, 'Dismiss', {
+        this.snackBar.open(`${err.error.message}`, 'Dismiss', {
           duration: 5000,
         });
         console.error('Failed to send friend request:', err);

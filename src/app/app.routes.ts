@@ -15,6 +15,7 @@ import { selfProfileGuard } from './auth/self-profile-guard';
 import { guestGuard } from './auth/guest-guard';
 import { FriendsListPage } from './components/pages/friends-list-page/friends-list-page';
 import { ChatPage } from './components/pages/chat-page/chat-page';
+import { authGuard } from './auth/auth-guard';
 
 export const routes: Routes = [
   {
@@ -73,7 +74,7 @@ export const routes: Routes = [
     path: 'Friends',
     component: FriendsListPage,
   },
-  { path: 'chat/:id', component: ChatPage },
+  { path: 'chat/:id', component: ChatPage, canActivate: [authGuard] },
 
   {
     path: '**',

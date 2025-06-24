@@ -16,7 +16,8 @@
         [class.verified]="user?.isVerified"
         [class.not-verified]="!user?.isVerified"
       >
-        {{ user?.isVerified ? 'Verified ✅' : 'Not Verified ❌' }}
+        <img *ngIf="user?.isVerified" src="verified.png" class="verified" />
+        <p *ngIf="!user?.isVerified">not verified</p>
       </span>
     </p>
     <button

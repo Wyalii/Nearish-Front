@@ -45,7 +45,6 @@ export class PostCardComponent implements OnInit {
         next: (res: any) => {
           this.postService.createdPosts = res || [];
           console.log('Created posts loaded:', this.postService.createdPosts);
-          
         },
         error: (err) => {
           console.error('Failed to load created posts:', err);
@@ -62,18 +61,17 @@ export class PostCardComponent implements OnInit {
         },
         error: (err) => {
           console.log(err);
-          
         },
       });
     }
   }
-   
+
   toggleDropdown() {
     this.showDropdown = !this.showDropdown;
   }
 
   copyPostUrl() {
-    const url = window.location.origin + '/posts/' + this.post.id;
+    const url = window.location.origin + '/post/' + this.post.id;
     navigator.clipboard.writeText(url).then(() => {
       alert('Post URL copied to clipboard');
       this.showDropdown = false;
@@ -128,7 +126,7 @@ export class PostCardComponent implements OnInit {
       complete: () => (this.isLiking = false),
     });
   }
- 
+
   unlikePost() {
     if (this.isLiking) return;
     this.isLiking = true;

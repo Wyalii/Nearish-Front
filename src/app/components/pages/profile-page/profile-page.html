@@ -15,7 +15,8 @@
         [class.verified]="user.isVerified"
         [class.not-verified]="!user.isVerified"
       >
-        {{ user.isVerified ? 'Verified ✅' : 'Not Verified ❌' }}
+        <img *ngIf="user?.isVerified" src="verified.png" class="verified" />
+        <p *ngIf="!user?.isVerified">not verified</p>
       </span>
     </p>
 
@@ -24,12 +25,10 @@
         Forgot Password
       </button>
     </div>
-      <div class="profile-actions">
-      <button class="secondary" (click)="goToFriends()">
-        Friends:
-      </button>
+    <div class="profile-actions" (click)="goToFriends()">
+      <p>view friends</p>
+      <img src="friends.png" class="friends" />
     </div>
-
   </section>
 
   <section *ngIf="userPosts.length > 0; else noPosts" class="posts-list">

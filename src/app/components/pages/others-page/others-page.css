@@ -34,6 +34,9 @@
 }
 
 .user-profile-status {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   font-size: 16px;
 }
 
@@ -83,4 +86,8 @@
 
 .friend-request-btn:hover {
   background-color: #0056b3;
+}
+.verified {
+  width: 30px;
+  height: 30px;
 }

@@ -1,38 +1,42 @@
 .search-container {
-  max-width: 600px;
-  margin: 2rem auto;
   padding: 1rem;
-  box-sizing: border-box;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.search-bar {
+  margin-bottom: 1rem;
 }
 
 .search-bar input {
   width: 100%;
-  padding: 0.75rem 1rem;
+  padding: 0.75rem;
   font-size: 1rem;
   border: 1px solid #ccc;
-  border-radius: 8px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  border-radius: 6px;
+  box-sizing: border-box;
 }
 
 .search-results {
-  margin-top: 1.5rem;
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
   gap: 1rem;
 }
 
 .result-card {
+  flex: 1 1 calc(33.33% - 1rem);
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  padding: 0.75rem;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
   display: flex;
   align-items: center;
-  padding: 1rem;
-  border-radius: 12px;
-  background-color: #f9f9f9;
-  border: 1px solid #ddd;
-  transition: background-color 0.2s ease;
+  gap: 1rem;
+  transition: transform 0.2s;
 }
 
 .result-card:hover {
-  background-color: #f1f1f1;
+  transform: scale(1.02);
 }
 
 .profile-image {
@@ -40,53 +44,32 @@
   height: 50px;
   border-radius: 50%;
   object-fit: cover;
-  margin-right: 1rem;
+  cursor: pointer;
 }
 
 .user-info h3 {
   margin: 0;
-  font-size: 1.1rem;
+  font-size: 1rem;
 }
 
 .user-info p {
   margin: 0;
-  color: #666;
   font-size: 0.9rem;
-}
-.result-card {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 1rem;
-  border-radius: 12px;
-  background-color: #f9f9f9;
-  border: 1px solid #ddd;
-  transition: background-color 0.2s ease;
-}
-
-.result-card:hover {
-  background-color: #f1f1f1;
-}
-
-.profile-image {
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  object-fit: cover;
-  margin-right: 1rem;
-}
-
-.user-info {
-  flex-grow: 1;
-}
-
-.user-info h3 {
-  margin: 0;
-  font-size: 1.1rem;
-}
-
-.user-info p {
-  margin: 0;
   color: #666;
-  font-size: 0.9rem;
+}
+
+/* ✅ Responsive adjustments for phones */
+@media (max-width: 768px) {
+  .result-card {
+    flex: 1 1 100%;
+  }
+
+  .profile-image {
+    width: 45px;
+    height: 45px;
+  }
+
+  .search-bar input {
+    font-size: 0.95rem;
+  }
 }

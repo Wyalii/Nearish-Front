@@ -61,7 +61,7 @@ export class SignalrService {
       userId: userId,
     };
     return this.http.post<Observable<any>>(
-      'http://localhost:5150/api/Message/getMessages',
+      'https://nearish-back.onrender.com/api/Message/getMessages',
       body,
       {
         headers,

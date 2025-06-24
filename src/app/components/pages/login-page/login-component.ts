@@ -47,7 +47,7 @@ export class LoginPage {
       },
       error: (err) => {
         this.loading = false;
-        this.snackBar.open(`${err.error.details}`, 'Dismiss', {
+        this.snackBar.open(`invalid email or passsword.`, 'Dismiss', {
           duration: 5000,
         });
       },

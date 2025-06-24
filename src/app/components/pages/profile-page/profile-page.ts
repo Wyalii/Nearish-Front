@@ -51,7 +51,7 @@ export class ProfilePage implements OnInit {
       },
       error: (err) => {
         this.error = 'Failed to load posts created by this user';
-         this.snackBar.open(`${err.error.details}`, 'Dismiss', {
+        this.snackBar.open(`${err.error.message}`, 'Dismiss', {
           duration: 5000,
         });
         this.loading = false;
@@ -61,7 +61,7 @@ export class ProfilePage implements OnInit {
   goToForgotPassword() {
     this.router.navigate(['/forgotPassword']);
   }
-  goToFriends(){
-    this.router.navigate(['/Friends'])
+  goToFriends() {
+    this.router.navigate(['/Friends']);
   }
 }

@@ -40,6 +40,7 @@ export class HeaderComponent implements OnInit {
 
   logout() {
     this.tokenService.removeTokenFromLocalStorage();
+    this.router.navigate(['/']);
     this.snackBar.open('Logged Out!', 'Dismiss', {
       duration: 5000,
     });
