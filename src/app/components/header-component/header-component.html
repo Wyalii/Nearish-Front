@@ -69,7 +69,11 @@
         Messages
       </a>
       <a>
-        <img src="friends.png" class="friends" (click)="goToFrientsList()" />
+        <img
+          src="friends.png"
+          class="friends"
+          (click)="goToFrientsList(); toggleMenu()"
+        />
         Friends
       </a>
       <button class="logout-btn" (click)="logout(); toggleMenu()">
