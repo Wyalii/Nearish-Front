@@ -64,20 +64,12 @@
       <a (click)="goToFriendRequest(); toggleMenu()">
         <img src="friend-request.png" class="friend-request" /> Friend Requests
       </a>
-      <a (click)="toggleMenu()">
-        <img
-          src="message.png"
-          class="message"
-          (click)="goToFrientsList(); toggleMenu()"
-        />
+      <a (click)="goToFrientsList(); toggleMenu()">
+        <img src="message.png" class="message" />
         Messages
       </a>
-      <a>
-        <img
-          src="friends.png"
-          class="friends"
-          (click)="goToFrientsList(); toggleMenu()"
-        />
+      <a (click)="goToFrientsList(); toggleMenu()">
+        <img src="friends.png" class="friends" />
         Friends
       </a>
       <button class="logout-btn" (click)="logout(); toggleMenu()">
