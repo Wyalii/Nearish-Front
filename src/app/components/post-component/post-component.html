@@ -3,12 +3,13 @@
   <p>loading...</p>
 </div>
 <ng-container *ngIf="!loading">
-  <div class="header">
-  </div>
+  <div class="header"></div>
   <div class="post-list">
     <app-post-card-component
       *ngFor="let post of posts"
       [post]="post"
     ></app-post-card-component>
   </div>
+
+  <h1 *ngIf="posts.length === 0">no posts avaiable.</h1>
 </ng-container>

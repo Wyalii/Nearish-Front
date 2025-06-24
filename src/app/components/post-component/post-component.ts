@@ -39,9 +39,6 @@ export class PostComponent implements OnInit {
       },
       error: (err) => {
         this.error = 'Failed to load posts';
-         this.snackBar.open(`${err.error.details}`, 'Dismiss', {
-          duration: 5000,
-        });
         this.loading = false;
       },
     });
@@ -69,9 +66,13 @@ export class PostComponent implements OnInit {
       },
       error: (err) => {
         console.error('Failed to delete the post:', err);
-         this.snackBar.open(`Failed to delete the post : ${err.error.details}`, 'Dismiss', {
-          duration: 5000,
-        });
+        this.snackBar.open(
+          `Failed to delete the post : ${err.error.details}`,
+          'Dismiss',
+          {
+            duration: 5000,
+          }
+        );
       },
     });
   }
@@ -102,9 +103,13 @@ export class PostComponent implements OnInit {
       },
       error: (err) => {
         console.error('Failed to update the post:', err);
-        this.snackBar.open(`Failed to update the post : ${err.error.details}`, 'Dismiss', {
-          duration: 5000,
-        });
+        this.snackBar.open(
+          `Failed to update the post : ${err.error.details}`,
+          'Dismiss',
+          {
+            duration: 5000,
+          }
+        );
       },
     });
   }

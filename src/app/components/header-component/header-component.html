@@ -53,7 +53,7 @@
         [src]="user?.profileImage || 'guest.png'"
         class="pfp"
         alt="Profile"
-        (click)="goToProfilePage()"
+        (click)="goToProfilePage(); toggleMenu()"
       />
       <a (click)="goToSearchPage();toggleMenu()">
         <img src="search-icon.webp" class="create-post" /> Search
@@ -65,7 +65,11 @@
         <img src="friend-request.png" class="friend-request" /> Friend Requests
       </a>
       <a (click)="toggleMenu()">
-        <img src="message.png" class="message" (click)="goToFrientsList()" />
+        <img
+          src="message.png"
+          class="message"
+          (click)="goToFrientsList(); toggleMenu()"
+        />
         Messages
       </a>
       <a>
