@@ -36,7 +36,6 @@ export class PostCardComponent implements OnInit {
   isLoggedIn = false;
   isLiking = false;
   LikedPosts: Post[] = [];
-  constructor() {}
   ngOnInit(): void {
     this.tokenService.isLoggedIn$.subscribe((status) => {
       this.isLoggedIn = status;
@@ -68,7 +67,7 @@ export class PostCardComponent implements OnInit {
       });
     }
   }
-
+   
   toggleDropdown() {
     this.showDropdown = !this.showDropdown;
   }
@@ -129,7 +128,7 @@ export class PostCardComponent implements OnInit {
       complete: () => (this.isLiking = false),
     });
   }
-
+ 
   unlikePost() {
     if (this.isLiking) return;
     this.isLiking = true;
@@ -154,5 +153,8 @@ export class PostCardComponent implements OnInit {
 
   isPostLiked(): boolean {
     return this.LikedPosts.some((p) => p.id === this.post.id);
+  }
+  viewProfile(userId: number) {
+    this.router.navigate(['/user', userId]);
   }
 }

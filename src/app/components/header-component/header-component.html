@@ -17,7 +17,8 @@
 
   <div class="header-right desktop-only" *ngIf="isLoggedIn">
     <div class="box">
-              <img src="plus.png" class="create-post" (click)="goToPostCreate()" >
+       <img src="search-icon.webp" class="create-post" (click)="goToSearchPage()" >
+      <img src="plus.png" class="create-post" (click)="goToPostCreate()" >
       <img src="friend-request.png" class="friend-request" (click)="goToFriendRequest()" />
       <img src="message.png" class="message" />
     </div>
@@ -41,7 +42,10 @@
 
     <ng-template #loggedInMenu>
       <img [src]="user?.profileImage || 'guest.png'" class="pfp" alt="Profile" (click)="goToProfilePage()" />
-      <a (click)="goToPostCreate()">
+       <a (click)="goToSearchPage();toggleMenu()">
+        <img src="search-icon.webp" class="create-post" /> Search
+      </a>
+      <a (click)="goToPostCreate();toggleMenu()">
         <img src="plus.png" class="create-post" /> Create Post
       </a>
       <a (click)="goToFriendRequest(); toggleMenu()">

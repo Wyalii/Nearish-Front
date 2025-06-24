@@ -18,9 +18,10 @@
         [src]="post.user?.profileImage"
         class="pfp"
         loading="lazy"
+        (click)="viewProfile(post.userId)"
       />
       <ng-template #guestPostUser>
-        <img src="guest.png" class="pfp" loading="lazy" />
+        <img src="guest.png" class="pfp" loading="lazy" (click)="viewProfile(post.userId)" />
       </ng-template>
       <p>{{ post.user?.name }}</p>
     </div>

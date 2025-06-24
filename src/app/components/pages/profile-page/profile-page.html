@@ -24,6 +24,12 @@
         Forgot Password
       </button>
     </div>
+      <div class="profile-actions">
+      <button class="secondary" (click)="goToFriends()">
+        Friends:
+      </button>
+    </div>
+
   </section>
 
   <section *ngIf="userPosts.length > 0; else noPosts" class="posts-list">

@@ -24,7 +24,7 @@ export class OthersPage implements OnInit {
   private firendRequestService = inject(FriendRequestService);
   private snackBar = inject(MatSnackBar);
   loggedInUserId: number | undefined = undefined;
-  showFriendRequestButton = false;
+  showFriendRequestButton = true;
   user: User | undefined = undefined;
   userPosts: Post[] = [];
   loading = false;
@@ -88,5 +88,6 @@ export class OthersPage implements OnInit {
         console.error('Failed to send friend request:', err);
       },
     });
+    this.showFriendRequestButton = false;
   }
 }

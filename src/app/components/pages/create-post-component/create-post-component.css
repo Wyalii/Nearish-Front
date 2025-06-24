@@ -1,17 +1,16 @@
 .form-wrapper {
-  height: 100vh;            /* full viewport height */
+  height: 100vh;            
   display: flex;
-  justify-content: center;  /* center horizontally */
-  align-items: center;      /* center vertically */
-  padding: 20px;            /* some padding so it doesn't stick to edges */
+  justify-content: center;  
+  align-items: center;     
+  padding: 20px;            
   box-sizing: border-box;
-  background-color: #f9f9f9; /* optional background */
+  background-color: #f9f9f9; 
 }
 
-/* Modal backdrop styling (optional if used as modal) */
 .modal-backdrop {
   position: fixed;
-  inset: 0; /* shorthand for top/right/bottom/left 0 */
+  inset: 0;
   background-color: rgba(0, 0, 0, 0.6);
   display: flex;
   justify-content: center;
@@ -20,7 +19,7 @@
   animation: fadeIn 0.3s ease forwards;
 }
 
-/* Modal box with soft shadow, rounded corners, and subtle gradient */
+
 .modal-content {
   background: linear-gradient(145deg, #ffffff, #f0f0f3);
   padding: 30px 35px;
@@ -37,7 +36,6 @@
   animation: slideUp 0.3s ease forwards;
 }
 
-/* Smooth fade-in and slide-up animations */
 @keyframes fadeIn {
   from { background-color: rgba(0, 0, 0, 0); }
   to { background-color: rgba(0, 0, 0, 0.6); }
@@ -47,7 +45,7 @@
   to { opacity: 1; transform: translateY(0); }
 }
 
-/* Form labels */
+
 label {
   display: block;
   margin-bottom: 14px;
@@ -57,7 +55,7 @@ label {
   user-select: none;
 }
 
-/* Inputs and textarea styling */
+
 textarea,
 input[type="text"] {
   width: 100%;
@@ -85,7 +83,7 @@ input[type="text"]:focus {
   background-color: #fff;
 }
 
-/* Validation error text */
+
 .error {
   color: #e74c3c;
   font-size: 13px;
@@ -95,7 +93,7 @@ input[type="text"]:focus {
   letter-spacing: 0.02em;
 }
 
-/* Buttons container aligned right with spacing */
+
 .buttons {
   display: flex;
   justify-content: flex-end;
@@ -103,7 +101,6 @@ input[type="text"]:focus {
   margin-top: 28px;
 }
 
-/* Primary submit button */
 button[type="submit"] {
   background-color: #4a90e2;
   border: none;
