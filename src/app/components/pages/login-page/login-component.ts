@@ -7,6 +7,7 @@ import { UserLogin } from '../../../interfaces/user-login';
 import { AuthService } from '../../../Services/AuthService';
 import { TokenService } from '../../../Services/token-service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { UserService } from '../../../Services/user-service';
 
 @Component({
   selector: 'app-login-component',
@@ -18,6 +19,7 @@ export class LoginPage {
   constructor(private api: AuthService, private router: Router) {}
   tokenService = inject(TokenService);
   private snackBar = inject(MatSnackBar);
+  private userService = inject(UserService);
   user: UserLogin = {
     email: '',
     password: '',
@@ -34,6 +36,7 @@ export class LoginPage {
 
           if (token) {
             this.tokenService.setToken(token);
+            this.userService.loadUser();
           }
           this.loading = false;
           this.router.navigate(['/']);
@@ -57,8 +60,7 @@ export class LoginPage {
     const date = new Date(match[1].trim());
     return isNaN(date.getTime()) ? null : date;
   }
-  goToResetPass(){
-  this.router.navigate(['/forgotPassword'])
+  goToResetPass() {
+    this.router.navigate(['/forgotPassword']);
   }
-
 }

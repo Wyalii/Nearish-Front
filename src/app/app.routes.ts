@@ -11,6 +11,8 @@ import { ForgotPassword } from './components/pages/forgot-password/forgot-passwo
 import { FriendRequestPage } from './components/pages/friend-request-page/friend-request-page';
 import { SearchPage } from './components/pages/search-page/search-page';
 import { OthersPage } from './components/pages/others-page/others-page';
+import { selfProfileGuard } from './auth/self-profile-guard';
+import { guestGuard } from './auth/guest-guard';
 
 export const routes: Routes = [
   {
@@ -20,14 +22,17 @@ export const routes: Routes = [
   {
     path: 'register',
     component: RegisterPage,
+    canActivate: [guestGuard],
   },
   {
     path: 'login',
     component: LoginPage,
+    canActivate: [guestGuard],
   },
   {
     path: 'verify',
     component: VerifyPage,
+    canActivate: [guestGuard],
   },
   {
     path: 'post/:postId',
@@ -58,8 +63,9 @@ export const routes: Routes = [
     component: SearchPage,
   },
   {
-    path: 'user/:id', // public view of another user's profile
+    path: 'user/:id',
     component: OthersPage,
+    canActivate: [selfProfileGuard],
   },
   {
     path: '**',

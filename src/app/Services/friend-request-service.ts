@@ -32,11 +32,13 @@ export class FriendRequestService {
   }
 
   acceptRequest(dto: AcceptFriendRequest): Observable<any> {
-    return this.http.patch(`${this.apiUrl}/accept`, dto);
+    const headers = this.getAuthHeaders();
+    return this.http.patch(`${this.apiUrl}/accept`, dto, { headers });
   }
 
   rejectRequest(dto: RejectFriendRequest): Observable<any> {
-    return this.http.patch(`${this.apiUrl}/reject`, dto);
+    const headers = this.getAuthHeaders();
+    return this.http.patch(`${this.apiUrl}/reject`, dto, { headers });
   }
   getFriends() {
     const headers = this.getAuthHeaders();
