@@ -14,6 +14,7 @@ import { OthersPage } from './components/pages/others-page/others-page';
 import { selfProfileGuard } from './auth/self-profile-guard';
 import { guestGuard } from './auth/guest-guard';
 import { FriendsListPage } from './components/pages/friends-list-page/friends-list-page';
+import { ChatPage } from './components/pages/chat-page/chat-page';
 
 export const routes: Routes = [
   {
@@ -72,6 +73,8 @@ export const routes: Routes = [
     path: 'Friends',
     component: FriendsListPage,
   },
+  { path: 'chat/:id', component: ChatPage },
+
   {
     path: '**',
     component: HomePage,

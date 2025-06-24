@@ -10,6 +10,7 @@
           [src]="friend.profileImage || 'guest.png'"
           alt="Profile"
           class="friend-image"
+          (click)="goToChat(friend.id)"
         />
         <div class="friend-info">
           <h4>{{ friend.name || 'Unknown' }}</h4>

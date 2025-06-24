@@ -1,48 +1,61 @@
 <header class="header-nav">
   <div class="header-left">
-    <h1 class="logo" (click)="goToMainPage()" >Nearish</h1>
+    <h1 class="logo" (click)="goToMainPage()">Nearish</h1>
   </div>
 
-
-  <div class="burger" (click)="toggleMenu()">
-    &#9776;
-  </div>
-
+  <div class="burger" (click)="toggleMenu()">&#9776;</div>
 
   <div class="header-center desktop-only" *ngIf="!isLoggedIn">
-    <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Home</a>
+    <a
+      routerLink="/"
+      routerLinkActive="active"
+      [routerLinkActiveOptions]="{ exact: true }"
+      >Home</a
+    >
     <a routerLink="/register" routerLinkActive="active">Register</a>
     <a routerLink="/login" routerLinkActive="active">Login</a>
   </div>
 
   <div class="header-right desktop-only" *ngIf="isLoggedIn">
     <div class="box">
-       <img src="search-icon.webp" class="create-post" (click)="goToSearchPage()" >
-      <img src="plus.png" class="create-post" (click)="goToPostCreate()" >
-      <img src="friend-request.png" class="friend-request" (click)="goToFriendRequest()" />
+      <img
+        src="search-icon.webp"
+        class="create-post"
+        (click)="goToSearchPage()"
+      />
+      <img src="plus.png" class="create-post" (click)="goToPostCreate()" />
+      <img
+        src="friend-request.png"
+        class="friend-request"
+        (click)="goToFriendRequest()"
+      />
       <img src="message.png" class="message" />
     </div>
-    <img [src]="user?.profileImage || 'guest.png'" class="pfp" alt="Profile" (click)="goToProfilePage()" />
+    <img src="friends.png" class="friends" (click)="goToFrientsList()" />
+    <img
+      [src]="user?.profileImage || 'guest.png'"
+      class="pfp"
+      alt="Profile"
+      (click)="goToProfilePage()"
+    />
     <button class="logout-btn" (click)="logout()">Logout</button>
   </div>
 
-
   <div class="burger-menu" *ngIf="menuOpen">
     <ng-container *ngIf="!isLoggedIn; else loggedInMenu">
-      <a routerLink="/" (click)="toggleMenu()">
-         Home
-      </a>
-      <a routerLink="/register" (click)="toggleMenu()">
-        Register
-      </a>
-      <a routerLink="/login" (click)="toggleMenu()">
-        Login
-      </a>
+      <a routerLink="/" (click)="toggleMenu()"> Home </a>
+      <a routerLink="/register" (click)="toggleMenu()"> Register </a>
+      <a routerLink="/login" (click)="toggleMenu()"> Login </a>
     </ng-container>
 
     <ng-template #loggedInMenu>
-      <img [src]="user?.profileImage || 'guest.png'" class="pfp" alt="Profile" (click)="goToProfilePage()" />
-       <a (click)="goToSearchPage();toggleMenu()">
+      <img
+        [src]="user?.profileImage || 'guest.png'"
+        class="pfp"
+        alt="Profile"
+        (click)="goToProfilePage()"
+      />
+      <a (click)="goToSearchPage();toggleMenu()">
         <img src="search-icon.webp" class="create-post" /> Search
       </a>
       <a (click)="goToPostCreate();toggleMenu()">
@@ -54,7 +67,13 @@
       <a (click)="toggleMenu()">
         <img src="message.png" class="message" /> Messages
       </a>
-      <button class="logout-btn" (click)="logout(); toggleMenu()">Logout</button>
+      <a>
+        <img src="friends.png" class="friends" (click)="goToFrientsList()" />
+        Friends
+      </a>
+      <button class="logout-btn" (click)="logout(); toggleMenu()">
+        Logout
+      </button>
     </ng-template>
   </div>
 </header>

@@ -20,18 +20,29 @@ export class App implements OnInit {
 
   isLoggedIn = false;
 
+  private connectionsStarted = false;
+
   ngOnInit(): void {
     this.userService.loadUser();
+
     this.tokenService.isLoggedIn$.subscribe((status) => {
       this.isLoggedIn = status;
-    });
-    if (this.isLoggedIn === true) {
-      const token = this.tokenService.getTokenFromLocalStorage();
-      if (token != undefined) {
-        this.signalRSerivce.startChatConnection(token);
-        this.signalRSerivce.startNotificationsConnection(token);
+
+      if (status && !this.connectionsStarted) {
+        const token = this.tokenService.getTokenFromLocalStorage();
+        if (token) {
+          this.signalRSerivce.startChatConnection(token);
+          this.signalRSerivce.startNotificationsConnection(token);
+          this.connectionsStarted = true;
+        }
       }
-    }
+
+      if (!status && this.connectionsStarted) {
+        this.signalRSerivce.stopChatConnection();
+        this.signalRSerivce.stopNotificationsConnection();
+        this.connectionsStarted = false;
+      }
+    });
   }
 
   // memgoni agar aris es sawiro xo??

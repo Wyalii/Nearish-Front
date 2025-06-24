@@ -43,7 +43,7 @@ export class UserService {
       });
   }
 
-  getUserById(userId: string): Observable<any> {
+  getUserById(userId: string | null): Observable<any> {
     return this.http.get<User>(`${this.baseUrl}Auth/Users/${userId}`);
   }
 

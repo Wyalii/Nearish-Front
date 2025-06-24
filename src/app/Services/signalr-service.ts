@@ -11,7 +11,7 @@ export class SignalrService {
   // --- CHAT CONNECTION ---
   startChatConnection(token: string) {
     this.chatConnection = new signalR.HubConnectionBuilder()
-      .withUrl('http://localhost:5150/chathub', {
+      .withUrl('https://nearish-back.onrender.com/chathub', {
         accessTokenFactory: () => token,
       })
       .withAutomaticReconnect()
@@ -54,7 +54,7 @@ export class SignalrService {
   // --- NOTIFICATIONS CONNECTION ---
   startNotificationsConnection(token: string) {
     this.notificationsConnection = new signalR.HubConnectionBuilder()
-      .withUrl('http://localhost:5150/notificationshub', {
+      .withUrl('https://nearish-back.onrender.com/notificationshub', {
         accessTokenFactory: () => token,
       })
       .withAutomaticReconnect()

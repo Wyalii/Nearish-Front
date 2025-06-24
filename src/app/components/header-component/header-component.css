@@ -205,3 +205,8 @@
     display: flex;
   }
 }
+.friends {
+  width: 40px;
+  cursor: pointer;
+  height: 40px;
+}

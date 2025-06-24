@@ -67,6 +67,10 @@ export class HeaderComponent implements OnInit {
   goToPostCreate() {
     this.router.navigate(['/create-post']);
   }
+
+  goToFrientsList() {
+    this.router.navigate(['/Friends']);
+  }
   goToMainPage() {
     this.router.navigate(['/']);
   }
@@ -88,7 +92,7 @@ export class HeaderComponent implements OnInit {
       this.menuOpen = false;
     }
   }
-  goToSearchPage(){
-     this.router.navigate(['/searchPage']);
+  goToSearchPage() {
+    this.router.navigate(['/searchPage']);
   }
 }

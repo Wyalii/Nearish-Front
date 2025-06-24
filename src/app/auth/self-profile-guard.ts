@@ -13,7 +13,7 @@ export const selfProfileGuard: CanActivateFn = (route, state) => {
     take(1),
     map((user) => {
       if (user?.id === targetUserId) {
-        router.navigate(['/profile']);
+        router.navigate(['/profile', targetUserId]);
         return false;
       }
       return true;
