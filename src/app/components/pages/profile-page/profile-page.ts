@@ -61,4 +61,7 @@ export class ProfilePage implements OnInit {
   goToForgotPassword() {
     this.router.navigate(['/forgotPassword']);
   }
+  goToFriends(){
+    this.router.navigate(['/Friends'])
+  }
 }

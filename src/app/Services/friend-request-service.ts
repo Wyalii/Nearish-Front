@@ -42,7 +42,7 @@ export class FriendRequestService {
   }
   getFriends() {
     const headers = this.getAuthHeaders();
-    return this.http.get(`${this.apiUrl}/FriendRequest/GetFriends`, {
+    return this.http.get(`${this.apiUrl}/GetFriends`, {
       headers,
     });
   }
@@ -50,10 +50,8 @@ export class FriendRequestService {
   isFriend(userId: number) {
     const headers = this.getAuthHeaders();
     const body = { userId: userId };
-    return this.http.post<boolean>(
-      `${this.apiUrl}/FriendRequest/isFriend`,
-      body,
-      { headers }
-    );
+    return this.http.post<boolean>(`${this.apiUrl}/isFriend`, body, {
+      headers,
+    });
   }
 }

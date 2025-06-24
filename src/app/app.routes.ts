@@ -13,6 +13,7 @@ import { SearchPage } from './components/pages/search-page/search-page';
 import { OthersPage } from './components/pages/others-page/others-page';
 import { selfProfileGuard } from './auth/self-profile-guard';
 import { guestGuard } from './auth/guest-guard';
+import { FriendsListPage } from './components/pages/friends-list-page/friends-list-page';
 
 export const routes: Routes = [
   {
@@ -66,6 +67,10 @@ export const routes: Routes = [
     path: 'user/:id',
     component: OthersPage,
     canActivate: [selfProfileGuard],
+  },
+  {
+    path: 'Friends',
+    component: FriendsListPage,
   },
   {
     path: '**',

@@ -1,0 +1,62 @@
+.friends-container {
+  max-width: 600px;
+  margin: 50px auto;
+  background-color: #f9f9f9;
+  padding: 20px 25px;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  font-family: Arial, sans-serif;
+}
+
+.friends-container h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #1877f2;
+}
+
+.empty-state {
+  text-align: center;
+  color: #666;
+  font-size: 18px;
+  padding: 30px 0;
+}
+
+.friends-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.friend-item {
+  display: flex;
+  align-items: center;
+  padding: 12px 10px;
+  border-bottom: 1px solid #ddd;
+  transition: background-color 0.2s ease;
+  cursor: default;
+}
+
+.friend-item:hover {
+  background-color: #e8f0fe;
+}
+
+.friend-image {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 15px;
+  border: 2px solid #1877f2;
+}
+
+.friend-info h4 {
+  margin: 0 0 4px 0;
+  font-size: 17px;
+  color: #333;
+}
+
+.friend-info p {
+  margin: 0;
+  font-size: 14px;
+  color: #666;
+}

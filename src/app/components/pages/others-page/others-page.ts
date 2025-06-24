@@ -40,15 +40,12 @@ export class OthersPage implements OnInit {
       next: (res) => {
         this.user = res.data;
         this.fetchUserPosts();
+        this.firendRequestService
+          .isFriend(this.user?.id!)
+          .subscribe((isFriend) => {
+            this.showFriendRequestButton = !isFriend;
+          });
         this.loading = false;
-        this.userService.user$.subscribe((u) => {
-          if (!u || u.id === this.user?.id) return;
-          this.firendRequestService
-            .isFriend(this.user?.id!)
-            .subscribe((isFriend) => {
-              this.showFriendRequestButton = !isFriend;
-            });
-        });
       },
       error: () => {
         this.error = 'User not found.';
@@ -88,5 +85,6 @@ export class OthersPage implements OnInit {
         console.error('Failed to send friend request:', err);
       },
     });
+    this.showFriendRequestButton = false;
   }
 }

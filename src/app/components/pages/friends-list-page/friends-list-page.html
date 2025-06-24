@@ -1,0 +1,21 @@
+<div class="friends-container">
+  <h2>Your Friends</h2>
+  <ng-container *ngIf="friendRequests">
+    <div *ngIf="friendRequests.length === 0" class="empty-state">
+      <p>You have no friends yet.</p>
+    </div>
+    <ul *ngIf="friendRequests.length > 0" class="friends-list">
+      <li *ngFor="let friend of friendRequests" class="friend-item">
+        <img
+          [src]="friend.profileImage || 'guest.png'"
+          alt="Profile"
+          class="friend-image"
+        />
+        <div class="friend-info">
+          <h4>{{ friend.name || 'Unknown' }}</h4>
+          <p>{{ friend.email || '' }}</p>
+        </div>
+      </li>
+    </ul>
+  </ng-container>
+</div>

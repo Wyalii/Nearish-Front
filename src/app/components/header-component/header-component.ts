@@ -88,4 +88,7 @@ export class HeaderComponent implements OnInit {
       this.menuOpen = false;
     }
   }
+  goToSearchPage(){
+     this.router.navigate(['/searchPage']);
+  }
 }
