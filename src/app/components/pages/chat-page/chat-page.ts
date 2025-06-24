@@ -66,7 +66,7 @@ export class ChatPage implements OnInit {
       this.newMessage.trim()
     );
 
-    this.messages.push({ senderId: 'me', message: this.newMessage.trim() });
+    this.messages.push({ senderId: 'me', text: this.newMessage.trim() });
     this.newMessage = '';
   }
 }
