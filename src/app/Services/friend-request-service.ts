@@ -50,7 +50,7 @@ export class FriendRequestService {
   isFriend(userId: number) {
     const headers = this.getAuthHeaders();
     const body = { userId: userId };
-    return this.http.post<boolean>(`${this.apiUrl}/isFriend`, body, {
+    return this.http.post<boolean>(`${this.apiUrl}/FriendStatus`, body, {
       headers,
     });
   }

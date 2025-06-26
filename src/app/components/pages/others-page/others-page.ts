@@ -30,6 +30,7 @@ export class OthersPage implements OnInit {
   loading = false;
   error = '';
   userId!: string | null;
+  isFriend: any;
   ngOnInit(): void {
     this.userId = this.route.snapshot.paramMap.get('id');
     if (!this.userId) return;
@@ -43,6 +44,8 @@ export class OthersPage implements OnInit {
         this.firendRequestService
           .isFriend(this.user?.id!)
           .subscribe((isFriend) => {
+            console.log(isFriend);
+            this.isFriend = isFriend;
             this.showFriendRequestButton = !isFriend;
           });
         this.loading = false;

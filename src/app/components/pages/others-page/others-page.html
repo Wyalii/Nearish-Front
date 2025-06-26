@@ -27,7 +27,7 @@
     >
       Send Friend Request
     </button>
-    <p *ngIf="!showFriendRequestButton">friends</p>
+    <p *ngIf="!showFriendRequestButton">Friend Status: {{isFriend.message}}</p>
   </section>
 
   <section *ngIf="userPosts.length > 0; else noPosts" class="user-posts-list">
