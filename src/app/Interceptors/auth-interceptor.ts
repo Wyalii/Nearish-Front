@@ -13,17 +13,17 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
   const token = tokenService.getTokenFromLocalStorage();
   const snackBar = inject(MatSnackBar);
   const excludedUrls = [
-    'https://nearish-back.onrender.com/api/Post/get all posts',
-    'https://nearish-back.onrender.com/api/Post/GetLikedPosts',
-    'https://nearish-back.onrender.com/api/Post/GetPost',
-    'https://nearish-back.onrender.com/api/FriendRequest/get',
-    'https://nearish-back.onrender.com/api/FriendRequest',
-    'https://nearish-back.onrender.com/api/Auth/Users',
-    'https://nearish-back.onrender.com/api/Search/users',
-    'https://nearish-back.onrender.com/api/Post/GetCreatedPostsByUser',
-    'https://nearish-back.onrender.com/chathub',
-    'https://nearish-back.onrender.com/notificationshub',
-    'https://nearish-back.onrender.com/api/Auth/ForgotPassword',
+    'https://nearish-back-bkbjdrfhbnhafecm.westeurope-01.azurewebsites.net/api/Post/get all posts',
+    'https://nearish-back-bkbjdrfhbnhafecm.westeurope-01.azurewebsites.net/api/Post/GetLikedPosts',
+    'https://nearish-back-bkbjdrfhbnhafecm.westeurope-01.azurewebsites.net/api/Post/GetPost',
+    'https://nearish-back-bkbjdrfhbnhafecm.westeurope-01.azurewebsites.net/api/FriendRequest/get',
+    'https://nearish-back-bkbjdrfhbnhafecm.westeurope-01.azurewebsites.net/api/FriendRequest',
+    'https://nearish-back-bkbjdrfhbnhafecm.westeurope-01.azurewebsites.net/api/Auth/Users',
+    'https://nearish-back-bkbjdrfhbnhafecm.westeurope-01.azurewebsites.net/api/Search/users',
+    'https://nearish-back-bkbjdrfhbnhafecm.westeurope-01.azurewebsites.net/api/Post/GetCreatedPostsByUser',
+    'https://nearish-back-bkbjdrfhbnhafecm.westeurope-01.azurewebsites.net/chathub',
+    'https://nearish-back-bkbjdrfhbnhafecm.westeurope-01.azurewebsites.net/notificationshub',
+    'https://nearish-back-bkbjdrfhbnhafecm.westeurope-01.azurewebsites.net/api/Auth/ForgotPassword',
   ];
 
   const shouldSkip = excludedUrls.some((url) => req.url.includes(url));
