@@ -11,7 +11,8 @@ import { getUserInterface } from '../interfaces/getUser-interface';
 export class UserService {
   private http = inject(HttpClient);
   private tokenService = inject(TokenService);
-  private baseUrl = 'https://nearish-back.onrender.com/api/';
+  private baseUrl =
+    'https://nearish-back-bkbjdrfhbnhafecm.westeurope-01.azurewebsites.net/api/';
   private userSubject = new BehaviorSubject<User | null>(null);
 
   get user$(): Observable<User | null> {

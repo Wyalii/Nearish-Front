@@ -14,9 +14,12 @@ export class SignalrService {
   // --- CHAT CONNECTION ---
   startChatConnection(token: string) {
     this.chatConnection = new signalR.HubConnectionBuilder()
-      .withUrl('https://nearish-back.onrender.com/chathub', {
-        accessTokenFactory: () => token,
-      })
+      .withUrl(
+        'https://nearish-back-bkbjdrfhbnhafecm.westeurope-01.azurewebsites.net/chathub',
+        {
+          accessTokenFactory: () => token,
+        }
+      )
       .withAutomaticReconnect()
       .build();
 
@@ -61,7 +64,7 @@ export class SignalrService {
       userId: userId,
     };
     return this.http.post<Observable<any>>(
-      'https://nearish-back.onrender.com/api/Message/getMessages',
+      'https://nearish-back-bkbjdrfhbnhafecm.westeurope-01.azurewebsites.net/api/Message/getMessages',
       body,
       {
         headers,
@@ -78,9 +81,12 @@ export class SignalrService {
   // --- NOTIFICATIONS CONNECTION ---
   startNotificationsConnection(token: string) {
     this.notificationsConnection = new signalR.HubConnectionBuilder()
-      .withUrl('https://nearish-back.onrender.com/notificationshub', {
-        accessTokenFactory: () => token,
-      })
+      .withUrl(
+        'https://nearish-back-bkbjdrfhbnhafecm.westeurope-01.azurewebsites.net/notificationshub',
+        {
+          accessTokenFactory: () => token,
+        }
+      )
       .withAutomaticReconnect()
       .build();
 

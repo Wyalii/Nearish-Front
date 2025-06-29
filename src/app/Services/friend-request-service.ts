@@ -10,7 +10,8 @@ import { TokenService } from './token-service';
   providedIn: 'root',
 })
 export class FriendRequestService {
-  private apiUrl = 'https://nearish-back.onrender.com/api/FriendRequest';
+  private apiUrl =
+    'https://nearish-back-bkbjdrfhbnhafecm.westeurope-01.azurewebsites.net/api/FriendRequest';
 
   constructor(private http: HttpClient, private tokenService: TokenService) {}
 

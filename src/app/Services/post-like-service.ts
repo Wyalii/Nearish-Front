@@ -8,34 +8,42 @@ import { CreatePostLikeInterface } from '../interfaces/create-post-like-interfac
 import { RemovePostLikeInterface } from '../interfaces/remove-post-like-interface';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class PostLikeService {
-
-  private baseUrl = 'https://nearish-back.onrender.com/api/PostLike';
+  private baseUrl =
+    'https://nearish-back-bkbjdrfhbnhafecm.westeurope-01.azurewebsites.net/api/PostLike';
 
   constructor(private http: HttpClient, private cookieService: CookieService) {}
 
- private getAuthHeaders(): HttpHeaders {
+  private getAuthHeaders(): HttpHeaders {
     const token = localStorage.getItem('accessToken');
     return new HttpHeaders({
       Authorization: `Bearer ${token}`,
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
     });
   }
 
   likePost(postId: number): Observable<BaseResponceInterface> {
     const body: CreatePostLikeInterface = { postId };
-    return this.http.post<BaseResponceInterface>(`${this.baseUrl}/like post`, body, {
-      headers: this.getAuthHeaders(),
-    });
+    return this.http.post<BaseResponceInterface>(
+      `${this.baseUrl}/like post`,
+      body,
+      {
+        headers: this.getAuthHeaders(),
+      }
+    );
   }
 
   unlikePost(postId: number): Observable<BaseResponceInterface> {
     const body: RemovePostLikeInterface = { postId };
-    return this.http.request<BaseResponceInterface>('DELETE', `${this.baseUrl}/unlike post`, {
-      body,
-      headers: this.getAuthHeaders(),
-    });
-  } 
+    return this.http.request<BaseResponceInterface>(
+      'DELETE',
+      `${this.baseUrl}/unlike post`,
+      {
+        body,
+        headers: this.getAuthHeaders(),
+      }
+    );
+  }
 }

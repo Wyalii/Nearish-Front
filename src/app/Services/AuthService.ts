@@ -14,7 +14,8 @@ import { User } from '../interfaces/user';
 })
 export class AuthService {
   private http = inject(HttpClient);
-  private baseUrl = 'https://nearish-back.onrender.com/api/';
+  private baseUrl =
+    'https://nearish-back-bkbjdrfhbnhafecm.westeurope-01.azurewebsites.net/api/';
   private tokenService = inject(TokenService);
   private getAuthHeaders(): HttpHeaders {
     const token = this.tokenService.getTokenFromLocalStorage();

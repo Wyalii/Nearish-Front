@@ -12,7 +12,8 @@ import { GetPostRequest } from '../interfaces/get-post-request';
   providedIn: 'root',
 })
 export class PostService {
-  private readonly baseUrl = 'https://nearish-back.onrender.com/api/Post/';
+  private readonly baseUrl =
+    'https://nearish-back-bkbjdrfhbnhafecm.westeurope-01.azurewebsites.net/api/Post/';
   public createdPosts: Post[] = [];
   constructor(private http: HttpClient) {}
 

@@ -7,7 +7,8 @@ import { inject, Injectable } from '@angular/core';
 export class SearchService {
   constructor() {}
   private http = inject(HttpClient);
-  private baseUrl: string = 'https://nearish-back.onrender.com/api/Search/';
+  private baseUrl: string =
+    'https://nearish-back-bkbjdrfhbnhafecm.westeurope-01.azurewebsites.net/api/Search/';
   searchUsers(searchQuery: string) {
     return this.http.get<{ success: boolean; message: string; data: any[] }>(
       `${this.baseUrl}users?searchQuery=${encodeURIComponent(
