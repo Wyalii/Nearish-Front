@@ -13,7 +13,7 @@ import { GetPostRequest } from '../interfaces/get-post-request';
 })
 export class PostService {
   private readonly baseUrl =
-    'https://nearish-back-bkbjdrfhbnhafecm.westeurope-01.azurewebsites.net/api/Post/';
+    'http://ebs-nearish-api-development.eba-jdfmahu2.eu-north-1.elasticbeanstalk.com/api/Post/';
   public createdPosts: Post[] = [];
   constructor(private http: HttpClient) {}
 

@@ -15,7 +15,7 @@ import { User } from '../interfaces/user';
 export class AuthService {
   private http = inject(HttpClient);
   private baseUrl =
-    'https://nearish-back-bkbjdrfhbnhafecm.westeurope-01.azurewebsites.net/api/';
+    'http://ebs-nearish-api-development.eba-jdfmahu2.eu-north-1.elasticbeanstalk.com/api/';
   private tokenService = inject(TokenService);
   private getAuthHeaders(): HttpHeaders {
     const token = this.tokenService.getTokenFromLocalStorage();

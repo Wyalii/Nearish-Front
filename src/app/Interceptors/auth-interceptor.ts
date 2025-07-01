@@ -13,17 +13,17 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
   const token = tokenService.getTokenFromLocalStorage();
   const snackBar = inject(MatSnackBar);
   const excludedUrls = [
-    'https://nearish-back-bkbjdrfhbnhafecm.westeurope-01.azurewebsites.net/api/Post/get all posts',
-    'https://nearish-back-bkbjdrfhbnhafecm.westeurope-01.azurewebsites.net/api/Post/GetLikedPosts',
-    'https://nearish-back-bkbjdrfhbnhafecm.westeurope-01.azurewebsites.net/api/Post/GetPost',
-    'https://nearish-back-bkbjdrfhbnhafecm.westeurope-01.azurewebsites.net/api/FriendRequest/get',
-    'https://nearish-back-bkbjdrfhbnhafecm.westeurope-01.azurewebsites.net/api/FriendRequest',
-    'https://nearish-back-bkbjdrfhbnhafecm.westeurope-01.azurewebsites.net/api/Auth/Users',
-    'https://nearish-back-bkbjdrfhbnhafecm.westeurope-01.azurewebsites.net/api/Search/users',
-    'https://nearish-back-bkbjdrfhbnhafecm.westeurope-01.azurewebsites.net/api/Post/GetCreatedPostsByUser',
-    'https://nearish-back-bkbjdrfhbnhafecm.westeurope-01.azurewebsites.net/chathub',
-    'https://nearish-back-bkbjdrfhbnhafecm.westeurope-01.azurewebsites.net/notificationshub',
-    'https://nearish-back-bkbjdrfhbnhafecm.westeurope-01.azurewebsites.net/api/Auth/ForgotPassword',
+    'http://ebs-nearish-api-development.eba-jdfmahu2.eu-north-1.elasticbeanstalk.com/api/Post/get all posts',
+    'http://ebs-nearish-api-development.eba-jdfmahu2.eu-north-1.elasticbeanstalk.com/api/Post/GetLikedPosts',
+    'http://ebs-nearish-api-development.eba-jdfmahu2.eu-north-1.elasticbeanstalk.com/api/Post/GetPost',
+    'http://ebs-nearish-api-development.eba-jdfmahu2.eu-north-1.elasticbeanstalk.com/api/FriendRequest/get',
+    'http://ebs-nearish-api-development.eba-jdfmahu2.eu-north-1.elasticbeanstalk.com/api/FriendRequest',
+    'http://ebs-nearish-api-development.eba-jdfmahu2.eu-north-1.elasticbeanstalk.com/api/Auth/Users',
+    'http://ebs-nearish-api-development.eba-jdfmahu2.eu-north-1.elasticbeanstalk.com/api/Search/users',
+    'http://ebs-nearish-api-development.eba-jdfmahu2.eu-north-1.elasticbeanstalk.com/api/Post/GetCreatedPostsByUser',
+    'http://ebs-nearish-api-development.eba-jdfmahu2.eu-north-1.elasticbeanstalk.com/chathub',
+    'http://ebs-nearish-api-development.eba-jdfmahu2.eu-north-1.elasticbeanstalk.com/notificationshub',
+    'http://ebs-nearish-api-development.eba-jdfmahu2.eu-north-1.elasticbeanstalk.com/api/Auth/ForgotPassword',
   ];
 
   const shouldSkip = excludedUrls.some((url) => req.url.includes(url));

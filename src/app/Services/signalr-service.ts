@@ -15,7 +15,7 @@ export class SignalrService {
   startChatConnection(token: string) {
     this.chatConnection = new signalR.HubConnectionBuilder()
       .withUrl(
-        'https://nearish-back-bkbjdrfhbnhafecm.westeurope-01.azurewebsites.net/chathub',
+        'http://ebs-nearish-api-development.eba-jdfmahu2.eu-north-1.elasticbeanstalk.com/chathub',
         {
           accessTokenFactory: () => token,
         }
@@ -64,7 +64,7 @@ export class SignalrService {
       userId: userId,
     };
     return this.http.post<Observable<any>>(
-      'https://nearish-back-bkbjdrfhbnhafecm.westeurope-01.azurewebsites.net/api/Message/getMessages',
+      'http://ebs-nearish-api-development.eba-jdfmahu2.eu-north-1.elasticbeanstalk.com/api/Message/getMessages',
       body,
       {
         headers,
@@ -82,7 +82,7 @@ export class SignalrService {
   startNotificationsConnection(token: string) {
     this.notificationsConnection = new signalR.HubConnectionBuilder()
       .withUrl(
-        'https://nearish-back-bkbjdrfhbnhafecm.westeurope-01.azurewebsites.net/notificationshub',
+        'http://ebs-nearish-api-development.eba-jdfmahu2.eu-north-1.elasticbeanstalk.com/notificationshub',
         {
           accessTokenFactory: () => token,
         }

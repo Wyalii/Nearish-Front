@@ -11,7 +11,7 @@ import { TokenService } from './token-service';
 })
 export class FriendRequestService {
   private apiUrl =
-    'https://nearish-back-bkbjdrfhbnhafecm.westeurope-01.azurewebsites.net/api/FriendRequest';
+    'http://ebs-nearish-api-development.eba-jdfmahu2.eu-north-1.elasticbeanstalk.com/api/FriendRequest';
 
   constructor(private http: HttpClient, private tokenService: TokenService) {}
 

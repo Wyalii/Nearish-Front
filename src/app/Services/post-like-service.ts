@@ -12,7 +12,7 @@ import { RemovePostLikeInterface } from '../interfaces/remove-post-like-interfac
 })
 export class PostLikeService {
   private baseUrl =
-    'https://nearish-back-bkbjdrfhbnhafecm.westeurope-01.azurewebsites.net/api/PostLike';
+    'http://ebs-nearish-api-development.eba-jdfmahu2.eu-north-1.elasticbeanstalk.com/api/PostLike';
 
   constructor(private http: HttpClient, private cookieService: CookieService) {}
 
